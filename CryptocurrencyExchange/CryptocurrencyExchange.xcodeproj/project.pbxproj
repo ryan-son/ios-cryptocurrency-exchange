@@ -12,6 +12,9 @@
 		AA86695927C9C487007DFBE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA86695827C9C487007DFBE6 /* Assets.xcassets */; };
 		AA86695C27C9C487007DFBE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA86695B27C9C487007DFBE6 /* Preview Assets.xcassets */; };
 		AA86696627C9C487007DFBE6 /* CryptocurrencyExchangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86696527C9C487007DFBE6 /* CryptocurrencyExchangeTests.swift */; };
+		AA86698327C9C819007DFBE6 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = AA86698227C9C819007DFBE6 /* CombineMoya */; };
+		AA86698627C9C83E007DFBE6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AA86698527C9C83E007DFBE6 /* ComposableArchitecture */; };
+		AA86699327C9DEB1007DFBE6 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = AA86699227C9DEB1007DFBE6 /* Starscream */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA86698627C9C83E007DFBE6 /* ComposableArchitecture in Frameworks */,
+				AA86698327C9C819007DFBE6 /* CombineMoya in Frameworks */,
+				AA86699327C9DEB1007DFBE6 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,10 +79,8 @@
 		AA86695327C9C484007DFBE6 /* CryptocurrencyExchange */ = {
 			isa = PBXGroup;
 			children = (
-				AA86695427C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift */,
-				AA86695627C9C484007DFBE6 /* ContentView.swift */,
-				AA86695827C9C487007DFBE6 /* Assets.xcassets */,
-				AA86695A27C9C487007DFBE6 /* Preview Content */,
+				AA86698927C9C8DD007DFBE6 /* Resources */,
+				AA86698827C9C8CE007DFBE6 /* Sources */,
 			);
 			path = CryptocurrencyExchange;
 			sourceTree = "<group>";
@@ -97,6 +101,80 @@
 			path = CryptocurrencyExchangeTests;
 			sourceTree = "<group>";
 		};
+		AA86698727C9C8A5007DFBE6 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				AA86695427C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		AA86698827C9C8CE007DFBE6 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AA86698E27C9C957007DFBE6 /* Data */,
+				AA86699027C9C9C5007DFBE6 /* Domain */,
+				AA86698D27C9C932007DFBE6 /* Presentation */,
+				AA86698C27C9C912007DFBE6 /* Repository */,
+				AA86698727C9C8A5007DFBE6 /* Application */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		AA86698927C9C8DD007DFBE6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA86695827C9C487007DFBE6 /* Assets.xcassets */,
+				AA86695A27C9C487007DFBE6 /* Preview Content */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA86698A27C9C8FE007DFBE6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		AA86698C27C9C912007DFBE6 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		AA86698D27C9C932007DFBE6 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				AA86695627C9C484007DFBE6 /* ContentView.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		AA86698E27C9C957007DFBE6 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AA86698F27C9C962007DFBE6 /* Persistent */,
+				AA86698A27C9C8FE007DFBE6 /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		AA86698F27C9C962007DFBE6 /* Persistent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Persistent;
+			sourceTree = "<group>";
+		};
+		AA86699027C9C9C5007DFBE6 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,6 +191,11 @@
 			dependencies = (
 			);
 			name = CryptocurrencyExchange;
+			packageProductDependencies = (
+				AA86698227C9C819007DFBE6 /* CombineMoya */,
+				AA86698527C9C83E007DFBE6 /* ComposableArchitecture */,
+				AA86699227C9DEB1007DFBE6 /* Starscream */,
+			);
 			productName = CryptocurrencyExchange;
 			productReference = AA86695127C9C484007DFBE6 /* CryptocurrencyExchange.app */;
 			productType = "com.apple.product-type.application";
@@ -163,6 +246,11 @@
 				Base,
 			);
 			mainGroup = AA86694827C9C484007DFBE6;
+			packageReferences = (
+				AA86698127C9C819007DFBE6 /* XCRemoteSwiftPackageReference "Moya" */,
+				AA86698427C9C83E007DFBE6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				AA86699127C9DEB1007DFBE6 /* XCRemoteSwiftPackageReference "Starscream" */,
+			);
 			productRefGroup = AA86695227C9C484007DFBE6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -466,6 +554,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA86698127C9C819007DFBE6 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		AA86698427C9C83E007DFBE6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		AA86699127C9DEB1007DFBE6 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA86698227C9C819007DFBE6 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA86698127C9C819007DFBE6 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		AA86698527C9C83E007DFBE6 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA86698427C9C83E007DFBE6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		AA86699227C9DEB1007DFBE6 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA86699127C9DEB1007DFBE6 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA86694927C9C484007DFBE6 /* Project object */;
 }
