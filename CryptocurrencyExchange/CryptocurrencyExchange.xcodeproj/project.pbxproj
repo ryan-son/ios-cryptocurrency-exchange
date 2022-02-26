@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7321A1E327CA1E6900686DB5 /* WebSocketAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1E227CA1E6900686DB5 /* WebSocketAPI.swift */; };
+		7321A1EB27CA243500686DB5 /* TickerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1EA27CA243500686DB5 /* TickerAPI.swift */; };
+		7321A1ED27CA249E00686DB5 /* TickerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1EC27CA249E00686DB5 /* TickerProvider.swift */; };
+		7321A1F127CA31D300686DB5 /* TickerSymbolsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1F027CA31D300686DB5 /* TickerSymbolsResponseDTO.swift */; };
+		7321A1F427CA386800686DB5 /* BithumbDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1F327CA386800686DB5 /* BithumbDataResponse.swift */; };
+		7321A1F627CA397300686DB5 /* MoyaProvider+MakeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1F527CA397300686DB5 /* MoyaProvider+MakeProvider.swift */; };
+		7321A1F927CA428D00686DB5 /* AnyPublisher+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1F827CA428D00686DB5 /* AnyPublisher+Validate.swift */; };
 		AA86695527C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86695427C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift */; };
 		AA86695727C9C484007DFBE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86695627C9C484007DFBE6 /* ContentView.swift */; };
 		AA86695927C9C487007DFBE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA86695827C9C487007DFBE6 /* Assets.xcassets */; };
@@ -35,6 +42,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7321A1E227CA1E6900686DB5 /* WebSocketAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketAPI.swift; sourceTree = "<group>"; };
+		7321A1EA27CA243500686DB5 /* TickerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerAPI.swift; sourceTree = "<group>"; };
+		7321A1EC27CA249E00686DB5 /* TickerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerProvider.swift; sourceTree = "<group>"; };
+		7321A1F027CA31D300686DB5 /* TickerSymbolsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbolsResponseDTO.swift; sourceTree = "<group>"; };
+		7321A1F327CA386800686DB5 /* BithumbDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbDataResponse.swift; sourceTree = "<group>"; };
+		7321A1F527CA397300686DB5 /* MoyaProvider+MakeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+MakeProvider.swift"; sourceTree = "<group>"; };
+		7321A1F827CA428D00686DB5 /* AnyPublisher+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyPublisher+Validate.swift"; sourceTree = "<group>"; };
 		AA86695127C9C484007DFBE6 /* CryptocurrencyExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptocurrencyExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA86695427C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocurrencyExchangeApp.swift; sourceTree = "<group>"; };
 		AA86695627C9C484007DFBE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +86,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7321A1E127CA1D1D00686DB5 /* REST */ = {
+			isa = PBXGroup;
+			children = (
+				7321A1F227CA372300686DB5 /* Protocol */,
+				7321A1EE27CA2F7700686DB5 /* Ticker */,
+				7321A1EC27CA249E00686DB5 /* TickerProvider.swift */,
+			);
+			path = REST;
+			sourceTree = "<group>";
+		};
+		7321A1E827CA1F6B00686DB5 /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				7321A1E227CA1E6900686DB5 /* WebSocketAPI.swift */,
+			);
+			path = WebSocket;
+			sourceTree = "<group>";
+		};
+		7321A1E927CA1F7200686DB5 /* REST */ = {
+			isa = PBXGroup;
+			children = (
+				7321A1EA27CA243500686DB5 /* TickerAPI.swift */,
+			);
+			path = REST;
+			sourceTree = "<group>";
+		};
+		7321A1EE27CA2F7700686DB5 /* Ticker */ = {
+			isa = PBXGroup;
+			children = (
+				7321A1EF27CA2F7E00686DB5 /* ResponseDTO */,
+			);
+			path = Ticker;
+			sourceTree = "<group>";
+		};
+		7321A1EF27CA2F7E00686DB5 /* ResponseDTO */ = {
+			isa = PBXGroup;
+			children = (
+				7321A1F027CA31D300686DB5 /* TickerSymbolsResponseDTO.swift */,
+			);
+			path = ResponseDTO;
+			sourceTree = "<group>";
+		};
+		7321A1F227CA372300686DB5 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7321A1F327CA386800686DB5 /* BithumbDataResponse.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		AA86694827C9C484007DFBE6 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				AA86699627C9E16D007DFBE6 /* API */,
+				7321A1E127CA1D1D00686DB5 /* REST */,
 				AA86699927C9FFC0007DFBE6 /* WebSocket */,
 				AA86699F27CA00A1007DFBE6 /* Utilities */,
 			);
@@ -196,6 +261,8 @@
 		AA86699627C9E16D007DFBE6 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				7321A1E927CA1F7200686DB5 /* REST */,
+				7321A1E827CA1F6B00686DB5 /* WebSocket */,
 				AA86699727C9E17D007DFBE6 /* API.swift */,
 			);
 			path = API;
@@ -230,7 +297,9 @@
 		AA8669A027CA00A9007DFBE6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7321A1F527CA397300686DB5 /* MoyaProvider+MakeProvider.swift */,
 				AA8669A327CA00BC007DFBE6 /* URLRequest+Extensions.swift */,
+				7321A1F827CA428D00686DB5 /* AnyPublisher+Validate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -387,13 +456,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA8669A227CA00B3007DFBE6 /* URL+Extensions.swift in Sources */,
+				7321A1F927CA428D00686DB5 /* AnyPublisher+Validate.swift in Sources */,
+				7321A1F127CA31D300686DB5 /* TickerSymbolsResponseDTO.swift in Sources */,
 				AA86699B27C9FFDA007DFBE6 /* BithumbSocketConnector.swift in Sources */,
 				AA86695727C9C484007DFBE6 /* ContentView.swift in Sources */,
 				AA8669A927CA024C007DFBE6 /* SocketTargetType.swift in Sources */,
+				7321A1E327CA1E6900686DB5 /* WebSocketAPI.swift in Sources */,
 				AA8669AD27CA030F007DFBE6 /* BithumbSocketType.swift in Sources */,
+				7321A1F627CA397300686DB5 /* MoyaProvider+MakeProvider.swift in Sources */,
 				AA86699E27CA000F007DFBE6 /* WebSocketConnector.swift in Sources */,
+				7321A1EB27CA243500686DB5 /* TickerAPI.swift in Sources */,
 				AA8669A427CA00BC007DFBE6 /* URLRequest+Extensions.swift in Sources */,
 				AA86699827C9E17D007DFBE6 /* API.swift in Sources */,
+				7321A1F427CA386800686DB5 /* BithumbDataResponse.swift in Sources */,
+				7321A1ED27CA249E00686DB5 /* TickerProvider.swift in Sources */,
 				AA86695527C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,8 +616,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Preview Content\"";
-				DEVELOPMENT_TEAM = W62BWL527B;
+				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -554,7 +630,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange;
+				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12345;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -569,8 +645,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Preview Content\"";
-				DEVELOPMENT_TEAM = W62BWL527B;
+				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -583,7 +659,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange;
+				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12345;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
