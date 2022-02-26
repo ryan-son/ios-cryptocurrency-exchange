@@ -8,7 +8,6 @@
 import Foundation
 
 extension URLRequest {
-
     static func make(
         with webSocketAPI: SocketTargetType
     ) -> URLRequest? {
@@ -18,4 +17,3 @@ extension URLRequest {
         return URLRequest(url: url)
     }
 }
-1

@@ -10,18 +10,11 @@ import CombineMoya
 import Moya
 
 enum API {
-
     enum WebSocket {
         case `public`
     }
-}
-
-extension API.WebSocket: BithumbSocketType {
-
-    var path: String {
-        switch self {
-        case .public:
-            return "/pub/ws"
-        }
+    
+    enum Ticker {
+        case symbols
     }
 }
