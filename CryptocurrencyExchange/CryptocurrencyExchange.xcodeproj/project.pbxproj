@@ -15,6 +15,13 @@
 		AA86698327C9C819007DFBE6 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = AA86698227C9C819007DFBE6 /* CombineMoya */; };
 		AA86698627C9C83E007DFBE6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AA86698527C9C83E007DFBE6 /* ComposableArchitecture */; };
 		AA86699327C9DEB1007DFBE6 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = AA86699227C9DEB1007DFBE6 /* Starscream */; };
+		AA86699827C9E17D007DFBE6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86699727C9E17D007DFBE6 /* API.swift */; };
+		AA86699B27C9FFDA007DFBE6 /* BithumbSocketConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86699A27C9FFDA007DFBE6 /* BithumbSocketConnector.swift */; };
+		AA86699E27CA000F007DFBE6 /* WebSocketConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86699D27CA000F007DFBE6 /* WebSocketConnector.swift */; };
+		AA8669A227CA00B3007DFBE6 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669A127CA00B3007DFBE6 /* URL+Extensions.swift */; };
+		AA8669A427CA00BC007DFBE6 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669A327CA00BC007DFBE6 /* URLRequest+Extensions.swift */; };
+		AA8669A927CA024C007DFBE6 /* SocketTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669A827CA024C007DFBE6 /* SocketTargetType.swift */; };
+		AA8669AD27CA030F007DFBE6 /* BithumbSocketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669AC27CA030F007DFBE6 /* BithumbSocketType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +42,13 @@
 		AA86695B27C9C487007DFBE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA86696127C9C487007DFBE6 /* CryptocurrencyExchangeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptocurrencyExchangeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA86696527C9C487007DFBE6 /* CryptocurrencyExchangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocurrencyExchangeTests.swift; sourceTree = "<group>"; };
+		AA86699727C9E17D007DFBE6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		AA86699A27C9FFDA007DFBE6 /* BithumbSocketConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbSocketConnector.swift; sourceTree = "<group>"; };
+		AA86699D27CA000F007DFBE6 /* WebSocketConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketConnector.swift; sourceTree = "<group>"; };
+		AA8669A127CA00B3007DFBE6 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		AA8669A327CA00BC007DFBE6 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
+		AA8669A827CA024C007DFBE6 /* SocketTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketTargetType.swift; sourceTree = "<group>"; };
+		AA8669AC27CA030F007DFBE6 /* BithumbSocketType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbSocketType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,11 +126,11 @@
 		AA86698827C9C8CE007DFBE6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				AA86698727C9C8A5007DFBE6 /* Application */,
 				AA86698E27C9C957007DFBE6 /* Data */,
+				AA86698C27C9C912007DFBE6 /* Repository */,
 				AA86699027C9C9C5007DFBE6 /* Domain */,
 				AA86698D27C9C932007DFBE6 /* Presentation */,
-				AA86698C27C9C912007DFBE6 /* Repository */,
-				AA86698727C9C8A5007DFBE6 /* Application */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -133,6 +147,9 @@
 		AA86698A27C9C8FE007DFBE6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				AA86699627C9E16D007DFBE6 /* API */,
+				AA86699927C9FFC0007DFBE6 /* WebSocket */,
+				AA86699F27CA00A1007DFBE6 /* Utilities */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -155,6 +172,7 @@
 		AA86698E27C9C957007DFBE6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				AA8669A527CA0160007DFBE6 /* Utilities */,
 				AA86698F27C9C962007DFBE6 /* Persistent */,
 				AA86698A27C9C8FE007DFBE6 /* Network */,
 			);
@@ -173,6 +191,89 @@
 			children = (
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		AA86699627C9E16D007DFBE6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				AA86699727C9E17D007DFBE6 /* API.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		AA86699927C9FFC0007DFBE6 /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				AA86699C27C9FFF8007DFBE6 /* Infrastructure */,
+				AA8669AA27CA027C007DFBE6 /* Bithumb */,
+			);
+			path = WebSocket;
+			sourceTree = "<group>";
+		};
+		AA86699C27C9FFF8007DFBE6 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669A727CA023B007DFBE6 /* Protocols */,
+				AA86699D27CA000F007DFBE6 /* WebSocketConnector.swift */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		AA86699F27CA00A1007DFBE6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669A027CA00A9007DFBE6 /* Extensions */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		AA8669A027CA00A9007DFBE6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669A327CA00BC007DFBE6 /* URLRequest+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AA8669A527CA0160007DFBE6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669A627CA0172007DFBE6 /* Extensions */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		AA8669A627CA0172007DFBE6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669A127CA00B3007DFBE6 /* URL+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AA8669A727CA023B007DFBE6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669A827CA024C007DFBE6 /* SocketTargetType.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		AA8669AA27CA027C007DFBE6 /* Bithumb */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669AB27CA0301007DFBE6 /* Protocols */,
+				AA86699A27C9FFDA007DFBE6 /* BithumbSocketConnector.swift */,
+			);
+			path = Bithumb;
+			sourceTree = "<group>";
+		};
+		AA8669AB27CA0301007DFBE6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669AC27CA030F007DFBE6 /* BithumbSocketType.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,7 +386,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA8669A227CA00B3007DFBE6 /* URL+Extensions.swift in Sources */,
+				AA86699B27C9FFDA007DFBE6 /* BithumbSocketConnector.swift in Sources */,
 				AA86695727C9C484007DFBE6 /* ContentView.swift in Sources */,
+				AA8669A927CA024C007DFBE6 /* SocketTargetType.swift in Sources */,
+				AA8669AD27CA030F007DFBE6 /* BithumbSocketType.swift in Sources */,
+				AA86699E27CA000F007DFBE6 /* WebSocketConnector.swift in Sources */,
+				AA8669A427CA00BC007DFBE6 /* URLRequest+Extensions.swift in Sources */,
+				AA86699827C9E17D007DFBE6 /* API.swift in Sources */,
 				AA86695527C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
