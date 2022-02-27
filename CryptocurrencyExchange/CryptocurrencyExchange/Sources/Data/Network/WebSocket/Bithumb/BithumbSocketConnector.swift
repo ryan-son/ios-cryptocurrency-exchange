@@ -15,8 +15,9 @@ struct BithumbSocketConnector {
     private let transactionSubject = PassthroughSubject<BithumbTransactionsResponseDTO, Error>()
     private let orderBookDepthSubject = PassthroughSubject<BithumbOrderBookDepthsResponseDTO, Error>()
     
-    func connect() {
+    func connect() -> AnyPublisher<Bool, Never> {
         socketConnector.connect()
+        return socketConnector.isConnectedPublisher
     }
     
     func getTickerPublisher(
@@ -24,15 +25,12 @@ struct BithumbSocketConnector {
         encodeWith encoder: JSONEncoder = JSONEncoder(),
         decodedWith decoder: JSONDecoder = JSONDecoder()
     ) -> AnyPublisher<BithumbTickersResponseDTO, Error> {
-        do {
-            let converted = try encoder.encode(filter)
-            socketConnector.write(data: converted)
-        } catch {
-            return Fail<BithumbTickersResponseDTO, Error>(error: error)
-                .eraseToAnyPublisher()
-        }
-        
-        return socketConnector.dataPublisher
+        return Just(filter)
+            .encode(encoder: encoder)
+            .flatMap { data -> AnyPublisher<Data, Never> in
+                socketConnector.write(data: data)
+                return socketConnector.dataPublisher
+            }
             .decode(type: BithumbTickersResponseDTO?.self, decoder: decoder)
             .compactMap { $0 }
             .eraseToAnyPublisher()
@@ -43,15 +41,12 @@ struct BithumbSocketConnector {
         encodeWith encoder: JSONEncoder = JSONEncoder(),
         decodedWith decoder: JSONDecoder = JSONDecoder()
     ) -> AnyPublisher<BithumbTransactionsResponseDTO, Error> {
-        do {
-            let converted = try encoder.encode(filter)
-            socketConnector.write(data: converted)
-        } catch {
-            return Fail<BithumbTransactionsResponseDTO, Error>(error: error)
-                .eraseToAnyPublisher()
-        }
-        
-        return socketConnector.dataPublisher
+        return Just(filter)
+            .encode(encoder: encoder)
+            .flatMap { data -> AnyPublisher<Data, Never> in
+                socketConnector.write(data: data)
+                return socketConnector.dataPublisher
+            }
             .decode(type: BithumbTransactionsResponseDTO?.self, decoder: decoder)
             .compactMap { $0 }
             .eraseToAnyPublisher()
@@ -62,15 +57,12 @@ struct BithumbSocketConnector {
         encodeWith encoder: JSONEncoder = JSONEncoder(),
         decodedWith decoder: JSONDecoder = JSONDecoder()
     ) -> AnyPublisher<BithumbOrderBookDepthsResponseDTO, Error> {
-        do {
-            let converted = try encoder.encode(filter)
-            socketConnector.write(data: converted)
-        } catch {
-            return Fail<BithumbOrderBookDepthsResponseDTO, Error>(error: error)
-                .eraseToAnyPublisher()
-        }
-        
-        return socketConnector.dataPublisher
+        return Just(filter)
+            .encode(encoder: encoder)
+            .flatMap { data -> AnyPublisher<Data, Never> in
+                socketConnector.write(data: data)
+                return socketConnector.dataPublisher
+            }
             .decode(type: BithumbOrderBookDepthsResponseDTO?.self, decoder: decoder)
             .compactMap { $0 }
             .eraseToAnyPublisher()
