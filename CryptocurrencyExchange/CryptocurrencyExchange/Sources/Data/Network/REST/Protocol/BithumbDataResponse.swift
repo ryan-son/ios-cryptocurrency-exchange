@@ -10,6 +10,6 @@ import Foundation
 protocol BithumbDataResponse: Decodable {
     associatedtype AnyData: Decodable
     var status: String { get }
-    var message: String? { get }
+    var resmsg: String? { get }
     var data: AnyData? { get }
 }
