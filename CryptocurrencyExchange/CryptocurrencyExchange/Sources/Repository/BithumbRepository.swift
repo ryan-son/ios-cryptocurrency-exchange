@@ -27,6 +27,12 @@ enum BithumbRepositoryError: Error {
 
 struct BithumbRepository: BithumbRepositoryProtocol {
     private let socketConnector: BithumbSocketConnector
+
+    init(
+        socketConnector: BithumbSocketConnector = BithumbSocketConnector()
+    ) {
+        self.socketConnector = socketConnector
+    }
     
     func getTickerPublisher(
         with filter: BithumbWebSocketFilter

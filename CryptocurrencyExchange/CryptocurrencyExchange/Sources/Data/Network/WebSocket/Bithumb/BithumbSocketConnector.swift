@@ -14,6 +14,12 @@ struct BithumbSocketConnector {
     private let tickerSubject = PassthroughSubject<BithumbTickersResponseDTO, Error>()
     private let transactionSubject = PassthroughSubject<BithumbTransactionsResponseDTO, Error>()
     private let orderBookDepthSubject = PassthroughSubject<BithumbOrderBookDepthsResponseDTO, Error>()
+
+    init(
+        socketConnector: WebSocketConnectable = WebSocketConnector<API.WebSocket>(api: .`public`)
+    ) {
+        self.socketConnector = socketConnector
+    }
     
     func connect() -> AnyPublisher<Bool, Never> {
         socketConnector.connect()
@@ -72,19 +78,20 @@ struct BithumbSocketConnector {
 struct BithumbWebSocketFilter: Codable {
     let type: BithumbWebSocketTopicType
     let symbols: [String]
-    let tickTypes: [TickType]
-    
-    enum TickType: Codable {
-        case thirtyMinute
-        case hour
-        case twelveHour
-        case day
-        case mid
-    }
+    let tickTypes: [TickType]?
 }
 
 enum BithumbWebSocketTopicType: String, Codable {
     case ticker
     case transaction
     case orderBookDepth = "orderbookdepth"
+}
+
+enum TickType: String, Codable {
+    case thirtyMinute = "30M"
+    case hour = "1H"
+    case twelveHour = "12H"
+    case day = "24H"
+    case mid = "MID"
+    case none
 }

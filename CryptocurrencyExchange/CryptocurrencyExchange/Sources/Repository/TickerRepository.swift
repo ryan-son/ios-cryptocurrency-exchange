@@ -14,7 +14,13 @@ protocol TickerRepositoryProtocol {
 struct TickerRepository: TickerRepositoryProtocol {
     private let provider: TickerProvider
     
+    init(
+        provider: TickerProvider = TickerProvider()
+    ) {
+        self.provider = provider
+    }
+    
     func getSymbols() -> AnyPublisher<TickerSymbolsResponseDTO, Error> {
-        provider.getSymbols()
+        return provider.getSymbols()
     }
 }
