@@ -7,18 +7,23 @@
 
 import Foundation
 
+enum URLComponentsError: Error {
+    case invalidBaseURL
+    case creationFailed
+}
+
 extension URL {
     static func make(
         with webSocketAPI: SocketTargetType
-    ) -> URL? {
+    ) throws -> URL {
         guard var urlComponents = URLComponents(string: webSocketAPI.baseURL) else {
-            return nil
+            throw URLComponentsError.invalidBaseURL
         }
         urlComponents.scheme = webSocketAPI.scheme
         urlComponents.path += webSocketAPI.path
 
         guard let url = urlComponents.url else {
-            return nil
+            throw URLComponentsError.creationFailed
         }
         return url
     }

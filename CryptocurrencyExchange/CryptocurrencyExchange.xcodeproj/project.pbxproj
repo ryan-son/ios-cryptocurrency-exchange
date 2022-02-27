@@ -34,6 +34,10 @@
 		AA8669A427CA00BC007DFBE6 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669A327CA00BC007DFBE6 /* URLRequest+Extensions.swift */; };
 		AA8669A927CA024C007DFBE6 /* SocketTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669A827CA024C007DFBE6 /* SocketTargetType.swift */; };
 		AA8669AD27CA030F007DFBE6 /* BithumbSocketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669AC27CA030F007DFBE6 /* BithumbSocketType.swift */; };
+		AA8669B127CB82C3007DFBE6 /* CoinListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669B027CB82C3007DFBE6 /* CoinListUseCase.swift */; };
+		AA8669B427CB85AA007DFBE6 /* TickerSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669B327CB85AA007DFBE6 /* TickerSymbols.swift */; };
+		AA8669B627CB8832007DFBE6 /* BithumbTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669B527CB8832007DFBE6 /* BithumbTicker.swift */; };
+		AA8669B927CBCD1E007DFBE6 /* String+ToDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8669B827CBCD1E007DFBE6 /* String+ToDate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +77,10 @@
 		AA8669A327CA00BC007DFBE6 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
 		AA8669A827CA024C007DFBE6 /* SocketTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketTargetType.swift; sourceTree = "<group>"; };
 		AA8669AC27CA030F007DFBE6 /* BithumbSocketType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbSocketType.swift; sourceTree = "<group>"; };
+		AA8669B027CB82C3007DFBE6 /* CoinListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListUseCase.swift; sourceTree = "<group>"; };
+		AA8669B327CB85AA007DFBE6 /* TickerSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbols.swift; sourceTree = "<group>"; };
+		AA8669B527CB8832007DFBE6 /* BithumbTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTicker.swift; sourceTree = "<group>"; };
+		AA8669B827CBCD1E007DFBE6 /* String+ToDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ToDate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +259,7 @@
 		AA86698D27C9C932007DFBE6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				AA8669B227CB8589007DFBE6 /* New Group */,
 				AA86695627C9C484007DFBE6 /* ContentView.swift */,
 			);
 			path = Presentation;
@@ -276,6 +285,9 @@
 		AA86699027C9C9C5007DFBE6 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				AA8669B727CBCD08007DFBE6 /* Utilities */,
+				AA8669AF27CB823E007DFBE6 /* Entities */,
+				AA8669AE27CB821D007DFBE6 /* UseCases */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -366,6 +378,46 @@
 				AA8669AC27CA030F007DFBE6 /* BithumbSocketType.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		AA8669AE27CB821D007DFBE6 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669B027CB82C3007DFBE6 /* CoinListUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		AA8669AF27CB823E007DFBE6 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669B327CB85AA007DFBE6 /* TickerSymbols.swift */,
+				AA8669B527CB8832007DFBE6 /* BithumbTicker.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		AA8669B227CB8589007DFBE6 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		AA8669B727CBCD08007DFBE6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669BA27CBCD25007DFBE6 /* Extensions */,
+				AA8669B827CBCD1E007DFBE6 /* String+ToDate.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		AA8669BA27CBCD25007DFBE6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -486,9 +538,12 @@
 				21E32C8F27CB38E000949D97 /* BithumbTickersResponseDTO.swift in Sources */,
 				AA86695727C9C484007DFBE6 /* ContentView.swift in Sources */,
 				AA8669A927CA024C007DFBE6 /* SocketTargetType.swift in Sources */,
+				AA8669B127CB82C3007DFBE6 /* CoinListUseCase.swift in Sources */,
 				7321A1E327CA1E6900686DB5 /* WebSocketAPI.swift in Sources */,
 				AA8669AD27CA030F007DFBE6 /* BithumbSocketType.swift in Sources */,
+				AA8669B927CBCD1E007DFBE6 /* String+ToDate.swift in Sources */,
 				7321A1F627CA397300686DB5 /* MoyaProvider+MakeProvider.swift in Sources */,
+				AA8669B427CB85AA007DFBE6 /* TickerSymbols.swift in Sources */,
 				21E32C9127CB38F300949D97 /* BithumbTransactionsResponseDTO.swift in Sources */,
 				AA86699E27CA000F007DFBE6 /* WebSocketConnector.swift in Sources */,
 				21E32C9327CB390300949D97 /* BithumbOrderBookDepthsResponseDTO.swift in Sources */,
@@ -499,6 +554,7 @@
 				7321A1F427CA386800686DB5 /* BithumbDataResponse.swift in Sources */,
 				7321A1ED27CA249E00686DB5 /* TickerProvider.swift in Sources */,
 				AA86695527C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift in Sources */,
+				AA8669B627CB8832007DFBE6 /* BithumbTicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

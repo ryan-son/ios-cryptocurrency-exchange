@@ -35,13 +35,11 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
         errorSubject.eraseToAnyPublisher()
     }
     
-    init?(
+    init(
         api: API,
         timeoutInterval: TimeInterval = 5
     ) {
-        guard var request = URLRequest.make(with: api) else {
-            return nil
-        }
+        var request = URLRequest.make(with: api)
         request.timeoutInterval = timeoutInterval
         socket = WebSocket(request: request)
     }

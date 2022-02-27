@@ -9,13 +9,13 @@ import Foundation
 
 struct BithumbOrderBookDepthsResponseDTO: Decodable {
     let type: BithumbWebSocketTopicType
-    let content: Content
+    let content: OrderBookDepths
     
-    struct Content: Codable {
-        let list: [List]
+    struct OrderBookDepths: Codable {
+        let list: [OrderBookDepth]
     }
 
-    struct List: Codable {
+    struct OrderBookDepth: Codable {
         let symbol, buySellGB, contPrice, contQty: String
         let contAmt, contDtm, updn: String
 

@@ -32,3 +32,9 @@ struct TickerSymbolsDTO: Decodable {
         case fluctateRate24H = "fluctate_rate_24H"
     }
 }
+
+extension TickerSymbolsResponseDTO {
+    func toDomain() -> [TickerSymbol] {
+        return data?.keys.compactMap(TickerSymbol.init) ?? []
+    }
+}

@@ -10,10 +10,12 @@ import Foundation
 extension URLRequest {
     static func make(
         with webSocketAPI: SocketTargetType
-    ) -> URLRequest? {
-        guard let url = URL.make(with: webSocketAPI) else {
-            return nil
+    ) -> URLRequest {
+        do {
+            let url = try URL.make(with: webSocketAPI)
+            return URLRequest(url: url)
+        } catch {
+            preconditionFailure("URLRequest generation failure: \(error)")
         }
-        return URLRequest(url: url)
     }
 }
