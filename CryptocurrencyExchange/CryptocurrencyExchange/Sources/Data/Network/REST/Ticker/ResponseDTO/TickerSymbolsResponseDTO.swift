@@ -9,7 +9,7 @@ import Foundation
 
 struct TickerSymbolsResponseDTO: BithumbDataResponse {
     let status: String
-    let message: String?
+    let resmsg: String?
     let data: [String: TickerSymbolsDTO]?
 }
 
