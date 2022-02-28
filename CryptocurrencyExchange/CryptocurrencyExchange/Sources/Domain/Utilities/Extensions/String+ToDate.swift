@@ -17,4 +17,10 @@ extension String {
         formatter.dateFormat = format.rawValue
         return formatter.date(from: self)
     }
+    
+    func toDate(format: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.date(from: self)
+    }
 }

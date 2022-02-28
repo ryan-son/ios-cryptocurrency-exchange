@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Example Response (ticker)
+/// https://apidocs.bithumb.com/docs/websocket_public
 struct BithumbTickersResponseDTO: Decodable {
     let type: BithumbWebSocketTopicType
     let content: [Ticker]
