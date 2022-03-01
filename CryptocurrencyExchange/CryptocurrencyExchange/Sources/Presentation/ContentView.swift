@@ -7,10 +7,24 @@
 import Combine
 import SwiftUI
 
+import ComposableArchitecture
+
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        CoinItemView(
+            store: Store(
+                initialState: CoinItemState(
+                    rank: nil,
+                    name: "비트코인",
+                    price: 78427482.42,
+                    changeRate: 1.24,
+                    isLiked: true,
+                    symbol: "BTC_KRW"
+                ),
+                reducer: coinItemReducer,
+                environment: CoinItemEnvironment()
+            )
+        )
     }
 }
 
