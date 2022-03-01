@@ -6,8 +6,10 @@
 //
 
 import ComposableArchitecture
+import Foundation
 
-struct CoinItemState: Equatable {
+struct CoinItemState: Equatable, Identifiable {
+    var id = UUID()
     var rank: Int?
     var name: String
     var price: Double

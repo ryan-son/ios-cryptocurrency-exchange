@@ -11,20 +11,15 @@ import ComposableArchitecture
 
 struct ContentView: View {
     var body: some View {
-        CoinItemView(
-            store: Store(
-                initialState: CoinItemState(
-                    rank: nil,
-                    name: "비트코인",
-                    price: 78427482.42,
-                    changeRate: 1.24,
-                    isLiked: true,
-                    symbol: "BTC_KRW"
-                ),
-                reducer: coinItemReducer,
-                environment: CoinItemEnvironment()
+        NavigationView {
+            CoinListView(
+                store: Store(
+                    initialState: CoinListState(items: .mock),
+                    reducer: coinListReducer,
+                    environment: CoinListEnvironment()
+                )
             )
-        )
+        }
     }
 }
 
