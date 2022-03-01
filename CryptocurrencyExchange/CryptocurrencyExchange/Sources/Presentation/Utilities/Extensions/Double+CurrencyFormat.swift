@@ -7,9 +7,10 @@
 
 import Foundation
 
-enum Currency {
-    case won
-    case dollar
+enum Currency: String {
+    case krw
+    case usd
+    case none
 }
 
 extension Double {
@@ -18,10 +19,12 @@ extension Double {
         formatter.numberStyle = .currencyAccounting
 
         switch currency {
-        case .won:
+        case .krw:
             formatter.locale = Locale(identifier: "ko_KR")
-        case .dollar:
+        case .usd:
             formatter.locale = Locale(identifier: "en_US")
+        case .none:
+            return String(self)
         }
 
         return formatter.string(from: NSNumber(value: self)) ?? ""
