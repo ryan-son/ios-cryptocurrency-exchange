@@ -5,8 +5,10 @@
 //  Created by Ryan-Son on 2022/03/01.
 //
 
-import ComposableArchitecture
+import Combine
 import SwiftUI
+
+import ComposableArchitecture
 import IdentifiedCollections
 
 struct CoinListState: Equatable {
@@ -17,10 +19,12 @@ struct CoinListState: Equatable {
 enum CoinListAction {
     case coinItem(id: CoinItemState.ID, action: CoinItemAction)
     case coinItemTapped
+    case onAppear
 }
 
 struct CoinListEnvironment {
-
+    let coinListUseCase: CoinListUseCaseProtocol
+    
 }
 
 let coinListReducer = Reducer<
@@ -32,10 +36,16 @@ let coinListReducer = Reducer<
         environment: { _ in CoinItemEnvironment() }
     ),
     Reducer { state, action, enviroment in
+        struct WebSocketId: Hashable {}
+        
         switch action {
         case .coinItem:
             return .none
         case .coinItemTapped:
+            return .none
+        case .onAppear:
+            
+            
             return .none
         }
     }
@@ -52,12 +62,20 @@ struct CoinListView: View {
                         state: \.items,
                         action: CoinListAction.coinItem(id:action:)
                     ),
-                    content: CoinItemView.init
+                    content: { itemStore in
+                        NavigationLink(destination: {
+                            CoinItemView(store: itemStore)
+                        }) {
+                            CoinItemView(store: itemStore)
+                        }
+                    }
                 )
             }
             .listStyle(.plain)
             .buttonStyle(.plain)
-            
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
         }
     }
 }
@@ -90,40 +108,11 @@ struct CoinListView_Previews: PreviewProvider {
             store: Store(
                 initialState: CoinListState(items: .mock),
                 reducer: coinListReducer,
-                environment: CoinListEnvironment()
+                environment: CoinListEnvironment(
+                    coinListUseCase: CoinListUseCase()
+                )
             )
         )
             .preferredColorScheme(.dark)
     }
 }
-
-
-//NavigationLink(
-//    tag: <#T##Hashable#>,
-//    selection: <#T##Binding<Hashable?>#>,
-//    destination: <#T##() -> _#>, label: {
-//
-//    })
-//ForEachStore(
-//    self.store.scope(
-//        state: \.items,
-//        action: CoinListAction.coinItem(id:action:)
-//    ),
-//    content: CoinItemView.init
-//)
-//
-//
-//ForEach(viewStore.items) { item in
-//    NavigationLink(
-//        tag: item.id,
-//        selection: viewStore.binding(
-//            get: \.selectedItem?.id,
-//            send: viewStore.send(.coinItemTapped)
-//        ),
-//        destination: Text("디테일")
-//    ) {
-//        CoinItemView(
-//            store: Store(
-//        )
-//    }
-//}

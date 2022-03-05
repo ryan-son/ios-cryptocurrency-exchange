@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import AnyCodable
 
 struct TickerSymbolsResponseDTO: BithumbDataResponse {
     let status: String
     let resmsg: String?
-    let data: [String: TickerSymbolsDTO]?
+    let data: [String: AnyCodable]?
 }
 
 struct TickerSymbolsDTO: Decodable {
@@ -35,6 +36,8 @@ struct TickerSymbolsDTO: Decodable {
 
 extension TickerSymbolsResponseDTO {
     func toDomain() -> [TickerSymbol] {
-        return data?.keys.compactMap(TickerSymbol.init) ?? []
+        return data?.keys
+            .filter { $0 != "date" }
+            .compactMap(TickerSymbol.init) ?? []
     }
 }

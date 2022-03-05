@@ -16,7 +16,9 @@ struct ContentView: View {
                 store: Store(
                     initialState: CoinListState(items: .mock),
                     reducer: coinListReducer,
-                    environment: CoinListEnvironment()
+                    environment: CoinListEnvironment(
+                        coinListUseCase: CoinListUseCase()
+                    )
                 )
             )
         }

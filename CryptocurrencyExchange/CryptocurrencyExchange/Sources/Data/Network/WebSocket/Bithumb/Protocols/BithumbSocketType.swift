@@ -11,6 +11,6 @@ protocol BithumbSocketType: SocketTargetType { }
 
 extension BithumbSocketType {
     var baseURL: String {
-        return "pubwss.bithumb.com"
+        return "wss://pubwss.bithumb.com"
     }
 }

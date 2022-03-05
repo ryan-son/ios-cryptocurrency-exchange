@@ -15,7 +15,7 @@ struct BithumbOrderBookDepthsResponseDTO: Decodable {
     
     struct OrderBookDepths: Codable {
         let list: [OrderBookDepth]
-        let datetime: Int
+        let datetime: String
     }
 
     struct OrderBookDepth: Codable {

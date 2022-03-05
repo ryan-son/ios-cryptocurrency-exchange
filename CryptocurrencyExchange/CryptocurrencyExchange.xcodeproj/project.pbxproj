@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2133D9FC27D11039003682C0 /* AnyCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 2133D9FB27D11039003682C0 /* AnyCodable */; };
 		21434BB827CA6536001EFE9A /* TickerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21434BB727CA6536001EFE9A /* TickerRepository.swift */; };
 		21434BBA27CA66A6001EFE9A /* BithumbRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21434BB927CA66A6001EFE9A /* BithumbRepository.swift */; };
+		21BECEAD27D332DD0018F7CA /* AnyPublisher+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAC27D332DD0018F7CA /* AnyPublisher+Decode.swift */; };
+		21BECEAF27D3426A0018F7CA /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAE27D3426A0018F7CA /* Log.swift */; };
 		21C2EA3227CDE859004E1379 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 21C2EA3127CDE859004E1379 /* Kingfisher */; };
 		21C2EA3527CDF2D7004E1379 /* HiddenIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C2EA3427CDF2D7004E1379 /* HiddenIf.swift */; };
 		21E32C8F27CB38E000949D97 /* BithumbTickersResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E32C8E27CB38E000949D97 /* BithumbTickersResponseDTO.swift */; };
@@ -64,6 +67,8 @@
 /* Begin PBXFileReference section */
 		21434BB727CA6536001EFE9A /* TickerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerRepository.swift; sourceTree = "<group>"; };
 		21434BB927CA66A6001EFE9A /* BithumbRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbRepository.swift; sourceTree = "<group>"; };
+		21BECEAC27D332DD0018F7CA /* AnyPublisher+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyPublisher+Decode.swift"; sourceTree = "<group>"; };
+		21BECEAE27D3426A0018F7CA /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		21C2EA3427CDF2D7004E1379 /* HiddenIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenIf.swift; sourceTree = "<group>"; };
 		21E32C8E27CB38E000949D97 /* BithumbTickersResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTickersResponseDTO.swift; sourceTree = "<group>"; };
 		21E32C9027CB38F300949D97 /* BithumbOrderBookDepthsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbOrderBookDepthsResponseDTO.swift; sourceTree = "<group>"; };
@@ -113,6 +118,7 @@
 				AA86698627C9C83E007DFBE6 /* ComposableArchitecture in Frameworks */,
 				AA86698327C9C819007DFBE6 /* CombineMoya in Frameworks */,
 				AA86699327C9DEB1007DFBE6 /* Starscream in Frameworks */,
+				2133D9FC27D11039003682C0 /* AnyCodable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +408,7 @@
 				7321A1F527CA397300686DB5 /* MoyaProvider+MakeProvider.swift */,
 				AA8669A327CA00BC007DFBE6 /* URLRequest+Extensions.swift */,
 				7321A1F827CA428D00686DB5 /* AnyPublisher+Validate.swift */,
+				21BECEAC27D332DD0018F7CA /* AnyPublisher+Decode.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -410,6 +417,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8669A627CA0172007DFBE6 /* Extensions */,
+				21BECEAE27D3426A0018F7CA /* Log.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -513,6 +521,7 @@
 				AA86698527C9C83E007DFBE6 /* ComposableArchitecture */,
 				AA86699227C9DEB1007DFBE6 /* Starscream */,
 				21C2EA3127CDE859004E1379 /* Kingfisher */,
+				2133D9FB27D11039003682C0 /* AnyCodable */,
 			);
 			productName = CryptocurrencyExchange;
 			productReference = AA86695127C9C484007DFBE6 /* CryptocurrencyExchange.app */;
@@ -569,6 +578,7 @@
 				AA86698427C9C83E007DFBE6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				AA86699127C9DEB1007DFBE6 /* XCRemoteSwiftPackageReference "Starscream" */,
 				21C2EA3027CDE859004E1379 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				2133D9FA27D11039003682C0 /* XCRemoteSwiftPackageReference "AnyCodable" */,
 			);
 			productRefGroup = AA86695227C9C484007DFBE6 /* Products */;
 			projectDirPath = "";
@@ -625,10 +635,12 @@
 				7321A1F627CA397300686DB5 /* MoyaProvider+MakeProvider.swift in Sources */,
 				AA8669B427CB85AA007DFBE6 /* TickerSymbol.swift in Sources */,
 				AA406E4A27CD317700013BF2 /* Double+CurrencyFormat.swift in Sources */,
+				21BECEAD27D332DD0018F7CA /* AnyPublisher+Decode.swift in Sources */,
 				21E32C9127CB38F300949D97 /* BithumbOrderBookDepthsResponseDTO.swift in Sources */,
 				AA86699E27CA000F007DFBE6 /* WebSocketConnector.swift in Sources */,
 				21E32C9327CB390300949D97 /* BithumbTransactionsResponseDTO.swift in Sources */,
 				21C2EA3527CDF2D7004E1379 /* HiddenIf.swift in Sources */,
+				21BECEAF27D3426A0018F7CA /* Log.swift in Sources */,
 				AA406E5327CD341100013BF2 /* CoinItemReducer.swift in Sources */,
 				AA406E5127CD33E900013BF2 /* CoinItemEnvironment.swift in Sources */,
 				7321A1EB27CA243500686DB5 /* TickerAPI.swift in Sources */,
@@ -785,7 +797,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
+				DEVELOPMENT_TEAM = TCV7B8P2RX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -814,7 +826,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
+				DEVELOPMENT_TEAM = TCV7B8P2RX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -908,6 +920,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2133D9FA27D11039003682C0 /* XCRemoteSwiftPackageReference "AnyCodable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Flight-School/AnyCodable";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.2;
+			};
+		};
 		21C2EA3027CDE859004E1379 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -943,6 +963,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2133D9FB27D11039003682C0 /* AnyCodable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2133D9FA27D11039003682C0 /* XCRemoteSwiftPackageReference "AnyCodable" */;
+			productName = AnyCodable;
+		};
 		21C2EA3127CDE859004E1379 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 21C2EA3027CDE859004E1379 /* XCRemoteSwiftPackageReference "Kingfisher" */;

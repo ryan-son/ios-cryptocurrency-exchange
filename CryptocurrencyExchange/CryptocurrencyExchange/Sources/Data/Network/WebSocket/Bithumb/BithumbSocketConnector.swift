@@ -37,9 +37,7 @@ struct BithumbSocketConnector {
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
-            .decode(type: BithumbTickersResponseDTO?.self, decoder: decoder)
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
+            .compactMapDecode(type: BithumbTickersResponseDTO.self, decoder: decoder)
     }
     
     func getTransactionPublisher(
@@ -53,9 +51,7 @@ struct BithumbSocketConnector {
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
-            .decode(type: BithumbTransactionsResponseDTO?.self, decoder: decoder)
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
+            .compactMapDecode(type: BithumbTransactionsResponseDTO.self, decoder: decoder)
     }
     
     func getOrderBookDepthPublisher(
@@ -69,9 +65,7 @@ struct BithumbSocketConnector {
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
-            .decode(type: BithumbOrderBookDepthsResponseDTO?.self, decoder: decoder)
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
+            .compactMapDecode(type: BithumbOrderBookDepthsResponseDTO.self, decoder: decoder)
     }
 }
 

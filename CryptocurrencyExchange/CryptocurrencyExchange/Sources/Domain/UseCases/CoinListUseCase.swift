@@ -11,16 +11,13 @@ import Foundation
 protocol CoinListUseCaseProtocol {
     func getSymbols() -> AnyPublisher<[TickerSymbol], Error>
     func getTickerPublisher(
-        type: BithumbWebSocketTopicType,
         symbols: [String],
         tickTypes: [TickType]
-    ) -> AnyPublisher<[BithumbTicker], Error>
+    ) -> AnyPublisher<BithumbTicker, Error>
     func getTransactionPublisher(
-        type: BithumbWebSocketTopicType,
         symbols: [String]
     ) -> AnyPublisher<[BithumbTransaction], Error>
     func getOrderBookDepthPublisher(
-        type: BithumbWebSocketTopicType,
         symbols: [String]
     ) -> AnyPublisher<[BithumbOrderBookDepth], Error>
 }
@@ -44,40 +41,39 @@ struct CoinListUseCase: CoinListUseCaseProtocol {
     }
 
     func getTickerPublisher(
-        type: BithumbWebSocketTopicType,
         symbols: [String],
         tickTypes: [TickType]
-    ) -> AnyPublisher<[BithumbTicker], Error> {
+    ) -> AnyPublisher<BithumbTicker, Error> {
         let filter = BithumbWebSocketFilter(
-            type: type,
+            type: .ticker,
             symbols: symbols,
             tickTypes: tickTypes
         )
-        return bithumbRepository.getTickerPublisher(with: filter)
-            .map { $0.toDomain() }
+        return bithumbRepository
+            .getTickerPublisher(with: filter)
+            .map { $0.content.toDomain() }
             .eraseToAnyPublisher()
     }
     
     func getTransactionPublisher(
-        type: BithumbWebSocketTopicType,
         symbols: [String]
     ) -> AnyPublisher<[BithumbTransaction], Error> {
         let filter = BithumbWebSocketFilter(
-            type: type,
+            type: .transaction,
             symbols: symbols,
             tickTypes: nil
         )
-        return bithumbRepository.getTransactionPublisher(with: filter)
+        return bithumbRepository
+            .getTransactionPublisher(with: filter)
             .map{ $0.toDomain() }
             .eraseToAnyPublisher()
     }
     
     func getOrderBookDepthPublisher(
-        type: BithumbWebSocketTopicType,
         symbols: [String]
     ) -> AnyPublisher<[BithumbOrderBookDepth], Error> {
         let filter = BithumbWebSocketFilter(
-            type: type,
+            type: .orderBookDepth,
             symbols: symbols,
             tickTypes: nil
         )
