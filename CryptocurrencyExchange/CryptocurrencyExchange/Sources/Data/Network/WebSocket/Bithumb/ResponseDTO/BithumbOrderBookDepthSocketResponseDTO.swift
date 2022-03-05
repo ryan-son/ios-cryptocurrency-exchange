@@ -9,7 +9,7 @@ import Foundation
 
 /// Example Response (orderbookdepth)
 /// https://apidocs.bithumb.com/docs/websocket_public
-struct BithumbOrderBookDepthsResponseDTO: Decodable {
+struct BithumbOrderBookDepthSocketResponseDTO: Decodable {
     let type: BithumbWebSocketTopicType
     let content: OrderBookDepths
     
@@ -24,10 +24,10 @@ struct BithumbOrderBookDepthsResponseDTO: Decodable {
     }
 }
 
-extension BithumbOrderBookDepthsResponseDTO {
-    func toDomain() -> [BithumbOrderBookDepth] {
+extension BithumbOrderBookDepthSocketResponseDTO {
+    func toDomain() -> [BithumbOrderBookDepthStream] {
         content.list.map{
-            BithumbOrderBookDepth(
+            BithumbOrderBookDepthStream(
                 symbol: $0.symbol,
                 orderType: BithumbOrderType(rawValue: $0.orderType) ?? .none,
                 price: Double($0.price) ?? 0,

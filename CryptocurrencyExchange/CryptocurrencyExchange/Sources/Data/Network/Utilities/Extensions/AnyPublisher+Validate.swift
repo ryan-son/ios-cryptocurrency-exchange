@@ -10,7 +10,7 @@ import CombineMoya
 import Moya
 
 extension AnyPublisher where Output == Response, Failure == MoyaError {
-    func vaildate() -> AnyPublisher<Response, Error> {
+    func validate() -> AnyPublisher<Response, Error> {
         tryMap { response -> Response in
             let successRange = 200..<300
             guard successRange.contains(response.statusCode) else {

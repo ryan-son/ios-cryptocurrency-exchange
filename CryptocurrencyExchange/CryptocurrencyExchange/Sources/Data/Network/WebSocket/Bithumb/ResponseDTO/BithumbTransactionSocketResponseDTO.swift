@@ -1,5 +1,5 @@
 //
-//  BithumbOrderBookDepthTypeResponseDTO.swift
+//  BithumbTransactionSocketResponseDTO.swift
 //  CryptocurrencyExchange
 //
 //  Created by 이경준 on 2022/02/27.
@@ -9,7 +9,7 @@ import Foundation
 
 /// Example Response (transaction)
 /// https://apidocs.bithumb.com/docs/websocket_public
-struct BithumbTransactionsResponseDTO: Decodable {
+struct BithumbTransactionSocketResponseDTO: Decodable {
     let type: BithumbWebSocketTopicType
     let content: Transactions
     
@@ -29,17 +29,17 @@ struct BithumbTransactionsResponseDTO: Decodable {
     }
 }
 
-extension BithumbTransactionsResponseDTO {
-    func toDomain() -> [BithumbTransaction] {
+extension BithumbTransactionSocketResponseDTO {
+    func toDomain() -> [BithumbTransactionStream] {
         return content.list.map{
             $0.toDomain()
         }
     }
 }
 
-extension BithumbTransactionsResponseDTO.Transaction {
-    func toDomain() -> BithumbTransaction {
-        return BithumbTransaction(
+extension BithumbTransactionSocketResponseDTO.Transaction {
+    func toDomain() -> BithumbTransactionStream {
+        return BithumbTransactionStream(
            symbol: symbol,
            transactionType: BithumbTransactionType(
             rawValue: Int(buySellGB) ?? -1

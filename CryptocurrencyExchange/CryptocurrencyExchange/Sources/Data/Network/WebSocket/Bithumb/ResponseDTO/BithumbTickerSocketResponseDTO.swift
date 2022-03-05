@@ -9,7 +9,7 @@ import Foundation
 
 /// Example Response (ticker)
 /// https://apidocs.bithumb.com/docs/websocket_public
-struct BithumbTickersResponseDTO: Decodable {
+struct BithumbTickerSocketResponseDTO: Decodable {
     let type: BithumbWebSocketTopicType
     let content: Ticker
     
@@ -21,9 +21,9 @@ struct BithumbTickersResponseDTO: Decodable {
     }
 }
 
-extension BithumbTickersResponseDTO.Ticker {
-    func toDomain() -> BithumbTicker {
-        return BithumbTicker(
+extension BithumbTickerSocketResponseDTO.Ticker {
+    func toDomain() -> BithumbTickerStream {
+        return BithumbTickerStream(
             symbol: symbol,
             tickType: TickType(rawValue: tickType) ?? .none,
             date: (date + time).toDate(format: .yyyyMMddHHmmss) ?? Date(),
@@ -35,9 +35,9 @@ extension BithumbTickersResponseDTO.Ticker {
             volume: Double(volume) ?? 0,
             sellVolume: Double(sellVolume) ?? 0,
             buyVolume: Double(buyVolume) ?? 0,
-            prevClosePrice: Double(prevClosePrice) ?? 0,
-            chgRate: Double(chgRate) ?? 0,
-            chgAmt: Double(chgAmt) ?? 0,
+            previousClosePrice: Double(prevClosePrice) ?? 0,
+            changeRate: Double(chgRate) ?? 0,
+            changeAmount: Double(chgAmt) ?? 0,
             volumePower: Double(volumePower) ?? 0
         )
     }

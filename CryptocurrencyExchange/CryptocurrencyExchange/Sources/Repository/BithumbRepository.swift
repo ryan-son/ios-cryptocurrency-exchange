@@ -10,15 +10,16 @@ import Combine
 import Foundation
 
 protocol BithumbRepositoryProtocol {
-    func getTickerPublisher(
+    func getTickerSinglePublisher() -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error>
+    func getTickerStreamPublisher(
         with filter: BithumbWebSocketFilter
-    ) -> AnyPublisher<BithumbTickersResponseDTO, Error>
-    func getTransactionPublisher(
+    ) -> AnyPublisher<BithumbTickerSocketResponseDTO, Error>
+    func getTransactionStreamPublisher(
         with filter: BithumbWebSocketFilter
-    ) -> AnyPublisher<BithumbTransactionsResponseDTO, Error>
-    func getOrderBookDepthPublisher(
+    ) -> AnyPublisher<BithumbTransactionSocketResponseDTO, Error>
+    func getOrderBookDepthStreamPublisher(
         with filter: BithumbWebSocketFilter
-    ) -> AnyPublisher<BithumbOrderBookDepthsResponseDTO, Error>
+    ) -> AnyPublisher<BithumbOrderBookDepthSocketResponseDTO, Error>
 }
 
 enum BithumbRepositoryError: Error {
@@ -26,40 +27,54 @@ enum BithumbRepositoryError: Error {
 }
 
 struct BithumbRepository: BithumbRepositoryProtocol {
-    private let socketConnector: BithumbSocketConnector
+    private let restService: BithumbRESTService
+    private let socketService: BithumbSocketService
 
     init(
-        socketConnector: BithumbSocketConnector = BithumbSocketConnector()
+        restService: BithumbRESTService = BithumbRESTService(),
+        socketService: BithumbSocketService = BithumbSocketService()
     ) {
-        self.socketConnector = socketConnector
+        self.restService = restService
+        self.socketService = socketService
     }
     
-    func getTickerPublisher(
+    // MARK: - REST
+    
+    func getTickerSinglePublisher() -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error> {
+        return restService
+            .getTickers()
+            .eraseToAnyPublisher()
+    }
+    
+
+    // MARK: - WebSocket
+    
+    func getTickerStreamPublisher(
         with filter: BithumbWebSocketFilter
-    ) -> AnyPublisher<BithumbTickersResponseDTO, Error> {
-        return socketConnector.connect()
+    ) -> AnyPublisher<BithumbTickerSocketResponseDTO, Error> {
+        return socketService.connect()
             .flatMap{ _ in
-                socketConnector.getTickerPublisher(with: filter)
+                socketService.getTickerPublisher(with: filter)
             }
             .eraseToAnyPublisher()
     }
     
-    func getTransactionPublisher(
+    func getTransactionStreamPublisher(
         with filter: BithumbWebSocketFilter
-    ) -> AnyPublisher<BithumbTransactionsResponseDTO, Error> {
-        return socketConnector.connect()
+    ) -> AnyPublisher<BithumbTransactionSocketResponseDTO, Error> {
+        return socketService.connect()
             .flatMap{ _ in
-                socketConnector.getTransactionPublisher(with: filter)
+                socketService.getTransactionPublisher(with: filter)
             }
             .eraseToAnyPublisher()
     }
     
-    func getOrderBookDepthPublisher(
+    func getOrderBookDepthStreamPublisher(
         with filter: BithumbWebSocketFilter
-    ) -> AnyPublisher<BithumbOrderBookDepthsResponseDTO, Error> {
-        return socketConnector.connect()
+    ) -> AnyPublisher<BithumbOrderBookDepthSocketResponseDTO, Error> {
+        return socketService.connect()
             .flatMap{ _ in
-                socketConnector.getOrderBookDepthPublisher(with: filter)
+                socketService.getOrderBookDepthPublisher(with: filter)
             }
             .eraseToAnyPublisher()
     }

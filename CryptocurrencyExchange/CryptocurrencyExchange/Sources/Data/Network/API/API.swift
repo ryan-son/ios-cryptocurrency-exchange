@@ -10,11 +10,11 @@ import CombineMoya
 import Moya
 
 enum API {
-    enum WebSocket {
+    enum BithumbWebSocket {
         case `public`
     }
     
-    enum Ticker {
-        case symbols
+    enum BithumbREST {
+        case ticker
     }
 }

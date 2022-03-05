@@ -1,5 +1,5 @@
 //
-//  BithumbTicker.swift
+//  BithumbTickerStream.swift
 //  CryptocurrencyExchange
 //
 //  Created by Ryan-Son on 2022/02/27.
@@ -9,7 +9,7 @@ import Foundation
 
 /// Example Response (ticker)
 /// https://apidocs.bithumb.com/docs/websocket_public
-struct BithumbTicker {
+struct BithumbTickerStream {
     /// 통화코드
     let symbol: String
     /// 변동 기준시간- 30M, 1H, 12H, 24H, MID
@@ -33,11 +33,11 @@ struct BithumbTicker {
     /// 매수누적거래량
     let buyVolume: Double
     /// 전일종가
-    let prevClosePrice: Double
+    let previousClosePrice: Double
     /// 변동률
-    let chgRate: Double
+    let changeRate: Double
     /// 변동금액
-    let chgAmt: Double
+    let changeAmount: Double
     /// 체결강도
     let volumePower: Double
 }

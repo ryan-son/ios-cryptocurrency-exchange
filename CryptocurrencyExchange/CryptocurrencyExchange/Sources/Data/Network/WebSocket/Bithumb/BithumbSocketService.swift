@@ -1,5 +1,5 @@
 //
-//  BithumbSocketConnector.swift
+//  BithumbSocketService.swift
 //  CryptocurrencyExchange
 //
 //  Created by Ryan-Son on 2022/02/26.
@@ -9,14 +9,14 @@ import Foundation
 
 import Combine
 
-struct BithumbSocketConnector {
+struct BithumbSocketService {
     private let socketConnector: WebSocketConnectable
-    private let tickerSubject = PassthroughSubject<BithumbTickersResponseDTO, Error>()
-    private let transactionSubject = PassthroughSubject<BithumbTransactionsResponseDTO, Error>()
-    private let orderBookDepthSubject = PassthroughSubject<BithumbOrderBookDepthsResponseDTO, Error>()
+    private let tickerSubject = PassthroughSubject<BithumbTickerSocketResponseDTO, Error>()
+    private let transactionSubject = PassthroughSubject<BithumbTransactionSocketResponseDTO, Error>()
+    private let orderBookDepthSubject = PassthroughSubject<BithumbOrderBookDepthSocketResponseDTO, Error>()
 
     init(
-        socketConnector: WebSocketConnectable = WebSocketConnector<API.WebSocket>(api: .`public`)
+        socketConnector: WebSocketConnectable = WebSocketConnector<API.BithumbWebSocket>(api: .`public`)
     ) {
         self.socketConnector = socketConnector
     }
@@ -30,42 +30,42 @@ struct BithumbSocketConnector {
         with filter: BithumbWebSocketFilter,
         encodeWith encoder: JSONEncoder = JSONEncoder(),
         decodedWith decoder: JSONDecoder = JSONDecoder()
-    ) -> AnyPublisher<BithumbTickersResponseDTO, Error> {
+    ) -> AnyPublisher<BithumbTickerSocketResponseDTO, Error> {
         return Just(filter)
             .encode(encoder: encoder)
             .flatMap { data -> AnyPublisher<Data, Never> in
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
-            .compactMapDecode(type: BithumbTickersResponseDTO.self, decoder: decoder)
+            .compactMapDecode(type: BithumbTickerSocketResponseDTO.self, decoder: decoder)
     }
     
     func getTransactionPublisher(
         with filter: BithumbWebSocketFilter,
         encodeWith encoder: JSONEncoder = JSONEncoder(),
         decodedWith decoder: JSONDecoder = JSONDecoder()
-    ) -> AnyPublisher<BithumbTransactionsResponseDTO, Error> {
+    ) -> AnyPublisher<BithumbTransactionSocketResponseDTO, Error> {
         return Just(filter)
             .encode(encoder: encoder)
             .flatMap { data -> AnyPublisher<Data, Never> in
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
-            .compactMapDecode(type: BithumbTransactionsResponseDTO.self, decoder: decoder)
+            .compactMapDecode(type: BithumbTransactionSocketResponseDTO.self, decoder: decoder)
     }
     
     func getOrderBookDepthPublisher(
         with filter: BithumbWebSocketFilter,
         encodeWith encoder: JSONEncoder = JSONEncoder(),
         decodedWith decoder: JSONDecoder = JSONDecoder()
-    ) -> AnyPublisher<BithumbOrderBookDepthsResponseDTO, Error> {
+    ) -> AnyPublisher<BithumbOrderBookDepthSocketResponseDTO, Error> {
         return Just(filter)
             .encode(encoder: encoder)
             .flatMap { data -> AnyPublisher<Data, Never> in
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
-            .compactMapDecode(type: BithumbOrderBookDepthsResponseDTO.self, decoder: decoder)
+            .compactMapDecode(type: BithumbOrderBookDepthSocketResponseDTO.self, decoder: decoder)
     }
 }
 

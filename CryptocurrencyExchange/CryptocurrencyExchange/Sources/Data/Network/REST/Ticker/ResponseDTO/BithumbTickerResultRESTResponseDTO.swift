@@ -1,5 +1,5 @@
 //
-//  TickerSymbolsResponseDTO.swift
+//  BithumbTickerResultRESTResponseDTO.swift
 //  CryptocurrencyExchange
 //
 //  Created by 김정상 on 2022/02/26.
@@ -8,13 +8,13 @@
 import Foundation
 import AnyCodable
 
-struct TickerSymbolsResponseDTO: BithumbDataResponse {
+struct BithumbTickerResultRESTResponseDTO: BithumbDataResponse {
     let status: String
     let resmsg: String?
     let data: [String: AnyCodable]?
 }
 
-struct TickerSymbolsDTO: Decodable {
+struct BithumbTickerRESTResponseDTO: Decodable {
     let openingPrice, closingPrice, minPrice, maxPrice: String
     let unitsTraded, accTradeValue, prevClosingPrice, unitsTraded24H: String
     let accTradeValue24H, fluctate24H, fluctateRate24H: String
@@ -34,12 +34,21 @@ struct TickerSymbolsDTO: Decodable {
     }
 }
 
-extension TickerSymbolsResponseDTO {
-    func toDomain() -> [TickerSymbolsDTO] {
-        return data?.keys
-            .filter { $0 != "date" }
+extension BithumbTickerResultRESTResponseDTO {
+    func toDomain() -> [BithumbTickerSingle] {
+        let filteredKeys = data?.keys
+            .filter { $0 != "date" } ?? []
+        let responses = filteredKeys
             .compactMap { data?[$0] }
             .compactMap { try? JSONEncoder().encode($0) }
-            .compactMap { try? JSONDecoder().decode(TickerSymbolsDTO.self, from: $0) } ?? []
+            .compactMap { try? JSONDecoder().decode(BithumbTickerRESTResponseDTO.self, from: $0) }
+        return zip(filteredKeys, responses)
+            .map { key, response in
+                BithumbTickerSingle(
+                    name: key,
+                    closingPrice: Double(response.closingPrice) ?? 0,
+                    changeRate: Double(response.fluctateRate24H) ?? 0
+                )
+            }
     }
 }

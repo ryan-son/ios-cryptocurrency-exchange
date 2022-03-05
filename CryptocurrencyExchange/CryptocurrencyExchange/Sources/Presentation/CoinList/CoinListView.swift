@@ -45,10 +45,10 @@ let coinListReducer = Reducer<
             return .none
         case .onAppear:
             let useCase = environment.coinListUseCase
-            let symbolsPublisher = useCase.getSymbols().share()
+            let symbolsPublisher = useCase.getTickerSinglePublisher().share()
             symbolsPublisher
                 .flatMap {
-                    useCase.getTickerPublisher(
+                    useCase.getTickerStreamPublisher(
                         symbols: $0.map { $0.name + "_KRW" },
                         tickTypes: [.day]
                     )
@@ -57,7 +57,7 @@ let coinListReducer = Reducer<
                     CoinItemState(
                         name: ticker.symbol.replacingOccurrences(of: "_KRW", with: ""),
                         price: ticker.closePrice,
-                        changeRate: ticker.chgRate,
+                        changeRate: ticker.changeRate,
                         isLiked: false,
                         symbol: ticker.symbol
                     )

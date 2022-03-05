@@ -1,5 +1,5 @@
 //
-//  BithumbTransaction.swift
+//  BithumbTransactionStream.swift
 //  CryptocurrencyExchange
 //
 //  Created by 김정상 on 2022/02/28.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BithumbTransaction {
+struct BithumbTransactionStream {
     let symbol: String
     let transactionType: BithumbTransactionType
     let contPrice: Double

@@ -9,76 +9,73 @@ import Combine
 import Foundation
 
 protocol CoinListUseCaseProtocol {
-    func getSymbols() -> AnyPublisher<[TickerSymbol], Error>
-    func getTickerPublisher(
+    func getTickerSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error>
+    func getTickerStreamPublisher(
         symbols: [String],
         tickTypes: [TickType]
-    ) -> AnyPublisher<BithumbTicker, Error>
-    func getTransactionPublisher(
+    ) -> AnyPublisher<BithumbTickerStream, Error>
+    func getTransactionStreamPublisher(
         symbols: [String]
-    ) -> AnyPublisher<[BithumbTransaction], Error>
-    func getOrderBookDepthPublisher(
+    ) -> AnyPublisher<[BithumbTransactionStream], Error>
+    func getOrderBookDepthStreamPublisher(
         symbols: [String]
-    ) -> AnyPublisher<[BithumbOrderBookDepth], Error>
+    ) -> AnyPublisher<[BithumbOrderBookDepthStream], Error>
 }
 
 struct CoinListUseCase: CoinListUseCaseProtocol {
-    private let tickerRepository: TickerRepositoryProtocol
-    private let bithumbRepository: BithumbRepositoryProtocol
+    private let repository: BithumbRepositoryProtocol
 
     init(
-        tickerRepository: TickerRepositoryProtocol = TickerRepository(),
-        bithumbRepository: BithumbRepositoryProtocol = BithumbRepository()
+        repository: BithumbRepositoryProtocol = BithumbRepository()
     ) {
-        self.tickerRepository = tickerRepository
-        self.bithumbRepository = bithumbRepository
+        self.repository = repository
     }
 
-    func getSymbols() -> AnyPublisher<[TickerSymbol], Error> {
-        return tickerRepository.getSymbols()
+    func getTickerSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error> {
+        return repository.getTickerSinglePublisher()
             .map { $0.toDomain() }
             .eraseToAnyPublisher()
     }
 
-    func getTickerPublisher(
+    func getTickerStreamPublisher(
         symbols: [String],
         tickTypes: [TickType]
-    ) -> AnyPublisher<BithumbTicker, Error> {
+    ) -> AnyPublisher<BithumbTickerStream, Error> {
         let filter = BithumbWebSocketFilter(
             type: .ticker,
             symbols: symbols,
             tickTypes: tickTypes
         )
-        return bithumbRepository
-            .getTickerPublisher(with: filter)
+        return repository
+            .getTickerStreamPublisher(with: filter)
             .map { $0.content.toDomain() }
             .eraseToAnyPublisher()
     }
     
-    func getTransactionPublisher(
+    func getTransactionStreamPublisher(
         symbols: [String]
-    ) -> AnyPublisher<[BithumbTransaction], Error> {
+    ) -> AnyPublisher<[BithumbTransactionStream], Error> {
         let filter = BithumbWebSocketFilter(
             type: .transaction,
             symbols: symbols,
             tickTypes: nil
         )
-        return bithumbRepository
-            .getTransactionPublisher(with: filter)
+        return repository
+            .getTransactionStreamPublisher(with: filter)
             .map{ $0.toDomain() }
             .eraseToAnyPublisher()
     }
     
-    func getOrderBookDepthPublisher(
+    func getOrderBookDepthStreamPublisher(
         symbols: [String]
-    ) -> AnyPublisher<[BithumbOrderBookDepth], Error> {
+    ) -> AnyPublisher<[BithumbOrderBookDepthStream], Error> {
         let filter = BithumbWebSocketFilter(
             type: .orderBookDepth,
             symbols: symbols,
             tickTypes: nil
         )
-        return bithumbRepository
-            .getOrderBookDepthPublisher(with: filter)
+        return repository
+            .getOrderBookDepthStreamPublisher(with: filter)
             .map { $0.toDomain() }
             .eraseToAnyPublisher()
     }
