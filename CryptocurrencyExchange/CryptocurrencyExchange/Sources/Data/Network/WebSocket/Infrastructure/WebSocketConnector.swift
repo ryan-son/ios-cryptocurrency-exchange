@@ -21,7 +21,12 @@ protocol WebSocketConnectable {
 
 final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     private let socket: WebSocket
-    private var isConnected: Bool = false
+    private var isConnected: Bool = false {
+        didSet {
+            isConnecting = false
+        }
+    }
+    private var isConnecting: Bool = false
     
     private let dataSubject = PassthroughSubject<Data, Never>()
     var dataPublisher: AnyPublisher<Data, Never> {
@@ -50,7 +55,11 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     }
     
     func connect() {
-        if isConnected {
+        guard isConnecting == false else {
+            return
+        }
+        isConnecting = true
+        guard isConnected == false else {
             isConnectedSubject.send(true)
             return
         }
@@ -67,7 +76,6 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     private func setOnEvent() {
         socket.onEvent = { [self] event in
             print("---------------------")
-//            print(event)
             switch event {
             case .connected(let headers):
                 print("websocket is connected: \(headers)")
@@ -78,7 +86,6 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
                 isConnected = false
                 isConnectedSubject.send(false)
             case .text(let string):
-                
                 print("Received text: \(string)")
                 guard let data = string.data(using: .utf8) else {
                     return

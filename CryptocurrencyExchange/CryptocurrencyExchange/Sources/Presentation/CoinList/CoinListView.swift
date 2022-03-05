@@ -14,6 +14,7 @@ import IdentifiedCollections
 struct CoinListState: Equatable {
     var items: IdentifiedArrayOf<CoinItemState>
     var selectedItem: Identified<CoinItemState.ID, CoinItemState>?
+    var cancellables: Set<AnyCancellable> = []
 }
 
 enum CoinListAction {
@@ -24,7 +25,6 @@ enum CoinListAction {
 
 struct CoinListEnvironment {
     let coinListUseCase: CoinListUseCaseProtocol
-    
 }
 
 let coinListReducer = Reducer<
@@ -35,17 +35,50 @@ let coinListReducer = Reducer<
         action: /CoinListAction.coinItem(id:action:),
         environment: { _ in CoinItemEnvironment() }
     ),
-    Reducer { state, action, enviroment in
+    Reducer { state, action, environment in
         struct WebSocketId: Hashable {}
-        
+
         switch action {
         case .coinItem:
             return .none
         case .coinItemTapped:
             return .none
         case .onAppear:
-            
-            
+            let useCase = environment.coinListUseCase
+            let symbolsPublisher = useCase.getSymbols().share()
+            symbolsPublisher
+                .flatMap {
+                    useCase.getTickerPublisher(
+                        symbols: $0.map { $0.name + "_KRW" },
+                        tickTypes: [.day]
+                    )
+                }
+                .map { ticker in
+                    CoinItemState(
+                        name: ticker.symbol.replacingOccurrences(of: "_KRW", with: ""),
+                        price: ticker.closePrice,
+                        changeRate: ticker.chgRate,
+                        isLiked: false,
+                        symbol: ticker.symbol
+                    )
+                }
+                .sink(
+                    receiveCompletion: { completion in
+                        switch completion {
+//                        case .complete:
+//                            Log.debug("getTickerPublisher Completed")
+                        case let .failure(error):
+                            Log.error(error)
+                        default:
+                            Log.error("???????")
+                        }
+                    },
+                    receiveValue: {
+                        Log.debug($0)
+                    }
+                )
+                .store(in: &state.cancellables)
+
             return .none
         }
     }

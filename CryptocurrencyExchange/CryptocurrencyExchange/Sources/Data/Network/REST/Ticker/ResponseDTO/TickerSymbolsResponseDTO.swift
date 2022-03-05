@@ -35,9 +35,11 @@ struct TickerSymbolsDTO: Decodable {
 }
 
 extension TickerSymbolsResponseDTO {
-    func toDomain() -> [TickerSymbol] {
+    func toDomain() -> [TickerSymbolsDTO] {
         return data?.keys
             .filter { $0 != "date" }
-            .compactMap(TickerSymbol.init) ?? []
+            .compactMap { data?[$0] }
+            .compactMap { try? JSONEncoder().encode($0) }
+            .compactMap { try? JSONDecoder().decode(TickerSymbolsDTO.self, from: $0) } ?? []
     }
 }

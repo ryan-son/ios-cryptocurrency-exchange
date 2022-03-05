@@ -12,7 +12,7 @@ class Log {
         #if DEBUG
         let fileName = file.split(separator: "/").last ?? ""
         let funcName = function.split(separator: "(").first ?? ""
-        print("⚬ 🟢 [\(fileName)] \(funcName)(\(line)) : \(msg)")
+        print("⚬ 🟢 [\(Date())] [\(fileName)] \(funcName)(\(line)) : \(msg)")
         #endif
     }
     
@@ -20,13 +20,13 @@ class Log {
         #if DEBUG
         let fileName = file.split(separator: "/").last ?? ""
         let funcName = function.split(separator: "(").first ?? ""
-        print("⚬ 🔵 [\(fileName)] \(funcName)(\(line)) : \(msg)")
+        print("⚬ 🔵 [\(Date())] [\(fileName)] \(funcName)(\(line)) : \(msg)")
         #endif
     }
     
     static func error(_ msg: Any, file: String = #file, function: String = #function, line: Int = #line){
         let fileName = file.split(separator: "/").last ?? ""
         let funcName = function.split(separator: "(").first ?? ""
-        print("⚬ 🔴 [\(fileName)] \(funcName)(\(line)) : \(msg)")
+        print("⚬ 🔴 [\(Date())] [\(fileName)] \(funcName)(\(line)) : \(msg)")
     }
 }
