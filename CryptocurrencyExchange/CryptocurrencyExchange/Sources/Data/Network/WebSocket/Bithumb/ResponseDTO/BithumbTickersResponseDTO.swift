@@ -11,7 +11,7 @@ import Foundation
 /// https://apidocs.bithumb.com/docs/websocket_public
 struct BithumbTickersResponseDTO: Decodable {
     let type: BithumbWebSocketTopicType
-    let content: [Ticker]
+    let content: Ticker
     
     struct Ticker: Decodable {
         let symbol, tickType, date, time: String
@@ -40,11 +40,5 @@ extension BithumbTickersResponseDTO.Ticker {
             chgAmt: Double(chgAmt) ?? 0,
             volumePower: Double(volumePower) ?? 0
         )
-    }
-}
-
-extension BithumbTickersResponseDTO {
-    func toDomain() -> [BithumbTicker] {
-        return content.map { $0.toDomain() }
     }
 }

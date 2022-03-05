@@ -19,7 +19,6 @@ extension URL {
         guard var urlComponents = URLComponents(string: webSocketAPI.baseURL) else {
             throw URLComponentsError.invalidBaseURL
         }
-        urlComponents.scheme = webSocketAPI.scheme
         urlComponents.path += webSocketAPI.path
 
         guard let url = urlComponents.url else {

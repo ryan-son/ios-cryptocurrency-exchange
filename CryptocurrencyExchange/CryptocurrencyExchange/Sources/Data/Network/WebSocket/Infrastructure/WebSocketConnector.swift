@@ -21,12 +21,13 @@ protocol WebSocketConnectable {
 
 final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     private let socket: WebSocket
+    private var isConnected: Bool = false
     
     private let dataSubject = PassthroughSubject<Data, Never>()
     var dataPublisher: AnyPublisher<Data, Never> {
         dataSubject.eraseToAnyPublisher()
     }
-    private let isConnectedSubject = CurrentValueSubject<Bool, Never>(false)
+    private let isConnectedSubject = PassthroughSubject<Bool, Never>()
     var isConnectedPublisher: AnyPublisher<Bool, Never> {
         isConnectedSubject.eraseToAnyPublisher()
     }
@@ -49,8 +50,12 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     }
     
     func connect() {
-        socket.connect()
+        if isConnected {
+            isConnectedSubject.send(true)
+            return
+        }
         setOnEvent()
+        socket.connect()
     }
     
     func write(
@@ -61,18 +66,26 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     
     private func setOnEvent() {
         socket.onEvent = { [self] event in
+            print("---------------------")
+//            print(event)
             switch event {
             case .connected(let headers):
                 print("websocket is connected: \(headers)")
+                isConnected = true
                 isConnectedSubject.send(true)
             case .disconnected(let reason, let code):
                 print("websocket is disconnected: \(reason) with code: \(code)")
+                isConnected = false
                 isConnectedSubject.send(false)
             case .text(let string):
+                
                 print("Received text: \(string)")
+                guard let data = string.data(using: .utf8) else {
+                    return
+                }
+                dataSubject.send(data)
             case .binary(let data):
                 print("Received data: \(data.count)")
-                dataSubject.send(data)
             case .ping(_):
                 break
             case .pong(_):
