@@ -793,7 +793,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = TCV7B8P2RX;
+				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -822,7 +822,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = TCV7B8P2RX;
+				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

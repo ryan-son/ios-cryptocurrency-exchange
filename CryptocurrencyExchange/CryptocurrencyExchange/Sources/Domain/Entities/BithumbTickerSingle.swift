@@ -12,3 +12,15 @@ struct BithumbTickerSingle {
     let closingPrice: Double
     let changeRate: Double
 }
+
+extension BithumbTickerSingle {
+    func toCoinItemState(isLiked: Bool) -> CoinItemState {
+        return CoinItemState(
+            name: name,
+            price: closingPrice,
+            changeRate: changeRate,
+            isLiked: isLiked,
+            symbol: name + "_KRW"
+        )
+    }
+}
