@@ -30,7 +30,7 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     
     private let dataSubject = PassthroughSubject<Data, Never>()
     var dataPublisher: AnyPublisher<Data, Never> {
-        dataSubject.eraseToAnyPublisher()
+        dataSubject.receive(on: DispatchQueue.global()).eraseToAnyPublisher()
     }
     private let isConnectedSubject = PassthroughSubject<Bool, Never>()
     var isConnectedPublisher: AnyPublisher<Bool, Never> {
@@ -74,23 +74,24 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     }
     
     private func setOnEvent() {
-        socket.onEvent = { [self] event in
+        socket.onEvent = { [weak self] event in
+            guard let self = self else { return }
             print("---------------------")
             switch event {
             case .connected(let headers):
                 print("websocket is connected: \(headers)")
-                isConnected = true
-                isConnectedSubject.send(true)
+                self.isConnected = true
+                self.isConnectedSubject.send(true)
             case .disconnected(let reason, let code):
                 print("websocket is disconnected: \(reason) with code: \(code)")
-                isConnected = false
-                isConnectedSubject.send(false)
+                self.isConnected = false
+                self.isConnectedSubject.send(false)
             case .text(let string):
                 print("Received text: \(string)")
                 guard let data = string.data(using: .utf8) else {
                     return
                 }
-                dataSubject.send(data)
+                self.dataSubject.send(data)
             case .binary(let data):
                 print("Received data: \(data.count)")
             case .ping(_):
@@ -102,13 +103,13 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
             case .reconnectSuggested(_):
                 break
             case .cancelled:
-                isConnectedSubject.send(false)
+                self.isConnectedSubject.send(false)
             case .error(let error):
-                isConnectedSubject.send(false)
+                self.isConnectedSubject.send(false)
                 guard let error = error else {
                     return
                 }
-                errorSubject.send(error)
+                self.errorSubject.send(error)
             }
         }
     }

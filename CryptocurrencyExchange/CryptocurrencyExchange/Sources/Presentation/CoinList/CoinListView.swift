@@ -55,9 +55,7 @@ let coinListReducer = Reducer<
             return .none
         case .onAppear:
             let useCase = environment.coinListUseCase()
-            
             var coinItemStates = [CoinItemState]()
-            
             let result = useCase.getTickerSinglePublisher()
                 .map { tickers in
                     tickers.map { ticker in
@@ -91,6 +89,7 @@ let coinListReducer = Reducer<
                     )
                 }
                 .map { updateState -> [CoinItemState] in
+                    var updateState = updateState
                     guard let index = coinItemStates.firstIndex(
                         where: {
                             $0.symbol == updateState.symbol
@@ -98,6 +97,7 @@ let coinListReducer = Reducer<
                     ) else {
                         return coinItemStates
                     }
+                    updateState.id = coinItemStates[index].id
                     coinItemStates[index] = updateState
                     return coinItemStates
                 }
@@ -106,6 +106,7 @@ let coinListReducer = Reducer<
                         $0.price > $1.price
                     })
                 }
+                .receive(on: DispatchQueue.main)
                 .eraseToEffect()
                 .catchToEffect()
                 .map(CoinListAction.updateCoinItems(result:))
