@@ -14,13 +14,16 @@ struct ContentView: View {
         NavigationView {
             CoinListView(
                 store: Store(
-                    initialState: CoinListState(items: .mock),
+                    initialState: CoinListState(items: []),
                     reducer: coinListReducer,
                     environment: CoinListEnvironment(
-                        coinListUseCase: CoinListUseCase()
+                        coinListUseCase: {
+                            CoinListUseCase()
+                        }
                     )
                 )
             )
+                .navigationTitle("목록")
         }
     }
 }

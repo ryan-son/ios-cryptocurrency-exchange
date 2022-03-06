@@ -21,10 +21,12 @@ enum CoinListAction {
     case coinItem(id: CoinItemState.ID, action: CoinItemAction)
     case coinItemTapped
     case onAppear
+    case onDisappear
+    case updateCoinItems(result: Result<[CoinItemState], Error>)
 }
 
 struct CoinListEnvironment {
-    let coinListUseCase: CoinListUseCaseProtocol
+    let coinListUseCase: () -> CoinListUseCaseProtocol
 }
 
 let coinListReducer = Reducer<
@@ -36,20 +38,46 @@ let coinListReducer = Reducer<
         environment: { _ in CoinItemEnvironment() }
     ),
     Reducer { state, action, environment in
-        struct WebSocketId: Hashable {}
-
+        struct CancelId: Hashable {}
+        
         switch action {
+        case let .updateCoinItems(result):
+            switch result {
+            case let .success(items):
+                state.items = IdentifiedArray(uniqueElements: items)
+            case let .failure(error):
+                break
+            }
+            return .none
         case .coinItem:
             return .none
         case .coinItemTapped:
             return .none
         case .onAppear:
-            let useCase = environment.coinListUseCase
-            let symbolsPublisher = useCase.getTickerSinglePublisher().share()
-            symbolsPublisher
+            let useCase = environment.coinListUseCase()
+            
+            var coinItemStates = [CoinItemState]()
+            
+            let result = useCase.getTickerSinglePublisher()
+                .map { tickers in
+                    tickers.map { ticker in
+                        CoinItemState(
+                            name: ticker.name,
+                            price: ticker.closingPrice,
+                            changeRate: ticker.changeRate,
+                            isLiked: false,
+                            symbol: ticker.name + "_KRW"
+                        )
+                    }
+                }
+                .handleEvents(
+                    receiveOutput: {
+                        coinItemStates = $0
+                    }
+                )
                 .flatMap {
                     useCase.getTickerStreamPublisher(
-                        symbols: $0.map { $0.name + "_KRW" },
+                        symbols: $0.map { $0.symbol },
                         tickTypes: [.day]
                     )
                 }
@@ -62,24 +90,29 @@ let coinListReducer = Reducer<
                         symbol: ticker.symbol
                     )
                 }
-                .sink(
-                    receiveCompletion: { completion in
-                        switch completion {
-//                        case .complete:
-//                            Log.debug("getTickerPublisher Completed")
-                        case let .failure(error):
-                            Log.error(error)
-                        default:
-                            Log.error("???????")
+                .map { updateState -> [CoinItemState] in
+                    guard let index = coinItemStates.firstIndex(
+                        where: {
+                            $0.symbol == updateState.symbol
                         }
-                    },
-                    receiveValue: {
-                        Log.debug($0)
+                    ) else {
+                        return coinItemStates
                     }
-                )
-                .store(in: &state.cancellables)
-
-            return .none
+                    coinItemStates[index] = updateState
+                    return coinItemStates
+                }
+                .map {
+                    $0.sorted(by: {
+                        $0.price > $1.price
+                    })
+                }
+                .eraseToEffect()
+                .catchToEffect()
+                .map(CoinListAction.updateCoinItems(result:))
+                .cancellable(id: CancelId(), cancelInFlight: true)
+            return result
+        case .onDisappear:
+            return .cancel(id: CancelId())
         }
     }
 )
@@ -108,6 +141,10 @@ struct CoinListView: View {
             .buttonStyle(.plain)
             .onAppear {
                 viewStore.send(.onAppear)
+            }
+            .onDisappear {
+                viewStore.send(.onDisappear)
+                
             }
         }
     }
@@ -142,7 +179,9 @@ struct CoinListView_Previews: PreviewProvider {
                 initialState: CoinListState(items: .mock),
                 reducer: coinListReducer,
                 environment: CoinListEnvironment(
-                    coinListUseCase: CoinListUseCase()
+                    coinListUseCase: {
+                        CoinListUseCase()
+                    }
                 )
             )
         )
