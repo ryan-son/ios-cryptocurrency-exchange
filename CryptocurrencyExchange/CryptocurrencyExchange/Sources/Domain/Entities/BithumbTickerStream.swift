@@ -41,3 +41,18 @@ struct BithumbTickerStream {
     /// 체결강도
     let volumePower: Double
 }
+
+extension BithumbTickerStream {
+    func toCoinItemState(isLiked: Bool) -> CoinItemState {
+        return CoinItemState(
+            name: symbol.replacingOccurrences(of: "_KRW", with: ""),
+            price: closePrice,
+            changeRate: changeRate,
+            isLiked: isLiked,
+            symbol: symbol
+        )
+    }
+}
+
+
+
