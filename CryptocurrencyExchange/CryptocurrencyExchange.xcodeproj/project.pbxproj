@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		2133D9FC27D11039003682C0 /* AnyCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 2133D9FB27D11039003682C0 /* AnyCodable */; };
 		21434BBA27CA66A6001EFE9A /* BithumbRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21434BB927CA66A6001EFE9A /* BithumbRepository.swift */; };
-		21BECEAD27D332DD0018F7CA /* AnyPublisher+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAC27D332DD0018F7CA /* AnyPublisher+Decode.swift */; };
+		21BECEAD27D332DD0018F7CA /* Publisher+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAC27D332DD0018F7CA /* Publisher+Decode.swift */; };
 		21BECEAF27D3426A0018F7CA /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAE27D3426A0018F7CA /* Log.swift */; };
 		21C2EA3227CDE859004E1379 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 21C2EA3127CDE859004E1379 /* Kingfisher */; };
 		21C2EA3527CDF2D7004E1379 /* HiddenIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C2EA3427CDF2D7004E1379 /* HiddenIf.swift */; };
 		21E32C8F27CB38E000949D97 /* BithumbTickerSocketResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E32C8E27CB38E000949D97 /* BithumbTickerSocketResponseDTO.swift */; };
 		21E32C9127CB38F300949D97 /* BithumbOrderBookDepthSocketResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E32C9027CB38F300949D97 /* BithumbOrderBookDepthSocketResponseDTO.swift */; };
 		21E32C9327CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E32C9227CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift */; };
+		21E4382327D64BC700002099 /* BithumbResultSocketResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E4382227D64BC700002099 /* BithumbResultSocketResponseDTO.swift */; };
+		21E4382527D64EF800002099 /* Publisher+FilterSocketTopicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E4382427D64EF800002099 /* Publisher+FilterSocketTopicType.swift */; };
 		7321A1E327CA1E6900686DB5 /* API+BithumbWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1E227CA1E6900686DB5 /* API+BithumbWebSocket.swift */; };
 		7321A1EB27CA243500686DB5 /* API+BithumbREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1EA27CA243500686DB5 /* API+BithumbREST.swift */; };
 		7321A1ED27CA249E00686DB5 /* BithumbRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1EC27CA249E00686DB5 /* BithumbRESTService.swift */; };
@@ -65,12 +67,14 @@
 
 /* Begin PBXFileReference section */
 		21434BB927CA66A6001EFE9A /* BithumbRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbRepository.swift; sourceTree = "<group>"; };
-		21BECEAC27D332DD0018F7CA /* AnyPublisher+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyPublisher+Decode.swift"; sourceTree = "<group>"; };
+		21BECEAC27D332DD0018F7CA /* Publisher+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Decode.swift"; sourceTree = "<group>"; };
 		21BECEAE27D3426A0018F7CA /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		21C2EA3427CDF2D7004E1379 /* HiddenIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenIf.swift; sourceTree = "<group>"; };
 		21E32C8E27CB38E000949D97 /* BithumbTickerSocketResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTickerSocketResponseDTO.swift; sourceTree = "<group>"; };
 		21E32C9027CB38F300949D97 /* BithumbOrderBookDepthSocketResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbOrderBookDepthSocketResponseDTO.swift; sourceTree = "<group>"; };
 		21E32C9227CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTransactionSocketResponseDTO.swift; sourceTree = "<group>"; };
+		21E4382227D64BC700002099 /* BithumbResultSocketResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbResultSocketResponseDTO.swift; sourceTree = "<group>"; };
+		21E4382427D64EF800002099 /* Publisher+FilterSocketTopicType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+FilterSocketTopicType.swift"; sourceTree = "<group>"; };
 		7321A1E227CA1E6900686DB5 /* API+BithumbWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+BithumbWebSocket.swift"; sourceTree = "<group>"; };
 		7321A1EA27CA243500686DB5 /* API+BithumbREST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+BithumbREST.swift"; sourceTree = "<group>"; };
 		7321A1EC27CA249E00686DB5 /* BithumbRESTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbRESTService.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 				21E32C8E27CB38E000949D97 /* BithumbTickerSocketResponseDTO.swift */,
 				21E32C9227CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift */,
 				21E32C9027CB38F300949D97 /* BithumbOrderBookDepthSocketResponseDTO.swift */,
+				21E4382227D64BC700002099 /* BithumbResultSocketResponseDTO.swift */,
 			);
 			path = ResponseDTO;
 			sourceTree = "<group>";
@@ -405,7 +410,8 @@
 				7321A1F527CA397300686DB5 /* MoyaProvider+MakeProvider.swift */,
 				AA8669A327CA00BC007DFBE6 /* URLRequest+Extensions.swift */,
 				7321A1F827CA428D00686DB5 /* AnyPublisher+Validate.swift */,
-				21BECEAC27D332DD0018F7CA /* AnyPublisher+Decode.swift */,
+				21BECEAC27D332DD0018F7CA /* Publisher+Decode.swift */,
+				21E4382427D64EF800002099 /* Publisher+FilterSocketTopicType.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -611,10 +617,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21E4382527D64EF800002099 /* Publisher+FilterSocketTopicType.swift in Sources */,
 				7321A22027CD122A00686DB5 /* BithumbTransactionStream.swift in Sources */,
 				AA8669BC27CD1CDF007DFBE6 /* CoinListView.swift in Sources */,
 				AA8669A227CA00B3007DFBE6 /* URL+Extensions.swift in Sources */,
 				7321A1F927CA428D00686DB5 /* AnyPublisher+Validate.swift in Sources */,
+				21E4382327D64BC700002099 /* BithumbResultSocketResponseDTO.swift in Sources */,
 				7321A22227CD17E300686DB5 /* BithumbOrderBookDepthStream.swift in Sources */,
 				AA406E4F27CD32AB00013BF2 /* CoinItemAction.swift in Sources */,
 				7321A1F127CA31D300686DB5 /* BithumbTickerResultRESTResponseDTO.swift in Sources */,
@@ -631,7 +639,7 @@
 				7321A1F627CA397300686DB5 /* MoyaProvider+MakeProvider.swift in Sources */,
 				AA8669B427CB85AA007DFBE6 /* BithumbTickerStream.swift in Sources */,
 				AA406E4A27CD317700013BF2 /* Double+CurrencyFormat.swift in Sources */,
-				21BECEAD27D332DD0018F7CA /* AnyPublisher+Decode.swift in Sources */,
+				21BECEAD27D332DD0018F7CA /* Publisher+Decode.swift in Sources */,
 				21E32C9127CB38F300949D97 /* BithumbOrderBookDepthSocketResponseDTO.swift in Sources */,
 				AA86699E27CA000F007DFBE6 /* WebSocketConnector.swift in Sources */,
 				21E32C9327CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift in Sources */,
@@ -793,7 +801,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
+				DEVELOPMENT_TEAM = TCV7B8P2RX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -822,7 +830,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
+				DEVELOPMENT_TEAM = TCV7B8P2RX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

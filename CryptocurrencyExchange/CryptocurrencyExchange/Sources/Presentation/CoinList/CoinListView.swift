@@ -120,10 +120,9 @@ fileprivate func logic(
                 $0.price > $1.price
             })
         }
-        .tryMap{ _ in
-            throw NSError(domain: "테스트에러", code: 1, userInfo: [NSLocalizedDescriptionKey : "테스트 오류 입니다."])
-            return []
-        }
+//        .tryMap{ _ in
+//            throw NSError(domain: "테스트에러", code: 1, userInfo: [NSLocalizedDescriptionKey : "테스트 오류 입니다."])
+//        }
         .eraseToAnyPublisher()
         // TODO: 사용자 정의 에러 필요.
         .mapError({ _ in
