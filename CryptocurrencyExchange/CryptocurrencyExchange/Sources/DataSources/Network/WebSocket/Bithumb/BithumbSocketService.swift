@@ -37,6 +37,7 @@ struct BithumbSocketService {
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
+            .filterSocketTopicType(filter: filter)
             .compactMapDecode(type: BithumbTickerSocketResponseDTO.self, decoder: decoder)
     }
     
@@ -51,6 +52,7 @@ struct BithumbSocketService {
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
+            .filterSocketTopicType(filter: filter)
             .compactMapDecode(type: BithumbTransactionSocketResponseDTO.self, decoder: decoder)
     }
     
@@ -65,6 +67,7 @@ struct BithumbSocketService {
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
+            .filterSocketTopicType(filter: filter)
             .compactMapDecode(type: BithumbOrderBookDepthSocketResponseDTO.self, decoder: decoder)
     }
 }

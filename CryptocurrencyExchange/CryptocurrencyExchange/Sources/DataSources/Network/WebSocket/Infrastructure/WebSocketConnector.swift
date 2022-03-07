@@ -76,7 +76,7 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     private func setOnEvent() {
         socket.onEvent = { [weak self] event in
             guard let self = self else { return }
-            print("---------------------")
+//            print("---------------------")
             switch event {
             case .connected(let headers):
                 print("websocket is connected: \(headers)")
@@ -87,7 +87,7 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
                 self.isConnected = false
                 self.isConnectedSubject.send(false)
             case .text(let string):
-                print("Received text: \(string)")
+//                print("Received text: \(string)")
                 guard let data = string.data(using: .utf8) else {
                     return
                 }
