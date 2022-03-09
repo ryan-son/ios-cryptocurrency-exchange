@@ -29,13 +29,13 @@ enum BithumbTransactionPriceUpDown: String {
     case none
 }
 
-//extension BithumbTransactionStream {
-//    func toTransactionItemState() -> TransactionItemState {
-//        return TransactionItemState(
-//            symbol: symbol,
-//            contDate: transactionDate,
-//            contPrice: contPrice,
-//            contQuantity: contQuantity
-//        )
-//    }
-//}
+extension BithumbTransactionStream {
+    func toTransactionItemState() -> TransactionItemState {
+        return TransactionItemState(
+            symbol: symbol,
+            contDate: transactionDate,
+            contPrice: contPrice,
+            contQuantity: contQuantity
+        )
+    }
+}

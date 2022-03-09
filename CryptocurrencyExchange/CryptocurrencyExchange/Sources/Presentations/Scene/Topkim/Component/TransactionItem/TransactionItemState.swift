@@ -15,7 +15,6 @@ struct TransactionItemState: Equatable, Identifiable {
     var contQuantity: Double
 }
 
-
 extension TransactionItemState {
     func toViewState() -> TransactionItemViewState {
         let contDate = contDate.format(with: "HH:mm:ss")
@@ -37,12 +36,4 @@ struct TransactionItemViewState {
     var contDate: String
     var contPrice: String
     var contQuantity: String
-}
-
-extension Date {
-    func format(with format: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
-    }
 }
