@@ -167,12 +167,20 @@
 			path = Modifier;
 			sourceTree = "<group>";
 		};
+		7315F72127D896C600276943 /* Bithumb */ = {
+			isa = PBXGroup;
+			children = (
+				7321A1EF27CA2F7E00686DB5 /* ResponseDTO */,
+				7321A1EC27CA249E00686DB5 /* BithumbRESTService.swift */,
+			);
+			path = Bithumb;
+			sourceTree = "<group>";
+		};
 		7321A1E127CA1D1D00686DB5 /* REST */ = {
 			isa = PBXGroup;
 			children = (
 				7321A1F227CA372300686DB5 /* Protocol */,
-				7321A1EE27CA2F7700686DB5 /* Ticker */,
-				7321A1EC27CA249E00686DB5 /* BithumbRESTService.swift */,
+				7315F72127D896C600276943 /* Bithumb */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -191,14 +199,6 @@
 				7321A1EA27CA243500686DB5 /* API+BithumbREST.swift */,
 			);
 			path = REST;
-			sourceTree = "<group>";
-		};
-		7321A1EE27CA2F7700686DB5 /* Ticker */ = {
-			isa = PBXGroup;
-			children = (
-				7321A1EF27CA2F7E00686DB5 /* ResponseDTO */,
-			);
-			path = Ticker;
 			sourceTree = "<group>";
 		};
 		7321A1EF27CA2F7E00686DB5 /* ResponseDTO */ = {
@@ -829,7 +829,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = TCV7B8P2RX;
+				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -858,7 +858,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = TCV7B8P2RX;
+				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

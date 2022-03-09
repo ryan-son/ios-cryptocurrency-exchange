@@ -62,11 +62,13 @@ let coinListReducer = Reducer<
         case let .updateCoinItems(result):
             switch result {
             case let .success(items):
-                // TODO: 문제 없는지 확인.
                 state.items = IdentifiedArray(uniqueElements: items)
                 return .none
             case let .failure(error):
-                return Effect(value: .showToast(message: "\(error.localizedDescription)"))
+                return Effect.merge(
+                    Effect(value: .onAppear),
+                    Effect(value: .showToast(message: "\(error.localizedDescription)"))
+                )
             }
         case .coinItem:
             return .none
@@ -142,7 +144,8 @@ fileprivate func fetchTickers(
         .eraseToAnyPublisher()
         .mapError { error in
             Log.error("Error: \(error)")
-            return CoinListError.description("데이터를 받아오지 못했습니다. 당겨서 페이지를 갱신해주세요.")
+            // TODO: 오류 났을 때 처리 필요.
+            return CoinListError.description("다시 연결 중...")
         }
         .receive(on: DispatchQueue.main)
         .eraseToEffect()
