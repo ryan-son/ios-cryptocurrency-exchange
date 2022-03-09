@@ -18,6 +18,17 @@
 		21E32C9327CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E32C9227CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift */; };
 		21E4382327D64BC700002099 /* BithumbResultSocketResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E4382227D64BC700002099 /* BithumbResultSocketResponseDTO.swift */; };
 		21E4382527D64EF800002099 /* Publisher+FilterSocketTopicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E4382427D64EF800002099 /* Publisher+FilterSocketTopicType.swift */; };
+		730F320C27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F320B27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift */; };
+		730F320E27D8EE27002AB57B /* BithumbOrderbookSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F320D27D8EE27002AB57B /* BithumbOrderbookSingle.swift */; };
+		7315F72B27D8D0FD00276943 /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F72A27D8D0FD00276943 /* TransactionListView.swift */; };
+		7315F72F27D8D15F00276943 /* TransactionItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F72E27D8D15F00276943 /* TransactionItemView.swift */; };
+		7315F73127D8D43400276943 /* TransactionItemState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F73027D8D43400276943 /* TransactionItemState.swift */; };
+		7315F73327D8D44A00276943 /* TransactionItemAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F73227D8D44A00276943 /* TransactionItemAction.swift */; };
+		7315F73527D8D46700276943 /* TransactionItemEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F73427D8D46700276943 /* TransactionItemEnviroment.swift */; };
+		7315F73727D8D47600276943 /* TransactionReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F73627D8D47600276943 /* TransactionReducer.swift */; };
+		7315F73927D8D6FB00276943 /* TransactionListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F73827D8D6FB00276943 /* TransactionListUseCase.swift */; };
+		7315F73B27D8D94A00276943 /* BithumbTransactionHistoryResultRESTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F73A27D8D94A00276943 /* BithumbTransactionHistoryResultRESTResponseDTO.swift */; };
+		7315F73D27D8DA9B00276943 /* BithumbTransactionHistroySingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F73C27D8DA9B00276943 /* BithumbTransactionHistroySingle.swift */; };
 		7321A1E327CA1E6900686DB5 /* API+BithumbWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1E227CA1E6900686DB5 /* API+BithumbWebSocket.swift */; };
 		7321A1EB27CA243500686DB5 /* API+BithumbREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1EA27CA243500686DB5 /* API+BithumbREST.swift */; };
 		7321A1ED27CA249E00686DB5 /* BithumbRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1EC27CA249E00686DB5 /* BithumbRESTService.swift */; };
@@ -78,6 +89,17 @@
 		21E32C9227CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTransactionSocketResponseDTO.swift; sourceTree = "<group>"; };
 		21E4382227D64BC700002099 /* BithumbResultSocketResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbResultSocketResponseDTO.swift; sourceTree = "<group>"; };
 		21E4382427D64EF800002099 /* Publisher+FilterSocketTopicType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+FilterSocketTopicType.swift"; sourceTree = "<group>"; };
+		730F320B27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbOrderbookResultRESTResponseDTO.swift; sourceTree = "<group>"; };
+		730F320D27D8EE27002AB57B /* BithumbOrderbookSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbOrderbookSingle.swift; sourceTree = "<group>"; };
+		7315F72A27D8D0FD00276943 /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
+		7315F72E27D8D15F00276943 /* TransactionItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItemView.swift; sourceTree = "<group>"; };
+		7315F73027D8D43400276943 /* TransactionItemState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItemState.swift; sourceTree = "<group>"; };
+		7315F73227D8D44A00276943 /* TransactionItemAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItemAction.swift; sourceTree = "<group>"; };
+		7315F73427D8D46700276943 /* TransactionItemEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItemEnviroment.swift; sourceTree = "<group>"; };
+		7315F73627D8D47600276943 /* TransactionReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionReducer.swift; sourceTree = "<group>"; };
+		7315F73827D8D6FB00276943 /* TransactionListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListUseCase.swift; sourceTree = "<group>"; };
+		7315F73A27D8D94A00276943 /* BithumbTransactionHistoryResultRESTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTransactionHistoryResultRESTResponseDTO.swift; sourceTree = "<group>"; };
+		7315F73C27D8DA9B00276943 /* BithumbTransactionHistroySingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTransactionHistroySingle.swift; sourceTree = "<group>"; };
 		7321A1E227CA1E6900686DB5 /* API+BithumbWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+BithumbWebSocket.swift"; sourceTree = "<group>"; };
 		7321A1EA27CA243500686DB5 /* API+BithumbREST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+BithumbREST.swift"; sourceTree = "<group>"; };
 		7321A1EC27CA249E00686DB5 /* BithumbRESTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbRESTService.swift; sourceTree = "<group>"; };
@@ -179,6 +201,8 @@
 		7315F72427D8CA5E00276943 /* Topkim */ = {
 			isa = PBXGroup;
 			children = (
+				7315F72C27D8D13F00276943 /* Component */,
+				7315F72A27D8D0FD00276943 /* TransactionListView.swift */,
 			);
 			path = Topkim;
 			sourceTree = "<group>";
@@ -207,6 +231,26 @@
 			children = (
 			);
 			path = Ryan;
+			sourceTree = "<group>";
+		};
+		7315F72C27D8D13F00276943 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				7315F72D27D8D14900276943 /* TransactionItem */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		7315F72D27D8D14900276943 /* TransactionItem */ = {
+			isa = PBXGroup;
+			children = (
+				7315F73027D8D43400276943 /* TransactionItemState.swift */,
+				7315F73227D8D44A00276943 /* TransactionItemAction.swift */,
+				7315F73427D8D46700276943 /* TransactionItemEnviroment.swift */,
+				7315F73627D8D47600276943 /* TransactionReducer.swift */,
+				7315F72E27D8D15F00276943 /* TransactionItemView.swift */,
+			);
+			path = TransactionItem;
 			sourceTree = "<group>";
 		};
 		7321A1E127CA1D1D00686DB5 /* REST */ = {
@@ -238,6 +282,8 @@
 			isa = PBXGroup;
 			children = (
 				7321A1F027CA31D300686DB5 /* BithumbTickerResultRESTResponseDTO.swift */,
+				730F320B27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift */,
+				7315F73A27D8D94A00276943 /* BithumbTransactionHistoryResultRESTResponseDTO.swift */,
 			);
 			path = ResponseDTO;
 			sourceTree = "<group>";
@@ -512,6 +558,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8669B027CB82C3007DFBE6 /* CoinListUseCase.swift */,
+				7315F73827D8D6FB00276943 /* TransactionListUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -523,6 +570,8 @@
 				7321A22127CD17E300686DB5 /* BithumbOrderBookDepthStream.swift */,
 				AA8669B327CB85AA007DFBE6 /* BithumbTickerStream.swift */,
 				AA406E5627D389A200013BF2 /* BithumbTickerSingle.swift */,
+				730F320D27D8EE27002AB57B /* BithumbOrderbookSingle.swift */,
+				7315F73C27D8DA9B00276943 /* BithumbTransactionHistroySingle.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -674,25 +723,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7315F73B27D8D94A00276943 /* BithumbTransactionHistoryResultRESTResponseDTO.swift in Sources */,
 				21E4382527D64EF800002099 /* Publisher+FilterSocketTopicType.swift in Sources */,
 				7321A22027CD122A00686DB5 /* BithumbTransactionStream.swift in Sources */,
 				AA8669BC27CD1CDF007DFBE6 /* CoinListView.swift in Sources */,
 				AA8669A227CA00B3007DFBE6 /* URL+Extensions.swift in Sources */,
 				7321A1F927CA428D00686DB5 /* AnyPublisher+Validate.swift in Sources */,
+				7315F72B27D8D0FD00276943 /* TransactionListView.swift in Sources */,
+				730F320C27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift in Sources */,
+				7315F73527D8D46700276943 /* TransactionItemEnviroment.swift in Sources */,
 				21E4382327D64BC700002099 /* BithumbResultSocketResponseDTO.swift in Sources */,
 				7321A22227CD17E300686DB5 /* BithumbOrderBookDepthStream.swift in Sources */,
 				AABBA44D27D866480092D1D2 /* ToastView.swift in Sources */,
+				7315F72F27D8D15F00276943 /* TransactionItemView.swift in Sources */,
 				AA406E4F27CD32AB00013BF2 /* CoinItemAction.swift in Sources */,
+				7315F73727D8D47600276943 /* TransactionReducer.swift in Sources */,
 				7321A1F127CA31D300686DB5 /* BithumbTickerResultRESTResponseDTO.swift in Sources */,
+				7315F73D27D8DA9B00276943 /* BithumbTransactionHistroySingle.swift in Sources */,
 				AA86699B27C9FFDA007DFBE6 /* BithumbSocketService.swift in Sources */,
 				21E32C8F27CB38E000949D97 /* BithumbTickerSocketResponseDTO.swift in Sources */,
+				730F320E27D8EE27002AB57B /* BithumbOrderbookSingle.swift in Sources */,
 				AA86695727C9C484007DFBE6 /* ContentView.swift in Sources */,
 				AA8669A927CA024C007DFBE6 /* SocketTargetType.swift in Sources */,
+				7315F73927D8D6FB00276943 /* TransactionListUseCase.swift in Sources */,
 				AA4B6D7227D87A36002A7398 /* ToastClient.swift in Sources */,
 				AA8669B127CB82C3007DFBE6 /* CoinListUseCase.swift in Sources */,
 				7321A1E327CA1E6900686DB5 /* API+BithumbWebSocket.swift in Sources */,
 				AA8669AD27CA030F007DFBE6 /* BithumbSocketType.swift in Sources */,
 				AA406E4D27CD329D00013BF2 /* CoinItemState.swift in Sources */,
+				7315F73327D8D44A00276943 /* TransactionItemAction.swift in Sources */,
 				AA8669B927CBCD1E007DFBE6 /* String+ToDate.swift in Sources */,
 				AA8669BE27CD1E09007DFBE6 /* CoinItemView.swift in Sources */,
 				7321A1F627CA397300686DB5 /* MoyaProvider+MakeProvider.swift in Sources */,
@@ -700,6 +759,7 @@
 				AA406E4A27CD317700013BF2 /* Double+CurrencyFormat.swift in Sources */,
 				21BECEAD27D332DD0018F7CA /* Publisher+Decode.swift in Sources */,
 				21E32C9127CB38F300949D97 /* BithumbOrderBookDepthSocketResponseDTO.swift in Sources */,
+				7315F73127D8D43400276943 /* TransactionItemState.swift in Sources */,
 				AA86699E27CA000F007DFBE6 /* WebSocketConnector.swift in Sources */,
 				21E32C9327CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift in Sources */,
 				21C2EA3527CDF2D7004E1379 /* HiddenIf.swift in Sources */,

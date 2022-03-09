@@ -17,12 +17,20 @@ extension API.BithumbREST: TargetType {
         switch self {
         case .ticker:
             return "/public/ticker/ALL_KRW"
+        case let .orderbook(symbol):
+            return "/public/orderbook/\(symbol)"
+        case let .transactionHistory(symbol):
+            return "/public/transaction_history/\(symbol)"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .ticker:
+            return .get
+        case .orderbook:
+            return .get
+        case .transactionHistory:
             return .get
         }
     }
@@ -31,12 +39,20 @@ extension API.BithumbREST: TargetType {
         switch self {
         case .ticker:
             return .requestPlain
+        case .orderbook:
+            return .requestPlain
+        case .transactionHistory:
+            return .requestPlain
         }
     }
     
     var headers: [String : String]? {
         switch self {
         case .ticker:
+            return nil
+        case .orderbook:
+            return nil
+        case .transactionHistory:
             return nil
         }
     }

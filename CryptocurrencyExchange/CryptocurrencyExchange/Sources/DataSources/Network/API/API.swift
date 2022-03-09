@@ -16,5 +16,7 @@ enum API {
     
     enum BithumbREST {
         case ticker
+        case orderbook(symbol: String)
+        case transactionHistory(symbol: String)
     }
 }
