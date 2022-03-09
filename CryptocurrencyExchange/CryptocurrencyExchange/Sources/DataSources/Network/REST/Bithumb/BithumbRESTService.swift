@@ -21,6 +21,27 @@ struct BithumbRESTService {
             .decode(type: BithumbTickerResultRESTResponseDTO.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
+    
+    func getOrderbook(
+        symbol: String
+    ) -> AnyPublisher<BithumbOrderbookResultRESTResponseDTO, Error> {
+        return service.requestPublisher(.orderbook(symbol: symbol))
+            .validate()
+            .map(\.data)
+            .decode(type: BithumbOrderbookResultRESTResponseDTO.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    func getTransactionHistory(
+        symbol: String
+    ) -> AnyPublisher<BithumbTransactionHistoryResultRESTResponseDTO, Error> {
+        return service.requestPublisher(.transactionHistory(symbol: symbol))
+            .validate()
+            .map(\.data)
+            .decode(type: BithumbTransactionHistoryResultRESTResponseDTO.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
 }
 
 

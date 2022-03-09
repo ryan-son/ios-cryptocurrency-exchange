@@ -11,6 +11,12 @@ import Foundation
 
 protocol BithumbRepositoryProtocol {
     func getTickerSinglePublisher() -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error>
+    func getOrderbookSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbOrderbookResultRESTResponseDTO, Error>
+    func getTransactionHistorySinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbTransactionHistoryResultRESTResponseDTO, Error>
     func getTickerStreamPublisher(
         with filter: BithumbWebSocketFilter
     ) -> AnyPublisher<BithumbTickerSocketResponseDTO, Error>
@@ -38,11 +44,28 @@ struct BithumbRepository: BithumbRepositoryProtocol {
         self.socketService = socketService
     }
     
+    
     // MARK: - REST
     
     func getTickerSinglePublisher() -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error> {
         return restService
             .getTickers()
+            .eraseToAnyPublisher()
+    }
+    
+    func getOrderbookSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbOrderbookResultRESTResponseDTO, Error> {
+        return restService
+            .getOrderbook(symbol: symbol)
+            .eraseToAnyPublisher()
+    }
+    
+    func getTransactionHistorySinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbTransactionHistoryResultRESTResponseDTO, Error> {
+        return restService
+            .getTransactionHistory(symbol: symbol)
             .eraseToAnyPublisher()
     }
     
