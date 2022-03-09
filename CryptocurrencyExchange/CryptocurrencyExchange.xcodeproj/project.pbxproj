@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2133D9FC27D11039003682C0 /* AnyCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 2133D9FB27D11039003682C0 /* AnyCodable */; };
+		2134363127D8D20B006F273B /* OrderBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134363027D8D20B006F273B /* OrderBookListView.swift */; };
+		2134363327D8D355006F273B /* OrderBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134363227D8D355006F273B /* OrderBookView.swift */; };
 		21434BBA27CA66A6001EFE9A /* BithumbRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21434BB927CA66A6001EFE9A /* BithumbRepository.swift */; };
 		21BECEAD27D332DD0018F7CA /* Publisher+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAC27D332DD0018F7CA /* Publisher+Decode.swift */; };
 		21BECEAF27D3426A0018F7CA /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAE27D3426A0018F7CA /* Log.swift */; };
@@ -80,6 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2134363027D8D20B006F273B /* OrderBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListView.swift; sourceTree = "<group>"; };
+		2134363227D8D355006F273B /* OrderBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookView.swift; sourceTree = "<group>"; };
 		21434BB927CA66A6001EFE9A /* BithumbRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbRepository.swift; sourceTree = "<group>"; };
 		21BECEAC27D332DD0018F7CA /* Publisher+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Decode.swift"; sourceTree = "<group>"; };
 		21BECEAE27D3426A0018F7CA /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -162,6 +166,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2134362F27D8D128006F273B /* OrderBook */ = {
+			isa = PBXGroup;
+			children = (
+				2134363027D8D20B006F273B /* OrderBookListView.swift */,
+				2134363227D8D355006F273B /* OrderBookView.swift */,
+			);
+			path = OrderBook;
+			sourceTree = "<group>";
+		};
 		21434BB627CA63E4001EFE9A /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,20 +220,13 @@
 			path = Topkim;
 			sourceTree = "<group>";
 		};
-		7315F72527D8CA6200276943 /* Sky */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Sky;
-			sourceTree = "<group>";
-		};
 		7315F72627D8CA8300276943 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				2134362F27D8D128006F273B /* OrderBook */,
 				AA8669B227CB8589007DFBE6 /* CoinList */,
 				7315F72727D8CB0000276943 /* Ryan */,
 				7315F72427D8CA5E00276943 /* Topkim */,
-				7315F72527D8CA6200276943 /* Sky */,
 				AA86695627C9C484007DFBE6 /* ContentView.swift */,
 			);
 			path = Scene;
@@ -440,17 +446,9 @@
 			isa = PBXGroup;
 			children = (
 				AA8669A527CA0160007DFBE6 /* Utilities */,
-				AA86698F27C9C962007DFBE6 /* Persistent */,
 				AA86698A27C9C8FE007DFBE6 /* Network */,
 			);
 			path = DataSources;
-			sourceTree = "<group>";
-		};
-		AA86698F27C9C962007DFBE6 /* Persistent */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Persistent;
 			sourceTree = "<group>";
 		};
 		AA86699027C9C9C5007DFBE6 /* Domains */ = {
@@ -726,6 +724,8 @@
 				7315F73B27D8D94A00276943 /* BithumbTransactionHistoryResultRESTResponseDTO.swift in Sources */,
 				21E4382527D64EF800002099 /* Publisher+FilterSocketTopicType.swift in Sources */,
 				7321A22027CD122A00686DB5 /* BithumbTransactionStream.swift in Sources */,
+				2134363327D8D355006F273B /* OrderBookView.swift in Sources */,
+				2134363127D8D20B006F273B /* OrderBookListView.swift in Sources */,
 				AA8669BC27CD1CDF007DFBE6 /* CoinListView.swift in Sources */,
 				AA8669A227CA00B3007DFBE6 /* URL+Extensions.swift in Sources */,
 				7321A1F927CA428D00686DB5 /* AnyPublisher+Validate.swift in Sources */,
