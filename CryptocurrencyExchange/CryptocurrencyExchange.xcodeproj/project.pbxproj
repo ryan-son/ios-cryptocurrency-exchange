@@ -176,6 +176,39 @@
 			path = Bithumb;
 			sourceTree = "<group>";
 		};
+		7315F72427D8CA5E00276943 /* Topkim */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Topkim;
+			sourceTree = "<group>";
+		};
+		7315F72527D8CA6200276943 /* Sky */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sky;
+			sourceTree = "<group>";
+		};
+		7315F72627D8CA8300276943 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				AA8669B227CB8589007DFBE6 /* CoinList */,
+				7315F72727D8CB0000276943 /* Ryan */,
+				7315F72427D8CA5E00276943 /* Topkim */,
+				7315F72527D8CA6200276943 /* Sky */,
+				AA86695627C9C484007DFBE6 /* ContentView.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		7315F72727D8CB0000276943 /* Ryan */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Ryan;
+			sourceTree = "<group>";
+		};
 		7321A1E127CA1D1D00686DB5 /* REST */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,8 +385,7 @@
 			children = (
 				AABBA44B27D866310092D1D2 /* Component */,
 				AA406E4727CD314800013BF2 /* Utilities */,
-				AA8669B227CB8589007DFBE6 /* CoinList */,
-				AA86695627C9C484007DFBE6 /* ContentView.swift */,
+				7315F72627D8CA8300276943 /* Scene */,
 			);
 			path = Presentations;
 			sourceTree = "<group>";
