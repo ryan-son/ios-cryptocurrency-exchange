@@ -19,7 +19,8 @@ struct ContentView: View {
                     environment: CoinListEnvironment(
                         coinListUseCase: {
                             CoinListUseCase()
-                        }
+                        },
+                        toastClient: .live
                     )
                 )
             )

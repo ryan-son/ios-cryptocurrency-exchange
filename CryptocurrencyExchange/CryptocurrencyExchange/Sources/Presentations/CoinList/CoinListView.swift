@@ -11,10 +11,24 @@ import SwiftUI
 import ComposableArchitecture
 import IdentifiedCollections
 
+enum CoinListError: Equatable {
+    case description(String)
+}
+
+extension CoinListError: LocalizedError {
+    var localizedDescription: String {
+        switch self {
+        case let .description(message):
+            return message
+        }
+    }
+}
+
 struct CoinListState: Equatable {
     var items: IdentifiedArrayOf<CoinItemState>
     var selectedItem: Identified<CoinItemState.ID, CoinItemState>?
     var alert: AlertState<CoinListAction>?
+    var toastMessage: String?
 }
 
 enum CoinListAction: Equatable {
@@ -22,14 +36,15 @@ enum CoinListAction: Equatable {
     case coinItemTapped
     case onAppear
     case onDisappear
-    // TODO: Error Equatable 채택 안되는 문제 처리 필요.
-    case updateCoinItems(result: Result<[CoinItemState], NSError>)
+    case updateCoinItems(result: Result<[CoinItemState], CoinListError>)
     case showAlert(message: String)
     case dismissAlert
+    case showToast(message: String)
 }
 
 struct CoinListEnvironment {
     let coinListUseCase: () -> CoinListUseCaseProtocol
+    let toastClient: ToastClient
 }
 
 let coinListReducer = Reducer<
@@ -51,14 +66,14 @@ let coinListReducer = Reducer<
                 state.items = IdentifiedArray(uniqueElements: items)
                 return .none
             case let .failure(error):
-                return Effect(value: .showAlert(message: error.localizedDescription))
+                return Effect(value: .showToast(message: "\(error.localizedDescription)"))
             }
         case .coinItem:
             return .none
         case .coinItemTapped:
             return .none
         case .onAppear:
-            return logic(environment: environment, cancelId: cancelId)
+            return fetchTickers(environment: environment, cancelId: cancelId)
         case .onDisappear:
             return .cancel(id: cancelId)
         case let .showAlert(message):
@@ -71,11 +86,15 @@ let coinListReducer = Reducer<
         case .dismissAlert:
             state.alert = nil
             return .none
+        case let .showToast(message):
+            let model = ToastModel(duration: 3, message: message)
+            return environment.toastClient.show(model)
+                .fireAndForget()
         }
     }
 )
 
-fileprivate func logic(
+fileprivate func fetchTickers(
     environment: CoinListEnvironment,
     cancelId: AnyHashable
 ) -> Effect<CoinListAction, Never> {
@@ -120,14 +139,11 @@ fileprivate func logic(
                 $0.price > $1.price
             })
         }
-//        .tryMap{ _ in
-//            throw NSError(domain: "테스트에러", code: 1, userInfo: [NSLocalizedDescriptionKey : "테스트 오류 입니다."])
-//        }
         .eraseToAnyPublisher()
-        // TODO: 사용자 정의 에러 필요.
-        .mapError({ _ in
-            return NSError(domain: "테스트에러", code: 1, userInfo: [NSLocalizedDescriptionKey : "테스트 오류 입니다."])
-        })
+        .mapError { error in
+            Log.error("Error: \(error)")
+            return CoinListError.description("데이터를 받아오지 못했습니다. 당겨서 페이지를 갱신해주세요.")
+        }
         .receive(on: DispatchQueue.main)
         .eraseToEffect()
         .catchToEffect()
@@ -140,31 +156,36 @@ struct CoinListView: View {
     
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            List {
-                ForEachStore(
-                    self.store.scope(
-                        state: \.items,
-                        action: CoinListAction.coinItem(id:action:)
-                    ),
-                    content: { itemStore in
-                        NavigationLink(destination: {
-                            CoinItemView(store: itemStore)
-                        }) {
-                            CoinItemView(store: itemStore)
+            ZStack(alignment: .top) {
+                List {
+                    ForEachStore(
+                        self.store.scope(
+                            state: \.items,
+                            action: CoinListAction.coinItem(id:action:)
+                        ),
+                        content: { itemStore in
+                            NavigationLink(destination: {
+                                CoinItemView(store: itemStore)
+                            }) {
+                                CoinItemView(store: itemStore)
+                            }
                         }
-                    }
-                )
+                    )
+                }
+                .alert(store.scope(state: \.alert), dismiss: CoinListAction.dismissAlert)
+                .listStyle(.plain)
+                .buttonStyle(.plain)
+                .onAppear {
+                    viewStore.send(.onAppear)
+                }
+                .onDisappear {
+                    viewStore.send(.onDisappear)
+                }
+                if let toastMessage = viewStore.toastMessage {
+                    ToastView(message: toastMessage)
+                }
             }
-            .alert(store.scope(state: \.alert), dismiss: CoinListAction.dismissAlert)
-            .listStyle(.plain)
-            .buttonStyle(.plain)
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
-            .onDisappear {
-                viewStore.send(.onDisappear)
-                
-            }
+            
         }
     }
 }
@@ -200,7 +221,8 @@ struct CoinListView_Previews: PreviewProvider {
                 environment: CoinListEnvironment(
                     coinListUseCase: {
                         CoinListUseCase()
-                    }
+                    },
+                    toastClient: .live
                 )
             )
         )

@@ -5,9 +5,10 @@
 //  Created by Ryan-Son on 2022/02/26.
 //
 
+import Combine
 import Foundation
 
-import Combine
+import Starscream
 
 struct BithumbSocketService {
     private let socketConnector: WebSocketConnectable
@@ -21,9 +22,9 @@ struct BithumbSocketService {
         self.socketConnector = socketConnector
     }
     
-    func connect() -> AnyPublisher<Bool, Never> {
+    func connect() -> AnyPublisher<Void, Error> {
         socketConnector.connect()
-        return socketConnector.isConnectedPublisher
+        return socketConnector.connectedPublisher
     }
     
     func getTickerPublisher(
@@ -33,7 +34,7 @@ struct BithumbSocketService {
     ) -> AnyPublisher<BithumbTickerSocketResponseDTO, Error> {
         return Just(filter)
             .encode(encoder: encoder)
-            .flatMap { data -> AnyPublisher<Data, Never> in
+            .flatMap { data -> AnyPublisher<Data, Error> in
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
@@ -48,7 +49,7 @@ struct BithumbSocketService {
     ) -> AnyPublisher<BithumbTransactionSocketResponseDTO, Error> {
         return Just(filter)
             .encode(encoder: encoder)
-            .flatMap { data -> AnyPublisher<Data, Never> in
+            .flatMap { data -> AnyPublisher<Data, Error> in
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }
@@ -63,7 +64,7 @@ struct BithumbSocketService {
     ) -> AnyPublisher<BithumbOrderBookDepthSocketResponseDTO, Error> {
         return Just(filter)
             .encode(encoder: encoder)
-            .flatMap { data -> AnyPublisher<Data, Never> in
+            .flatMap { data -> AnyPublisher<Data, Error> in
                 socketConnector.write(data: data)
                 return socketConnector.dataPublisher
             }

@@ -11,9 +11,8 @@ import Foundation
 import Starscream
 
 protocol WebSocketConnectable {
-    var dataPublisher: AnyPublisher<Data, Never> { get }
-    var isConnectedPublisher: AnyPublisher<Bool, Never> { get }
-    var errorPublisher: AnyPublisher<Error, Never> { get }
+    var dataPublisher: AnyPublisher<Data, Error> { get }
+    var connectedPublisher: AnyPublisher<Void, Error> { get }
     
     func connect()
     func write(data: Data)
@@ -28,17 +27,13 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
     }
     private var isConnecting: Bool = false
     
-    private let dataSubject = PassthroughSubject<Data, Never>()
-    var dataPublisher: AnyPublisher<Data, Never> {
+    private let dataSubject = PassthroughSubject<Data, Error>()
+    var dataPublisher: AnyPublisher<Data, Error> {
         dataSubject.receive(on: DispatchQueue.global()).eraseToAnyPublisher()
     }
-    private let isConnectedSubject = PassthroughSubject<Bool, Never>()
-    var isConnectedPublisher: AnyPublisher<Bool, Never> {
-        isConnectedSubject.eraseToAnyPublisher()
-    }
-    private let errorSubject = PassthroughSubject<Error, Never>()
-    var errorPublisher: AnyPublisher<Error, Never> {
-        errorSubject.eraseToAnyPublisher()
+    private let connectedSubject = PassthroughSubject<Void, Error>()
+    var connectedPublisher: AnyPublisher<Void, Error> {
+        connectedSubject.eraseToAnyPublisher()
     }
     
     init(
@@ -60,7 +55,7 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
         }
         isConnecting = true
         guard isConnected == false else {
-            isConnectedSubject.send(true)
+            connectedSubject.send()
             return
         }
         setOnEvent()
@@ -81,11 +76,17 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
             case .connected(let headers):
                 print("websocket is connected: \(headers)")
                 self.isConnected = true
-                self.isConnectedSubject.send(true)
+                self.connectedSubject.send()
             case .disconnected(let reason, let code):
                 print("websocket is disconnected: \(reason) with code: \(code)")
                 self.isConnected = false
-                self.isConnectedSubject.send(false)
+                guard let error = CloseCode(rawValue: code)?.asSocketConnectorError else {
+                    self.connectedSubject.send(
+                        completion: .failure(SocketConnectorError.unknown(nil))
+                    )
+                    return
+                }
+                self.connectedSubject.send(completion: .failure(error))
             case .text(let string):
 //                print("Received text: \(string)")
                 guard let data = string.data(using: .utf8) else {
@@ -103,14 +104,26 @@ final class WebSocketConnector<API: SocketTargetType>: WebSocketConnectable {
             case .reconnectSuggested(_):
                 break
             case .cancelled:
-                self.isConnectedSubject.send(false)
+                self.connectedSubject.send(
+                    completion: .failure(SocketConnectorError.cancelled)
+                )
             case .error(let error):
-                self.isConnectedSubject.send(false)
-                guard let error = error else {
-                    return
-                }
-                self.errorSubject.send(error)
+                self.dataSubject.send(
+                    completion: .failure(SocketConnectorError.unknown(error))
+                )
             }
         }
     }
+}
+
+extension CloseCode {
+    var asSocketConnectorError: SocketConnectorError {
+        return .webSocketDisconnected(code: self)
+    }
+}
+
+enum SocketConnectorError: Error {
+    case webSocketDisconnected(code: CloseCode)
+    case cancelled
+    case unknown(Error?)
 }
