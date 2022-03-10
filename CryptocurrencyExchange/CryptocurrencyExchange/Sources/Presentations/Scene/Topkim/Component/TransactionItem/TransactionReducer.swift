@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-let transactionReducer = Reducer<
+let transactionItemReducer = Reducer<
     TransactionItemState, TransactionItemAction, TransactionItemEnviroment
 > { state, action, environment in
     switch action {

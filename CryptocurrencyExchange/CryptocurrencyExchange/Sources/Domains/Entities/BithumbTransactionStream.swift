@@ -17,12 +17,6 @@ struct BithumbTransactionStream {
     let priceUpDown: BithumbTransactionPriceUpDown
 }
 
-enum BithumbTransactionType: Int {
-    case sell = 1
-    case buy = 2
-    case none = -1
-}
-
 enum BithumbTransactionPriceUpDown: String {
     case up
     case down = "dn"
@@ -33,6 +27,7 @@ extension BithumbTransactionStream {
     func toTransactionItemState() -> TransactionItemState {
         return TransactionItemState(
             symbol: symbol,
+            type: transactionType,
             contDate: transactionDate,
             contPrice: contPrice,
             contQuantity: contQuantity

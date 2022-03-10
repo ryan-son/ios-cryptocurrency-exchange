@@ -9,6 +9,7 @@ import Foundation
 
 struct BithumbTransactionHistroySingle {
     var symbol: String
+    var transactionType: BithumbTransactionType
     var contDate: Date
     var contPrice: Double
     var contQuantity: Double
@@ -18,6 +19,7 @@ extension BithumbTransactionHistroySingle {
     func toTransactionItemState() -> TransactionItemState {
         return TransactionItemState(
             symbol: symbol,
+            type: transactionType,
             contDate: contDate,
             contPrice: contPrice,
             contQuantity: contQuantity

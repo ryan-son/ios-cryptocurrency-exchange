@@ -30,6 +30,9 @@ extension BithumbTransactionHistoryResultRESTResponseDTO {
         symbol: String
     ) -> [BithumbTransactionHistroySingle] {
         return data?.map { transactionHistory -> BithumbTransactionHistroySingle in
+            let transactionType = BithumbTransactionType.from(
+                value: transactionHistory.type
+            )
             let contDate = transactionHistory.transactionDate.toDate(
                 format: "yyyy-MM-dd HH:mm:ss"
             ) ?? Date()
@@ -39,6 +42,7 @@ extension BithumbTransactionHistoryResultRESTResponseDTO {
             let contQuantity = Double(transactionHistory.unitsTraded) ?? 0
             return BithumbTransactionHistroySingle(
                 symbol: symbol,
+                transactionType: transactionType,
                 contDate: contDate,
                 contPrice: contPrice,
                 contQuantity: contQuantity
