@@ -7,8 +7,11 @@
 
 import ComposableArchitecture
 
-let transactionReducer = Reducer<
+let transactionItemReducer = Reducer<
     TransactionItemState, TransactionItemAction, TransactionItemEnviroment
 > { state, action, environment in
-    return .none
+    switch action {
+    default:
+        return .none
+    }
 }

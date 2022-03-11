@@ -15,10 +15,22 @@ struct TransactionItemView: View {
     var body: some View {
         WithViewStore(self.store) { viewStore in
             let viewState = viewStore.state.toViewState()
-            VStack(spacing: 10) {
-                Text("시간 : \(viewState.contDate)")
-                Text("체결량 : \(viewState.contQuantity)")
-                Text("체결가 : \(viewState.contPrice)")
+            HStack(spacing: 10) {
+                VStack(alignment: .leading) {
+                    Text(viewState.contDate)
+                        .font(.body)
+                    Text(viewState.type)
+                        .font(.caption)
+                        .foregroundColor(viewState.typeColor)
+                }
+                Spacer()
+                VStack(alignment: .trailing) {
+                    Text(viewState.contPrice)
+                        .font(.body)
+                    Text(viewState.contQuantity)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
             }
             .padding()
         }
@@ -32,11 +44,12 @@ struct TransactionItemView_Previews: PreviewProvider {
                 initialState: TransactionItemState(
                     id: UUID(),
                     symbol: "BTC_KRW",
+                    type: .buy,
                     contDate: Date(),
                     contPrice: 200000,
                     contQuantity: 1
                 ),
-                reducer: transactionReducer,
+                reducer: transactionItemReducer,
                 environment: TransactionItemEnviroment()
             )
         )
