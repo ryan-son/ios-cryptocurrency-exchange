@@ -35,15 +35,11 @@ struct OrderBookListView: View {
                 )
             }
             HStack {
-                Spacer()
                 Text("판매 잔여 수량")
                 Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
                 Text("구매 잔여 수량")
-                Spacer()
             }
+            .padding(.horizontal, 20)
             ScrollView {
                 WithViewStore(
                     store.scope(state: \.orderBooks)
