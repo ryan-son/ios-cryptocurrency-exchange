@@ -8,11 +8,7 @@
 import Combine
 import Foundation
 
-protocol OrderBookListUseCaseProtocol {
-    func getLatelyTransactionSinglePublisher(
-        symbol: String
-    ) -> AnyPublisher<BithumbTransactionHistroySingle?, Error>
-    
+protocol OrderBookListUseCaseProtocol {    
     func getOrderbookSinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbOrderbookSingle, Error>
@@ -31,14 +27,6 @@ struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
         self.repository = repository
     }
     
-    func getLatelyTransactionSinglePublisher(
-        symbol: String
-    ) -> AnyPublisher<BithumbTransactionHistroySingle?, Error> {
-        return repository
-            .getTransactionHistorySinglePublisher(symbol: symbol)
-            .map { $0.toDomain(symbol: symbol).first }
-            .eraseToAnyPublisher()
-    }
     
     func getOrderbookSinglePublisher(
         symbol: String

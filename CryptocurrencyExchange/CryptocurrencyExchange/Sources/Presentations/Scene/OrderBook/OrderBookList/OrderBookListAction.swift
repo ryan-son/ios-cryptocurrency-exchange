@@ -9,7 +9,7 @@ import Foundation
 
 enum OrderBookListAction: Equatable {
     case onAppear
-    case responseNowPrice(Result<BithumbTransactionHistroySingle?, OrderBookListError>)
+    case onDisappear
     case responseOrderBookSingle(Result<BithumbOrderbookSingle, OrderBookListError>)
     case responseOrderBookStream(Result<[BithumbOrderBookDepthStream], OrderBookListError>)
     case sortOrderBooks

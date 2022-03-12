@@ -12,43 +12,32 @@ import ComposableArchitecture
 let orderBookListReducer = Reducer<
     OrderBookListState, OrderBookListAction, OrderBookListEnvironment
 > { state, action, environment in
+    
+    struct OrderBookCancelId: Hashable {}
+    
     switch action {
     case .onAppear:
-        return .merge(
-            environment.useCase
-                .getLatelyTransactionSinglePublisher(symbol: state.symbol)
-                .mapError { OrderBookListError.description($0.localizedDescription) }
-                .catchToEffect(OrderBookListAction.responseNowPrice),
-            environment.useCase
+        return environment.useCase
                 .getOrderBookDepthStreamPublisher(symbols: [state.symbol])
                 .receive(on: RunLoop.main)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
                 .map { $0.filter { $0.quantity > 0 } }
                 .catchToEffect(OrderBookListAction.responseOrderBookStream)
-        )
+                .cancellable(id: OrderBookCancelId())
         
-    case let .responseNowPrice(.success(transaction)):
-        if let nowPrice = transaction?.contPrice {
-            state.nowPrice = nowPrice
-        }
-        return .none
-    case let .responseNowPrice(.failure(error)):
-        Log.error(error)
-        return .none
+    case .onDisappear:
+        return .cancel(id: OrderBookCancelId())
         
     case let .responseOrderBookSingle(.success(orderBooks)):
         
         let sellOrderBooks = orderBooks.sell.prefix(10).reversed()
         let buyOrderBooks = orderBooks.buy.prefix(10)
-        let newMaxQuantity = [
+        
+        state.maxQuantity = [
             sellOrderBooks.map(\.quantity).max() ?? 0,
             buyOrderBooks.map(\.quantity).max() ?? 0
         ]
             .max() ?? 0
-        
-        if state.maxQuantity < newMaxQuantity {
-            state.maxQuantity = newMaxQuantity
-        }
         
         let sellOrderBookItems = sellOrderBooks.map {
             OrderBookListState.OrderBookItem(
@@ -79,11 +68,6 @@ let orderBookListReducer = Reducer<
         return .none
         
     case let .responseOrderBookStream(.success(orderBooks)):
-        let newMaxQuantity = orderBooks.map(\.quantity).max() ?? 0
-        if state.maxQuantity < newMaxQuantity {
-            state.maxQuantity = newMaxQuantity
-        }
-        
         orderBooks.forEach { orderBook in
             if let index = state.orderBooks.firstIndex(where: {
                 $0.price == orderBook.price && $0.orderType == orderBook.orderType
