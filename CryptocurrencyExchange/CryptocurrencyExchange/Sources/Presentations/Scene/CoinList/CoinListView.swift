@@ -25,18 +25,6 @@ struct CoinListView: View {
                     content: { itemStore in
                         NavigationLink(destination: {
                             WithViewStore(itemStore.scope(state: \.symbol)) { viewItemStore in
-//                                CoinCandleChartView(
-//                                    store: Store(
-//                                        initialState: CoinCandleChartState(
-//                                            symbol: viewItemStore.state.symbol
-//                                        ),
-//                                        reducer: coinCandleChartReducer,
-//                                        environment: CoinCandleChartEnvironment(
-//                                            useCase: CoinCandleChartUseCase(),
-//                                            toastClient: .live
-//                                        )
-//                                    )
-//                                )
                                 CoinDetailView(
                                     store: Store(
                                         initialState: CoinDetailState(symbol: viewItemStore.state),

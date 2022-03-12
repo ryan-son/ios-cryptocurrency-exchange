@@ -322,13 +322,10 @@
 		7315F72627D8CA8300276943 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				2134362F27D8D128006F273B /* OrderBook */,
 				AA8669B227CB8589007DFBE6 /* CoinList */,
-				AA4B6D7627D8D32B002A7398 /* CoinCandleChartView */,
-				7315F72427D8CA5E00276943 /* Topkim */,
 				AA4B6D7627D8D32B002A7398 /* CoinDetail */,
 				7315F72427D8CA5E00276943 /* TransactionList */,
-				7315F72527D8CA6200276943 /* Sky */,
+				2134362F27D8D128006F273B /* OrderBook */,
 				AA86695627C9C484007DFBE6 /* ContentView.swift */,
 			);
 			path = Scene;

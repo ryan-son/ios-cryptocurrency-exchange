@@ -65,8 +65,17 @@ struct CoinDetailView: View {
                                     WithViewStore(
                                         self.store.scope(state: \.symbol)
                                     ) { viewItemStore in
-                                        // TODO: Orderbook View 넣기
-                                        EmptyView()
+                                        OrderBookListView(
+                                            store: Store(
+                                                initialState: OrderBookListState(
+                                                    symbol: viewItemStore.state
+                                                ),
+                                                reducer: orderBookListReducer,
+                                                environment: OrderBookListEnvironment(
+                                                    useCase: OrderBookListUseCase()
+                                                )
+                                            )
+                                        )
                                     }
                                 },
                                 label: {

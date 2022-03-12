@@ -59,6 +59,7 @@ struct OrderBookListView: View {
         .onDisappear {
             ViewStore(store).send(.onDisappear)
         }
+        .navigationTitle("호가")
     }
 }
 
