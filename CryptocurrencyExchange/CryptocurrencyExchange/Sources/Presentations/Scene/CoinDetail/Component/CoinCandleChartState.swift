@@ -9,5 +9,13 @@ import Foundation
 
 struct CoinCandleChartState: Equatable {
     var symbol: String
-    var dataEntries: [BithumbCandleStickDataSingle]?
+    var dataEntries: [CoinCandleChartItemState]?
+}
+
+struct CoinCandleChartItemState: Equatable {
+    let date: Date
+    let openPrice: Double
+    let closePrice: Double
+    let lowPrice: Double
+    let highPrice: Double
 }

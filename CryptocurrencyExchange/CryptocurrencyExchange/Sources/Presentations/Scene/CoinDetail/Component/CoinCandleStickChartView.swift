@@ -10,8 +10,6 @@ import SwiftUI
 import Charts
 import ComposableArchitecture
 
-
-
 struct CoinCandleChartView: View {
     let store: Store<CoinCandleChartState, CoinCandleChartAction>
     
@@ -31,16 +29,9 @@ struct CoinCandleChartView: View {
                 },
                 else: ProgressView.init
             )
-//                .onAppear {
-//                    viewStore.send(.onAppear)
-//                }
         }
     }
 }
-
-
-
-
 
 struct CoinCandleStickChartView_Previews: PreviewProvider {
     static var previews: some View {

@@ -54,5 +54,21 @@ extension BithumbTickerStream {
     }
 }
 
+extension BithumbTickerStream {
+    func toCoinCandleChartItemState() -> CoinCandleChartItemState {
+        let date = date
+        let openPrice = openPrice
+        let closePrice = closePrice
+        let lowPrice = lowPrice
+        let highPrice = highPrice
+        return CoinCandleChartItemState(
+            date: date,
+            openPrice: openPrice,
+            closePrice: closePrice,
+            lowPrice: lowPrice,
+            highPrice: highPrice
+        )
+    }
+}
 
 
