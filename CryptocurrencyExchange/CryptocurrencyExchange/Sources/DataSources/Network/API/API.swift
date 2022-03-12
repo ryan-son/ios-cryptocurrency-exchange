@@ -18,5 +18,6 @@ enum API {
         case ticker
         case orderbook(symbol: String)
         case transactionHistory(symbol: String)
+        case candleStick(symbol: String)
     }
 }

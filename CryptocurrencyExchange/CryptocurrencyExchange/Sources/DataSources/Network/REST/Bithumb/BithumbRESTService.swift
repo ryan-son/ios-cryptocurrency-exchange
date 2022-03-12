@@ -42,6 +42,16 @@ struct BithumbRESTService {
             .eraseToAnyPublisher()
     }
     
+    func getCandleStick(
+        symbol: String
+    ) -> AnyPublisher<BithumbCandleStickResultResponseDTO, Error> {
+        return service.requestPublisher(.candleStick(symbol: symbol))
+            .validate()
+            .map(\.data)
+            .receive(on: DispatchQueue.global())
+            .decode(type: BithumbCandleStickResultResponseDTO.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
 }
 
 

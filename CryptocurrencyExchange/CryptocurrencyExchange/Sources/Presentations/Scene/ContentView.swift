@@ -11,23 +11,21 @@ import ComposableArchitecture
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            CoinListView(
-                store: Store(
-                    initialState: CoinListState(items: []),
-                    reducer: coinListReducer,
-                    environment: CoinListEnvironment(
-                        coinListUseCase: {
-                            CoinListUseCase()
-                        },
-                        toastClient: .live
-                    )
+        CoinCandleChartView(
+            store: Store(
+                initialState: CoinCandleChartState(
+                    symbol: "XRP_KRW"
+                ),
+                reducer: coinCandleChartReducer,
+                environment: CoinCandleChartEnvironment(
+                    useCase: CoinCandleChartUseCase(),
+                    toastClient: .live
                 )
             )
-                .navigationTitle("목록")
-        }
+        )
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
