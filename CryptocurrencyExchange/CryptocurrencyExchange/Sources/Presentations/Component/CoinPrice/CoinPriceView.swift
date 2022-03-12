@@ -111,11 +111,10 @@ struct CoinPriceView: View {
                     .frame(width: 50, height: 50)
                 VStack(alignment: .leading, spacing: 8) {
                     Text("현재가격")
-                        .foregroundColor(Color(#colorLiteral(red: 0.6147381663, green: 0.6195807457, blue: 0.6412109733, alpha: 1)))
+                        .font(.headline)
                     Text(viewState.nowPrice)
-                        .bold()
-                        .font(.title3)
-                        .foregroundColor(Color(#colorLiteral(red: 0.764742434, green: 0.7645910382, blue: 0.7776351571, alpha: 1)))
+                        .font(.body)
+                        .foregroundColor(.gray)
                 }
                 Spacer()
             }
