@@ -12,5 +12,6 @@ enum OrderBookListAction: Equatable {
     case onDisappear
     case responseOrderBookSingle(Result<BithumbOrderbookSingle, OrderBookListError>)
     case responseOrderBookStream(Result<[BithumbOrderBookDepthStream], OrderBookListError>)
+    case responseTicker(Result<BithumbTickerStream, OrderBookListError>)
     case sortOrderBooks
 }

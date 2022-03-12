@@ -31,21 +31,28 @@ struct CoinDetailView: View {
                                     WithViewStore(
                                         self.store.scope(state: \.symbol)
                                     ) { viewItemStore in
-                                        TransactionListView(
+                                        OrderLayoutView(
                                             store: Store(
-                                                initialState: TransactionListState(
-                                                    symbol: viewItemStore.state,
-                                                    items: []
-                                                ),
-                                                reducer: transcationListReducer,
-                                                environment: TransactionListEnvironment(
-                                                    transactionListUseCase: {
-                                                        TransactionListUseCase()
-                                                    },
-                                                    toastClient: .live
-                                                )
+                                                initialState: OrderLayoutState(symbol: viewItemStore.state),
+                                                reducer: orderLayoutReducer,
+                                                environment: OrderLayoutEnvironment()
                                             )
                                         )
+//                                        TransactionListView(
+//                                            store: Store(
+//                                                initialState: TransactionListState(
+//                                                    symbol: viewItemStore.state,
+//                                                    items: []
+//                                                ),
+//                                                reducer: transcationListReducer,
+//                                                environment: TransactionListEnvironment(
+//                                                    transactionListUseCase: {
+//                                                        TransactionListUseCase()
+//                                                    },
+//                                                    toastClient: .live
+//                                                )
+//                                            )
+//                                        )
                                     }
                                 },
                                 label: {

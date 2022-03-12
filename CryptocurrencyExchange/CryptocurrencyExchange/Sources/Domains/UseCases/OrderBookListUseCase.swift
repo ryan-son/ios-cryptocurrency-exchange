@@ -16,6 +16,11 @@ protocol OrderBookListUseCaseProtocol {
     func getOrderBookDepthStreamPublisher(
         symbols: [String]
     ) -> AnyPublisher<[BithumbOrderBookDepthStream], Error>
+    
+    func getTickerStreamPublisher(
+        symbols: [String],
+        tickTypes: [TickType]
+    ) -> AnyPublisher<BithumbTickerStream, Error>
 }
 
 struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
@@ -50,6 +55,21 @@ struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
         return repository
             .getOrderBookDepthStreamPublisher(with: filter)
             .map { $0.toDomain() }
+            .eraseToAnyPublisher()
+    }
+    
+    func getTickerStreamPublisher(
+        symbols: [String],
+        tickTypes: [TickType]
+    ) -> AnyPublisher<BithumbTickerStream, Error> {
+        let filter = BithumbWebSocketFilter(
+            type: .ticker,
+            symbols: symbols,
+            tickTypes: tickTypes
+        )
+        return repository
+            .getTickerStreamPublisher(with: filter)
+            .map { $0.content.toDomain() }
             .eraseToAnyPublisher()
     }
 }

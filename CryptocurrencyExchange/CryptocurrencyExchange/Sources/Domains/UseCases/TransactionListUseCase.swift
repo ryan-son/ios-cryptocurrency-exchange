@@ -51,6 +51,7 @@ struct TransactionListUseCase: TransactionListUseCaseProtocol {
                 symbol: symbol
             )
             .map { $0.toDomain() }
+            .print()
             .eraseToAnyPublisher()
     }
     
@@ -95,6 +96,7 @@ struct TransactionListUseCase: TransactionListUseCaseProtocol {
         return repository
             .getTransactionStreamPublisher(with: filter)
             .map{ $0.toDomain() }
+            .print()
             .eraseToAnyPublisher()
     }
     
