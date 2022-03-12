@@ -11,7 +11,7 @@ import Charts
 import ComposableArchitecture
 
 struct CoinCandleChartRepresentable: UIViewRepresentable {
-    let viewStore: ViewStore<[BithumbCandleStickDataSingle], CoinCandleChartAction>
+    let viewStore: ViewStore<[CoinCandleChartItemState], CoinCandleChartAction>
 
     func makeUIView(context: Context) -> CandleStickChartView {
         let chartView = CandleStickChartView()
@@ -52,7 +52,7 @@ struct CoinCandleChartRepresentable: UIViewRepresentable {
         uiView.drawMarkers = true
     }
 
-    func dataEntries(from entries: [BithumbCandleStickDataSingle]) -> [CandleChartDataEntry] {
+    func dataEntries(from entries: [CoinCandleChartItemState]) -> [CandleChartDataEntry] {
         return entries.enumerated().map {
             return CandleChartDataEntry(
                 x: Double($0),
@@ -64,7 +64,10 @@ struct CoinCandleChartRepresentable: UIViewRepresentable {
         }
     }
 
-    func axisValues(from entries: [BithumbCandleStickDataSingle]) -> [String] {
-        return entries.map(\.asDateString)
+    func axisValues(from entries: [CoinCandleChartItemState]) -> [String] {
+        return entries.map {
+            $0.date.format(with: "yyyy-MM-dd")
+        }
     }
 }
+

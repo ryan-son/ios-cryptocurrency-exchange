@@ -30,3 +30,20 @@ extension BithumbCandleStickDataSingle {
         return dateFormatter.string(from: date)
     }
 }
+
+extension BithumbCandleStickDataSingle {
+    func toCoinCandleChartItemState() -> CoinCandleChartItemState {
+        let date = Date(timeIntervalSince1970: date / 1000)
+        let openPrice = openPrice
+        let closePrice = closePrice
+        let lowPrice = lowPrice
+        let highPrice = highPrice
+        return CoinCandleChartItemState(
+            date: date,
+            openPrice: openPrice,
+            closePrice: closePrice,
+            lowPrice: lowPrice,
+            highPrice: highPrice
+        )
+    }
+}

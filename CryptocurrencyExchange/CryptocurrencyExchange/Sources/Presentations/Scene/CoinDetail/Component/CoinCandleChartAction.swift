@@ -10,6 +10,6 @@ import Foundation
 enum CoinCandleChartAction {
     case onAppear
     case onDisappear
-    case coinCandleResponse(Result<BithumbCandleStickSingle, Error>)
+    case updateCoinCandleChartItemStates(result: Result<[CoinCandleChartItemState], CoinListError>)
     case showToast(message: String)
 }
