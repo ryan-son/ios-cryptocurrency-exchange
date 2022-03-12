@@ -25,17 +25,29 @@ struct CoinListView: View {
                     content: { itemStore in
                         NavigationLink(destination: {
                             WithViewStore(itemStore) { viewItemStore in
-                                TransactionListView(
+//                                TransactionListView(
+//                                    store: Store(
+//                                        initialState: TransactionListState(
+//                                            symbol: viewItemStore.state.symbol,
+//                                            items: []
+//                                        ),
+//                                        reducer: transcationListReducer,
+//                                        environment: TransactionListEnvironment(
+//                                            transactionListUseCase: {
+//                                                TransactionListUseCase()
+//                                            },
+//                                            toastClient: .live
+//                                        )
+//                                    )
+//                                )
+                                CoinCandleChartView(
                                     store: Store(
-                                        initialState: TransactionListState(
-                                            symbol: viewItemStore.state.symbol,
-                                            items: []
+                                        initialState: CoinCandleChartState(
+                                            symbol: viewItemStore.state.symbol
                                         ),
-                                        reducer: transcationListReducer,
-                                        environment: TransactionListEnvironment(
-                                            transactionListUseCase: {
-                                                TransactionListUseCase()
-                                            },
+                                        reducer: coinCandleChartReducer,
+                                        environment: CoinCandleChartEnvironment(
+                                            useCase: CoinCandleChartUseCase(),
                                             toastClient: .live
                                         )
                                     )

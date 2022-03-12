@@ -71,6 +71,11 @@
 		AA4B6D7E27DA3ADC002A7398 /* CoinCandleChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6D7D27DA3ADC002A7398 /* CoinCandleChartUseCase.swift */; };
 		AA4B6D8027DA3C36002A7398 /* BithumbCandleStickResultResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6D7F27DA3C36002A7398 /* BithumbCandleStickResultResponseDTO.swift */; };
 		AA4B6D8227DA3DAF002A7398 /* BithumbCandleStickSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6D8127DA3DAF002A7398 /* BithumbCandleStickSingle.swift */; };
+		AA4B6D8427DC6D90002A7398 /* CoinCandleChartRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6D8327DC6D90002A7398 /* CoinCandleChartRepresentable.swift */; };
+		AA4B6D8627DC6DCE002A7398 /* CoinCandleChartState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6D8527DC6DCE002A7398 /* CoinCandleChartState.swift */; };
+		AA4B6D8827DC6DE2002A7398 /* CoinCandleChartAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6D8727DC6DE2002A7398 /* CoinCandleChartAction.swift */; };
+		AA4B6D8A27DC6DF5002A7398 /* CoinCandleChartEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6D8927DC6DF5002A7398 /* CoinCandleChartEnvironment.swift */; };
+		AA4B6D8C27DC6E1C002A7398 /* CoinCandleChartReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6D8B27DC6E1C002A7398 /* CoinCandleChartReducer.swift */; };
 		AA86695527C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86695427C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift */; };
 		AA86695727C9C484007DFBE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86695627C9C484007DFBE6 /* ContentView.swift */; };
 		AA86695927C9C487007DFBE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA86695827C9C487007DFBE6 /* Assets.xcassets */; };
@@ -166,6 +171,11 @@
 		AA4B6D7D27DA3ADC002A7398 /* CoinCandleChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCandleChartUseCase.swift; sourceTree = "<group>"; };
 		AA4B6D7F27DA3C36002A7398 /* BithumbCandleStickResultResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbCandleStickResultResponseDTO.swift; sourceTree = "<group>"; };
 		AA4B6D8127DA3DAF002A7398 /* BithumbCandleStickSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbCandleStickSingle.swift; sourceTree = "<group>"; };
+		AA4B6D8327DC6D90002A7398 /* CoinCandleChartRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCandleChartRepresentable.swift; sourceTree = "<group>"; };
+		AA4B6D8527DC6DCE002A7398 /* CoinCandleChartState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCandleChartState.swift; sourceTree = "<group>"; };
+		AA4B6D8727DC6DE2002A7398 /* CoinCandleChartAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCandleChartAction.swift; sourceTree = "<group>"; };
+		AA4B6D8927DC6DF5002A7398 /* CoinCandleChartEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCandleChartEnvironment.swift; sourceTree = "<group>"; };
+		AA4B6D8B27DC6E1C002A7398 /* CoinCandleChartReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCandleChartReducer.swift; sourceTree = "<group>"; };
 		AA86695127C9C484007DFBE6 /* CryptocurrencyExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptocurrencyExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA86695427C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocurrencyExchangeApp.swift; sourceTree = "<group>"; };
 		AA86695627C9C484007DFBE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -305,18 +315,10 @@
 				2134362F27D8D128006F273B /* OrderBook */,
 				AA8669B227CB8589007DFBE6 /* CoinList */,
 				AA4B6D7627D8D32B002A7398 /* CoinCandleChartView */,
-				7315F72727D8CB0000276943 /* Ryan */,
 				7315F72427D8CA5E00276943 /* Topkim */,
 				AA86695627C9C484007DFBE6 /* ContentView.swift */,
 			);
 			path = Scene;
-			sourceTree = "<group>";
-		};
-		7315F72727D8CB0000276943 /* Ryan */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Ryan;
 			sourceTree = "<group>";
 		};
 		7315F72C27D8D13F00276943 /* Component */ = {
@@ -434,6 +436,11 @@
 		AA4B6D7627D8D32B002A7398 /* CoinCandleChartView */ = {
 			isa = PBXGroup;
 			children = (
+				AA4B6D8527DC6DCE002A7398 /* CoinCandleChartState.swift */,
+				AA4B6D8727DC6DE2002A7398 /* CoinCandleChartAction.swift */,
+				AA4B6D8927DC6DF5002A7398 /* CoinCandleChartEnvironment.swift */,
+				AA4B6D8B27DC6E1C002A7398 /* CoinCandleChartReducer.swift */,
+				AA4B6D8327DC6D90002A7398 /* CoinCandleChartRepresentable.swift */,
 				AA4B6D7827D8DFB3002A7398 /* CoinCandleStickChartView.swift */,
 			);
 			path = CoinCandleChartView;
@@ -838,9 +845,11 @@
 				7315F73527D8D46700276943 /* TransactionItemEnviroment.swift in Sources */,
 				21E4382327D64BC700002099 /* BithumbResultSocketResponseDTO.swift in Sources */,
 				730F321B27DA4C50002AB57B /* TransactionListEnviroment.swift in Sources */,
+				AA4B6D8A27DC6DF5002A7398 /* CoinCandleChartEnvironment.swift in Sources */,
 				7321A22227CD17E300686DB5 /* BithumbOrderBookDepthStream.swift in Sources */,
 				730F321D27DA4C56002AB57B /* TransactionListReducer.swift in Sources */,
 				AA4B6D8227DA3DAF002A7398 /* BithumbCandleStickSingle.swift in Sources */,
+				AA4B6D8827DC6DE2002A7398 /* CoinCandleChartAction.swift in Sources */,
 				AA4B6D7927D8DFB3002A7398 /* CoinCandleStickChartView.swift in Sources */,
 				216C6AF027D8F2A9003EA3B5 /* OrderBookListUseCase.swift in Sources */,
 				AABBA44D27D866480092D1D2 /* ToastView.swift in Sources */,
@@ -855,6 +864,7 @@
 				7321A1F127CA31D300686DB5 /* BithumbTickerResultRESTResponseDTO.swift in Sources */,
 				7315F73D27D8DA9B00276943 /* BithumbTransactionHistroySingle.swift in Sources */,
 				AA86699B27C9FFDA007DFBE6 /* BithumbSocketService.swift in Sources */,
+				AA4B6D8427DC6D90002A7398 /* CoinCandleChartRepresentable.swift in Sources */,
 				21E32C8F27CB38E000949D97 /* BithumbTickerSocketResponseDTO.swift in Sources */,
 				AA4B6D8027DA3C36002A7398 /* BithumbCandleStickResultResponseDTO.swift in Sources */,
 				730F320E27D8EE27002AB57B /* BithumbOrderbookSingle.swift in Sources */,
@@ -892,12 +902,14 @@
 				21434BBA27CA66A6001EFE9A /* BithumbRepository.swift in Sources */,
 				AA8669A427CA00BC007DFBE6 /* URLRequest+Extensions.swift in Sources */,
 				AA406E5727D389A200013BF2 /* BithumbTickerSingle.swift in Sources */,
+				AA4B6D8627DC6DCE002A7398 /* CoinCandleChartState.swift in Sources */,
 				AA86699827C9E17D007DFBE6 /* API.swift in Sources */,
 				7321A1F427CA386800686DB5 /* BithumbDataResponse.swift in Sources */,
 				7321A1ED27CA249E00686DB5 /* BithumbRESTService.swift in Sources */,
 				AA86695527C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift in Sources */,
 				730F321727DA4C1C002AB57B /* TransactionListState.swift in Sources */,
 				AA4B6D7427D8922B002A7398 /* ToastUIView.swift in Sources */,
+				AA4B6D8C27DC6E1C002A7398 /* CoinCandleChartReducer.swift in Sources */,
 				7386F06F27DBAA520079E2EE /* CoinListEnviroment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1045,7 +1057,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
+				DEVELOPMENT_TEAM = W62BWL527B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1058,7 +1070,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12345;
+				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12123123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1074,7 +1086,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
+				DEVELOPMENT_TEAM = W62BWL527B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1087,7 +1099,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12345;
+				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12123123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
