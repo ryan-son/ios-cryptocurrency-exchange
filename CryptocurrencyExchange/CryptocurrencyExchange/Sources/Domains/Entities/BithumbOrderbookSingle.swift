@@ -7,8 +7,14 @@
 
 import Foundation
 
-struct BithumbOrderbookSingle {
-
+struct BithumbOrderbookSingle: Equatable {
+    let buy: [OrderbookRow]
+    let sell: [OrderbookRow]
+    
+    struct OrderbookRow: Equatable {
+        let quantity: Double
+        let price: Double
+    }
 }
 
 
