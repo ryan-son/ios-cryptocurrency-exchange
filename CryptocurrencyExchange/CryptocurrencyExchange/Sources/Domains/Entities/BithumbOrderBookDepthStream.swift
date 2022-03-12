@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct BithumbOrderBookDepthStream {
+struct BithumbOrderBookDepthStream: Equatable, Hashable {
     let symbol: String
     let orderType: BithumbOrderType
     let price: Double
@@ -18,4 +19,32 @@ enum BithumbOrderType: String {
     case buy = "bid"
     case sell = "ask"
     case none
+    
+    private var comparisonValue: Int {
+        switch self {
+        case .sell:
+            return 1
+        case .buy:
+            return 0
+        case .none:
+            return -1
+        }
+    }
+}
+
+extension BithumbOrderType: Comparable {
+    static func < (lhs: BithumbOrderType, rhs: BithumbOrderType) -> Bool {
+        lhs.comparisonValue < rhs.comparisonValue
+    }
+}
+
+extension BithumbOrderBookDepthStream {
+    func toOrderBookItem(ratio: CGFloat) -> OrderBookListState.OrderBookItem {
+        OrderBookListState.OrderBookItem(
+            orderType: orderType,
+            price: price,
+            quantity: quantity,
+            ratio: ratio
+        )
+    }
 }

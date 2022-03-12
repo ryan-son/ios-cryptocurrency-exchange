@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BithumbTransactionHistroySingle {
+struct BithumbTransactionHistroySingle: Equatable {
     var symbol: String
     var transactionType: BithumbTransactionType
     var contDate: Date
