@@ -9,7 +9,7 @@ import Foundation
 
 /// Example Response (ticker)
 /// https://apidocs.bithumb.com/docs/websocket_public
-struct BithumbTickerStream {
+struct BithumbTickerStream: Equatable {
     /// 통화코드
     let symbol: String
     /// 변동 기준시간- 30M, 1H, 12H, 24H, MID

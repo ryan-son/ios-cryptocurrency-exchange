@@ -13,11 +13,11 @@ import Kingfisher
 struct OrderBookListView: View {
     let store: Store<OrderBookListState, OrderBookListAction>
     
-//    init(store: Store<OrderBookListState, OrderBookListAction>) {
-//        self.store = store
-//        let viewStore = ViewStore(store)
-//        viewStore.send(.onAppear)
-//    }
+    init(store: Store<OrderBookListState, OrderBookListAction>) {
+        self.store = store
+        let viewStore = ViewStore(store)
+        viewStore.send(.onAppear)
+    }
     
     var body: some View {
         VStack {
@@ -52,10 +52,10 @@ struct OrderBookListView: View {
                 }
             }
         }
-        .padding()
-        .onAppear {
-            ViewStore(store).send(.onAppear)
-        }
+        .padding(.horizontal)
+//        .onAppear {
+//            ViewStore(store).send(.onAppear)
+//        }
         .onDisappear {
             ViewStore(store).send(.onDisappear)
         }
