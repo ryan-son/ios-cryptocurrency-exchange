@@ -13,31 +13,26 @@ import Kingfisher
 struct OrderBookListView: View {
     let store: Store<OrderBookListState, OrderBookListAction>
     
-    init(store: Store<OrderBookListState, OrderBookListAction>) {
-        self.store = store
-        let viewStore = ViewStore(store)
-        viewStore.send(.onAppear)
-    }
+//    init(store: Store<OrderBookListState, OrderBookListAction>) {
+//        self.store = store
+//        let viewStore = ViewStore(store)
+//        viewStore.send(.onAppear)
+//    }
     
     var body: some View {
         VStack {
-            WithViewStore(store) { viewStore in
-                let viewState = viewStore.state.toViewState()
-                HStack(spacing: 16) {
-                    KFImage.url(viewState.imageURL)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("현재가격")
-                            .foregroundColor(Color(#colorLiteral(red: 0.6147381663, green: 0.6195807457, blue: 0.6412109733, alpha: 1)))
-                        Text(viewState.nowPrice)
-                            .bold()
-                            .font(.title3)
-                            .foregroundColor(Color(#colorLiteral(red: 0.764742434, green: 0.7645910382, blue: 0.7776351571, alpha: 1)))
-                    }
-                    Spacer()
-                }
-                .padding(.vertical, 20)
+            WithViewStore(
+                store.scope(state: \.coinPriceState)
+            ) { coinPriceStore in
+                CoinPriceView(
+                    store: Store(
+                        initialState: coinPriceStore.state,
+                        reducer: coinPriceReducer,
+                        environment: CoinPriceEnvironment(
+                            useCase: TransactionListUseCase()
+                        )
+                    )
+                )
             }
             HStack {
                 Spacer()
@@ -62,6 +57,12 @@ struct OrderBookListView: View {
             }
         }
         .padding()
+        .onAppear {
+            ViewStore(store).send(.onAppear)
+        }
+        .onDisappear {
+            ViewStore(store).send(.onDisappear)
+        }
     }
 }
 

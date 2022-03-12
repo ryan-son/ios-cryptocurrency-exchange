@@ -23,16 +23,20 @@ extension OrderBookListError: LocalizedError {
 
 struct OrderBookListState: Equatable {
     let symbol: String
-    var nowPrice: Double?
+    var coinPriceState: CoinPriceState
     var orderBooks: [OrderBookItem] = []
     var maxQuantity: Double = 0
     
+    init(symbol: String) {
+        self.symbol = symbol
+        coinPriceState = CoinPriceState(symbol: symbol)
+    }
+    
     struct OrderBookItem: Equatable, Hashable, Comparable {
-        
         let orderType: BithumbOrderType
         let price: Double
         let quantity: Double
-        let ratio: CGFloat
+        var ratio: CGFloat
         
         func toViewItem() -> OrderBookView.OrderBookViewItem {
             OrderBookView.OrderBookViewItem(
@@ -62,28 +66,4 @@ struct OrderBookListState: Equatable {
     func getRatio(quantity: Double) -> CGFloat {
         maxQuantity == 0 ? 0 : CGFloat(quantity / maxQuantity)
     }
-}
-
-extension OrderBookListState {
-    func toViewState() -> OrderBookListViewState {
-        let symbols = symbol.components(separatedBy: "_")
-        let coinSymbol = symbols.first ?? ""
-        let currencySymbol = symbols.last ?? ""
-        let currency = Currency(rawValue: currencySymbol.lowercased()) ?? .none
-        let formattedPrice = nowPrice?.format(to: currency) ?? ""
-        let imageURL = URL(
-            string: "https://cryptoicon-api.vercel.app/api/icon/\(coinSymbol.lowercased())"
-        )
-        return OrderBookListViewState(
-            symbolName: coinSymbol,
-            nowPrice: formattedPrice,
-            imageURL: imageURL
-        )
-    }
-}
-
-struct OrderBookListViewState {
-    let symbolName: String
-    var nowPrice: String
-    let imageURL: URL?
 }

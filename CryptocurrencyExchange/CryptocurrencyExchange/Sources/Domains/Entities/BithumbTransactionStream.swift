@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BithumbTransactionStream {
+struct BithumbTransactionStream: Equatable {
     let symbol: String
     let transactionType: BithumbTransactionType
     let contPrice: Double
