@@ -7,13 +7,19 @@
 
 import ComposableArchitecture
 
+//var isLikedCache: [String: Bool] = [:]
+
 let coinListReducer = Reducer<
     CoinListState, CoinListAction, CoinListEnvironment
 >.combine(
     coinItemReducer.forEach(
         state: \.items,
         action: /CoinListAction.coinItem(id:action:),
-        environment: { _ in CoinItemEnvironment() }
+        environment: { _ in
+            CoinItemEnvironment(
+                useCase: { CoinItemUseCase() }
+            )
+        }
     ),
     Reducer { state, action, environment in
         struct CancelId: Hashable {}
@@ -55,7 +61,8 @@ fileprivate func fetchTickers(
     return useCase.getTickerSinglePublisher()
         .map { tickers in
             tickers.map { ticker in
-                ticker.toCoinItemState(isLiked: false)
+                let isLiked = useCase.getCoinIsLikeState(for: ticker.name)
+                return ticker.toCoinItemState(isLiked: isLiked)
             }
         }
         .handleEvents(
@@ -69,8 +76,9 @@ fileprivate func fetchTickers(
                 tickTypes: [.day]
             )
         }
-        .map { ticker in
-            ticker.toCoinItemState(isLiked: false)
+        .map { ticker -> CoinItemState in
+            let isLiked = useCase.getCoinIsLikeState(for: ticker.symbol.symbolToName())
+            return ticker.toCoinItemState(isLiked: isLiked)
         }
         .map { updateState -> [CoinItemState] in
             // TODO: Dictionary 로 사용 시 cancel 안되는 문제 확인 필요.
@@ -85,6 +93,14 @@ fileprivate func fetchTickers(
             updateState.id = coinItemStates[index].id
             coinItemStates[index] = updateState
             return coinItemStates
+        }
+        .map {
+            $0.map { state -> CoinItemState in
+                var state = state
+                let isLiked = useCase.getCoinIsLikeState(for: state.name)
+                state.isLiked = isLiked
+                return state
+            }
         }
         .map {
             $0.sorted(by: {

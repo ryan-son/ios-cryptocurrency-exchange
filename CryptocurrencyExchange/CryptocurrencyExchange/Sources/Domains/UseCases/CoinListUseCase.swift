@@ -20,6 +20,8 @@ protocol CoinListUseCaseProtocol {
     func getOrderBookDepthStreamPublisher(
         symbols: [String]
     ) -> AnyPublisher<[BithumbOrderBookDepthStream], Error>
+    func getCoinIsLikeState(for coinName: String) -> Bool
+    func saveCoinIsLikeState(for coinName: String, isLike: Bool)
 }
 
 struct CoinListUseCase: CoinListUseCaseProtocol {
@@ -78,5 +80,13 @@ struct CoinListUseCase: CoinListUseCaseProtocol {
             .getOrderBookDepthStreamPublisher(with: filter)
             .map { $0.toDomain() }
             .eraseToAnyPublisher()
+    }
+    
+    func getCoinIsLikeState(for coinName: String) -> Bool {
+        return repository.getCoinIsLikeState(for: coinName)
+    }
+    
+    func saveCoinIsLikeState(for coinName: String, isLike: Bool) {
+        repository.saveCoinIsLikeState(for: coinName, isLike: isLike)
     }
 }

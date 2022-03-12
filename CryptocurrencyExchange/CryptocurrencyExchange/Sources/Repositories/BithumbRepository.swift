@@ -29,6 +29,8 @@ protocol BithumbRepositoryProtocol {
     func getOrderBookDepthStreamPublisher(
         with filter: BithumbWebSocketFilter
     ) -> AnyPublisher<BithumbOrderBookDepthSocketResponseDTO, Error>
+    func getCoinIsLikeState(for coinName: String) -> Bool
+    func saveCoinIsLikeState(for coinName: String, isLike: Bool)
 }
 
 enum BithumbRepositoryError: Error {
@@ -38,13 +40,16 @@ enum BithumbRepositoryError: Error {
 struct BithumbRepository: BithumbRepositoryProtocol {
     private let restService: BithumbRESTService
     private let socketService: BithumbSocketService
+    private let coinIsLikeStorage: CoinIsLikeCoreDataStorageProtocol
 
     init(
         restService: BithumbRESTService = BithumbRESTService(),
-        socketService: BithumbSocketService = BithumbSocketService()
+        socketService: BithumbSocketService = BithumbSocketService(),
+        coinIsLikeStorage: CoinIsLikeCoreDataStorageProtocol = CoinIsLikeCoreDataStorage()
     ) {
         self.restService = restService
         self.socketService = socketService
+        self.coinIsLikeStorage = coinIsLikeStorage
     }
     
     
@@ -110,5 +115,16 @@ struct BithumbRepository: BithumbRepositoryProtocol {
                 socketService.getOrderBookDepthPublisher(with: filter)
             }
             .eraseToAnyPublisher()
+    }
+    
+    // MARK: - Persistence
+    
+    func getCoinIsLikeState(for coinName: String) -> Bool {
+        return coinIsLikeStorage.fetchCoinIsLike(for: coinName)
+    }
+    
+    func saveCoinIsLikeState(for coinName: String, isLike: Bool) {
+        let coinIsLikeState = CoinIsLikeState(name: coinName, isLike: isLike)
+        _ = coinIsLikeStorage.saveCoinIsLikeState(coinIsLikeState)
     }
 }
