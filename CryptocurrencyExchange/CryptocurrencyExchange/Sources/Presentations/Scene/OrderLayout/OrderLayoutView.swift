@@ -9,31 +9,11 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct OrderLayoutState: Equatable {
-    let symbol: String
-    var selection = OrderLayoutView.TapBarList.transaction
-}
-
-enum OrderLayoutAction: Equatable {
-    case tapBarTapped(OrderLayoutView.TapBarList)
-}
-
-struct OrderLayoutEnvironment {}
-
-let orderLayoutReducer = Reducer<
-    OrderLayoutState, OrderLayoutAction, OrderLayoutEnvironment
-> { state, action, environment in
-    switch action {
-    case let .tapBarTapped(tapBarItem):
-        state.selection = tapBarItem
-        return .none
-    }
-}
-
 struct OrderLayoutView: View {
     let store: Store<OrderLayoutState, OrderLayoutAction>
     @Namespace private var tapBar
     @Namespace private var animation
+    
     var body: some View {
         VStack {
             TapBarView()
@@ -71,7 +51,6 @@ extension OrderLayoutView {
                                     )
                                     .padding(10)
                             
-                            
                                 if selectionStore.state == tapBarItem {
                                     Rectangle()
                                         .frame(height: 3)
@@ -90,6 +69,7 @@ extension OrderLayoutView {
 }
 
 extension OrderLayoutView {
+    
     @ViewBuilder
     func content(tapBar: TapBarList) -> some View {
         switch tapBar {

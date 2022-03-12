@@ -14,119 +14,118 @@ struct CoinDetailView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                WithViewStore(self.store) { viewStore in
-                    let viewState = viewStore.state.toViewState()
-                    VStack(alignment: .leading) {
-                        Text("KRW")
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                        HStack {
-                            Text(viewState.name)
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                            Spacer()
-                            NavigationLink(
-                                destination: {
-                                    WithViewStore(
-                                        self.store.scope(state: \.symbol)
-                                    ) { viewItemStore in
-                                        OrderLayoutView(
-                                            store: Store(
-                                                initialState: OrderLayoutState(symbol: viewItemStore.state),
-                                                reducer: orderLayoutReducer,
-                                                environment: OrderLayoutEnvironment()
-                                            )
-                                        )
-//                                        TransactionListView(
-//                                            store: Store(
-//                                                initialState: TransactionListState(
-//                                                    symbol: viewItemStore.state,
-//                                                    items: []
-//                                                ),
-//                                                reducer: transcationListReducer,
-//                                                environment: TransactionListEnvironment(
-//                                                    transactionListUseCase: {
-//                                                        TransactionListUseCase()
-//                                                    },
-//                                                    toastClient: .live
-//                                                )
-//                                            )
-//                                        )
-                                    }
-                                },
-                                label: {
-                                    Text("체결")
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .padding(.horizontal)
-                                        .padding(.vertical, 8)
-                                        .background(Color(UIColor.systemGray6))
-                                        .cornerRadius(8)
-                                }
-                            )
-                            Spacer()
-                                .frame(width: 8)
-                            NavigationLink(
-                                destination: {
-                                    WithViewStore(
-                                        self.store.scope(state: \.symbol)
-                                    ) { viewItemStore in
-                                        OrderBookListView(
-                                            store: Store(
-                                                initialState: OrderBookListState(
-                                                    symbol: viewItemStore.state
-                                                ),
-                                                reducer: orderBookListReducer,
-                                                environment: OrderBookListEnvironment(
-                                                    useCase: OrderBookListUseCase()
-                                                )
-                                            )
-                                        )
-                                    }
-                                },
-                                label: {
-                                    Text("호가")
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .padding(.horizontal)
-                                        .padding(.vertical, 8)
-                                        .background(Color(UIColor.systemGray6))
-                                        .cornerRadius(8)
-                                }
-                            )
-                        }
-                        Text("₩1,239,100")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                        Text("+₩1,450 (+3.0%)")
-                            .font(.body)
-                            .foregroundColor(.red)
-                    }
-                    .padding()
-                }
-            }
-            Spacer()
-            WithViewStore(
-                self.store.scope(state: \.symbol)
-            ) { viewItemStore in
-                CoinCandleChartView(
-                    store: Store(
-                        initialState: CoinCandleChartState(
-                            symbol: viewItemStore.state
-                        ),
-                        reducer: coinCandleChartReducer,
-                        environment: CoinCandleChartEnvironment(
-                            useCase: CoinCandleChartUseCase(),
-                            toastClient: .live
-                        )
-                    )
-                )
-            }
+            priceAndNavigationView()
+            graphView()
         }
         .navigationTitle("상세")
     }
+}
+
+extension CoinDetailView {
+    func priceAndNavigationView() -> some View {
+        WithViewStore(self.store) { viewStore in
+            let viewState = viewStore.state.toViewState()
+            VStack(alignment: .leading, spacing: 0) {
+                Text("KRW")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .padding(.bottom)
+                HStack(spacing: 8) {
+                    Text(viewState.name)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Spacer()
+                    navigationButton(navigationButtonType: .transaction)
+                    navigationButton(navigationButtonType: .orderbook)
+                }
+                Text("₩1,239,100")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                Text("+₩1,450 (+3.0%)")
+                    .font(.body)
+                    .foregroundColor(.red)
+            }
+            .padding()
+        }
+    }
     
+    func graphView() -> some View {
+        WithViewStore(
+            self.store.scope(state: \.symbol)
+        ) { viewItemStore in
+            CoinCandleChartView(
+                store: Store(
+                    initialState: CoinCandleChartState(
+                        symbol: viewItemStore.state
+                    ),
+                    reducer: coinCandleChartReducer,
+                    environment: CoinCandleChartEnvironment(
+                        useCase: CoinCandleChartUseCase(),
+                        toastClient: .live
+                    )
+                )
+            )
+        }
+    }
+}
+
+extension CoinDetailView {
+    func navigationButton(
+        navigationButtonType: NavigationButtonType
+    ) -> some View {
+        NavigationLink(
+            destination: {
+                WithViewStore(
+                    self.store.scope(state: \.symbol)
+                ) { viewItemStore in
+                    OrderLayoutView(
+                        store: Store(
+                            initialState: OrderLayoutState(
+                                symbol: viewItemStore.state,
+                                selection: navigationButtonType.getTapBarItem()
+                            ),
+                            reducer: orderLayoutReducer,
+                            environment: OrderLayoutEnvironment()
+                        )
+                    )
+                }
+            },
+            label: {
+                Text(navigationButtonType.label)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
+                    .background(Color(UIColor.systemGray6))
+                    .cornerRadius(8)
+            }
+        )
+    }
+}
+
+extension CoinDetailView {
+    enum NavigationButtonType {
+        case transaction
+        case orderbook
+        
+        var label: String {
+            switch self {
+            case .transaction:
+                return "체결"
+            case .orderbook:
+                return "호가"
+            }
+        }
+        
+        func getTapBarItem() -> OrderLayoutView.TapBarList {
+            switch self {
+            case .transaction:
+                return .transaction
+            case .orderbook:
+                return .orderbook
+            }
+        }
+    }
 }
 
 struct CoinDetailView_Previews: PreviewProvider {
