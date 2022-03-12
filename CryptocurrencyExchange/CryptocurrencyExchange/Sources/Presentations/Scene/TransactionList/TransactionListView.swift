@@ -23,19 +23,35 @@ struct TransactionListView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            List {
-                ForEachStore(
-                    self.store.scope(
-                        state: \.items,
-                        action: TransactionListAction.transactionItem(id:action:)
-                    ),
-                    content: { itemStore in
-                        TransactionItemView(store: itemStore)
-                    }
-                )
+            VStack {
+                WithViewStore(
+                    store.scope(state: \.symbol)
+                ) { symbolViewStore in
+                    CoinPriceView(
+                        store: Store(
+                            initialState: CoinPriceState(symbol: symbolViewStore.state),
+                            reducer: coinPriceReducer,
+                            environment: CoinPriceEnvironment(
+                                useCase: TransactionListUseCase()
+                            )
+                        )
+                    )
+                }
+                .padding(.horizontal)
+                List {
+                    ForEachStore(
+                        self.store.scope(
+                            state: \.items,
+                            action: TransactionListAction.transactionItem(id:action:)
+                        ),
+                        content: { itemStore in
+                            TransactionItemView(store: itemStore)
+                        }
+                    )
+                }
+                .listStyle(.plain)
+                .buttonStyle(.plain)
             }
-            .listStyle(.plain)
-            .buttonStyle(.plain)
             // TODO: Coin List Scoping 정리 되면 되돌릴 것.
             //                .onAppear {
             //                    viewStore.send(.onAppear)
