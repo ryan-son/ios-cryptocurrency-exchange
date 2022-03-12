@@ -24,32 +24,24 @@ struct CoinListView: View {
                     ),
                     content: { itemStore in
                         NavigationLink(destination: {
-                            WithViewStore(itemStore) { viewItemStore in
-//                                TransactionListView(
+                            WithViewStore(itemStore.scope(state: \.symbol)) { viewItemStore in
+//                                CoinCandleChartView(
 //                                    store: Store(
-//                                        initialState: TransactionListState(
-//                                            symbol: viewItemStore.state.symbol,
-//                                            items: []
+//                                        initialState: CoinCandleChartState(
+//                                            symbol: viewItemStore.state.symbol
 //                                        ),
-//                                        reducer: transcationListReducer,
-//                                        environment: TransactionListEnvironment(
-//                                            transactionListUseCase: {
-//                                                TransactionListUseCase()
-//                                            },
+//                                        reducer: coinCandleChartReducer,
+//                                        environment: CoinCandleChartEnvironment(
+//                                            useCase: CoinCandleChartUseCase(),
 //                                            toastClient: .live
 //                                        )
 //                                    )
 //                                )
-                                CoinCandleChartView(
+                                CoinDetailView(
                                     store: Store(
-                                        initialState: CoinCandleChartState(
-                                            symbol: viewItemStore.state.symbol
-                                        ),
-                                        reducer: coinCandleChartReducer,
-                                        environment: CoinCandleChartEnvironment(
-                                            useCase: CoinCandleChartUseCase(),
-                                            toastClient: .live
-                                        )
+                                        initialState: CoinDetailState(symbol: viewItemStore.state),
+                                        reducer: coinDetailReducer,
+                                        environment: CoinDetailEnvironment()
                                     )
                                 )
                             }
@@ -75,6 +67,7 @@ struct CoinListView: View {
                 }
             }
         }
+        .navigationTitle("목록")
     }
 }
 

@@ -51,6 +51,7 @@ struct TransactionListView: View {
                 }
             }
         }
+        .navigationTitle("체결")
     }
 }
 
