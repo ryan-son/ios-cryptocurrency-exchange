@@ -91,11 +91,11 @@ let orderBookListReducer = Reducer<
                     if state.orderBooks.count > 20 {
                         state.orderBooks.removeFirst()
                     }
-                    if let indexForRemove = state.orderBooks.firstIndex(where: {
-                        $0.orderType == .buy && $0.price > orderBook.price
-                    }) {
-                        state.orderBooks.remove(at: indexForRemove)
-                    }
+//                    if let indexForRemove = state.orderBooks.firstIndex(where: {
+//                        $0.orderType == .buy && $0.price > orderBook.price
+//                    }) {
+//                        state.orderBooks.remove(at: indexForRemove)
+//                    }
                 }
             case .buy:
                 if orderBook.price > state.orderBooks.map({ $0.price }).min() ?? 0 {
@@ -107,11 +107,11 @@ let orderBookListReducer = Reducer<
                     if state.orderBooks.count > 20 {
                         state.orderBooks.removeLast()
                     }
-                    if let indexForRemove = state.orderBooks.firstIndex(where: {
-                        $0.orderType == .sell && $0.price < orderBook.price
-                    }) {
-                        state.orderBooks.remove(at: indexForRemove)
-                    }
+//                    if let indexForRemove = state.orderBooks.firstIndex(where: {
+//                        $0.orderType == .sell && $0.price < orderBook.price
+//                    }) {
+//                        state.orderBooks.remove(at: indexForRemove)
+//                    }
                 }
             case .none:
                 break
