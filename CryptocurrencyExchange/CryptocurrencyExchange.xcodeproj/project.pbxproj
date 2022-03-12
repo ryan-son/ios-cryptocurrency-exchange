@@ -11,6 +11,7 @@
 		2134363127D8D20B006F273B /* OrderBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134363027D8D20B006F273B /* OrderBookListView.swift */; };
 		2134363327D8D355006F273B /* OrderBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134363227D8D355006F273B /* OrderBookView.swift */; };
 		21434BBA27CA66A6001EFE9A /* BithumbRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21434BB927CA66A6001EFE9A /* BithumbRepository.swift */; };
+		216C6AF027D8F2A9003EA3B5 /* OrderBookListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216C6AEF27D8F2A9003EA3B5 /* OrderBookListUseCase.swift */; };
 		21BECEAD27D332DD0018F7CA /* Publisher+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAC27D332DD0018F7CA /* Publisher+Decode.swift */; };
 		21BECEAF27D3426A0018F7CA /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAE27D3426A0018F7CA /* Log.swift */; };
 		21C2EA3227CDE859004E1379 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 21C2EA3127CDE859004E1379 /* Kingfisher */; };
@@ -102,6 +103,7 @@
 		2134363027D8D20B006F273B /* OrderBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListView.swift; sourceTree = "<group>"; };
 		2134363227D8D355006F273B /* OrderBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookView.swift; sourceTree = "<group>"; };
 		21434BB927CA66A6001EFE9A /* BithumbRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbRepository.swift; sourceTree = "<group>"; };
+		216C6AEF27D8F2A9003EA3B5 /* OrderBookListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListUseCase.swift; sourceTree = "<group>"; };
 		21BECEAC27D332DD0018F7CA /* Publisher+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Decode.swift"; sourceTree = "<group>"; };
 		21BECEAE27D3426A0018F7CA /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		21C2EA3427CDF2D7004E1379 /* HiddenIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenIf.swift; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				AA8669B027CB82C3007DFBE6 /* CoinListUseCase.swift */,
 				7315F73827D8D6FB00276943 /* TransactionListUseCase.swift */,
 				AA4B6D7D27DA3ADC002A7398 /* CoinCandleChartUseCase.swift */,
+				216C6AEF27D8F2A9003EA3B5 /* OrderBookListUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				730F321D27DA4C56002AB57B /* TransactionListReducer.swift in Sources */,
 				AA4B6D8227DA3DAF002A7398 /* BithumbCandleStickSingle.swift in Sources */,
 				AA4B6D7927D8DFB3002A7398 /* CoinCandleStickChartView.swift in Sources */,
+				216C6AF027D8F2A9003EA3B5 /* OrderBookListUseCase.swift in Sources */,
 				AABBA44D27D866480092D1D2 /* ToastView.swift in Sources */,
 				7315F72F27D8D15F00276943 /* TransactionItemView.swift in Sources */,
 				AA406E4F27CD32AB00013BF2 /* CoinItemAction.swift in Sources */,
