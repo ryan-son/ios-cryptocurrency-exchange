@@ -17,6 +17,9 @@ protocol BithumbRepositoryProtocol {
     func getTransactionHistorySinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbTransactionHistoryResultRESTResponseDTO, Error>
+    func getCandleStickSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbCandleStickResultResponseDTO, Error>
     func getTickerStreamPublisher(
         with filter: BithumbWebSocketFilter
     ) -> AnyPublisher<BithumbTickerSocketResponseDTO, Error>
@@ -69,6 +72,13 @@ struct BithumbRepository: BithumbRepositoryProtocol {
             .eraseToAnyPublisher()
     }
     
+    func getCandleStickSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbCandleStickResultResponseDTO, Error> {
+        return restService
+            .getCandleStick(symbol: symbol)
+            .eraseToAnyPublisher()
+    }
 
     // MARK: - WebSocket
     

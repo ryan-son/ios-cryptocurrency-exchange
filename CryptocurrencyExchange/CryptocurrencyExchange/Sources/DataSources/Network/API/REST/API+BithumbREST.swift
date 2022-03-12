@@ -21,6 +21,8 @@ extension API.BithumbREST: TargetType {
             return "/public/orderbook/\(symbol)"
         case let .transactionHistory(symbol):
             return "/public/transaction_history/\(symbol)"
+        case let .candleStick(symbol):
+            return "/public/candlestick/\(symbol)"
         }
     }
     
@@ -31,6 +33,8 @@ extension API.BithumbREST: TargetType {
         case .orderbook:
             return .get
         case .transactionHistory:
+            return .get
+        case .candleStick:
             return .get
         }
     }
@@ -43,6 +47,8 @@ extension API.BithumbREST: TargetType {
             return .requestPlain
         case .transactionHistory:
             return .requestPlain
+        case .candleStick:
+            return .requestPlain
         }
     }
     
@@ -53,6 +59,8 @@ extension API.BithumbREST: TargetType {
         case .orderbook:
             return nil
         case .transactionHistory:
+            return nil
+        case .candleStick:
             return nil
         }
     }
