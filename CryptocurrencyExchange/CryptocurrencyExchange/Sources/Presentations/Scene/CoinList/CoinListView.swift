@@ -24,20 +24,12 @@ struct CoinListView: View {
                     ),
                     content: { itemStore in
                         NavigationLink(destination: {
-                            WithViewStore(itemStore) { viewItemStore in
-                                TransactionListView(
+                            WithViewStore(itemStore.scope(state: \.symbol)) { viewItemStore in
+                                CoinDetailView(
                                     store: Store(
-                                        initialState: TransactionListState(
-                                            symbol: viewItemStore.state.symbol,
-                                            items: []
-                                        ),
-                                        reducer: transcationListReducer,
-                                        environment: TransactionListEnvironment(
-                                            transactionListUseCase: {
-                                                TransactionListUseCase()
-                                            },
-                                            toastClient: .live
-                                        )
+                                        initialState: CoinDetailState(symbol: viewItemStore.state),
+                                        reducer: coinDetailReducer,
+                                        environment: CoinDetailEnvironment()
                                     )
                                 )
                             }
@@ -63,6 +55,7 @@ struct CoinListView: View {
                 }
             }
         }
+        .navigationTitle("목록")
     }
 }
 

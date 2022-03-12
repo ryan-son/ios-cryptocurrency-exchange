@@ -12,34 +12,18 @@ import ComposableArchitecture
 struct ContentView: View {
     var body: some View {
         NavigationView {
-//            CoinListView(
-//                store: Store(
-//                    initialState: CoinListState(items: []),
-//                    reducer: coinListReducer,
-//                    environment: CoinListEnvironment(
-//                        coinListUseCase: {
-//                            CoinListUseCase()
-//                        },
-//                        toastClient: .live
-//                    )
-//                )
-//            )
-            NavigationLink(destination: {
-                OrderBookListView(
-                    store: Store(
-                        initialState: OrderBookListState(
-                            symbol: "BTC_KRW"
-                        ),
-                        reducer: orderBookListReducer,
-                        environment: OrderBookListEnvironment(
-                            useCase: OrderBookListUseCase()
-                        )
+            CoinListView(
+                store: Store(
+                    initialState: CoinListState(items: []),
+                    reducer: coinListReducer,
+                    environment: CoinListEnvironment(
+                        coinListUseCase: {
+                            CoinListUseCase()
+                        },
+                        toastClient: .live
                     )
                 )
-            }) {
-                Text("다음 화면으로 이동")
-            }
-                .navigationTitle("목록")
+            )
         }
     }
 }

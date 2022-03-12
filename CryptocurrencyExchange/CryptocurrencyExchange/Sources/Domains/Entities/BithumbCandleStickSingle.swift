@@ -23,13 +23,10 @@ struct BithumbCandleStickDataSingle: Equatable {
 }
 
 extension BithumbCandleStickDataSingle {
-    func toDataEntry() -> CandleChartDataEntry {
-        return CandleChartDataEntry(
-            x: date,
-            shadowH: highPrice,
-            shadowL: lowPrice,
-            open: openPrice,
-            close: closePrice
-        )
+    var asDateString: String {
+        let dateFormatter = DateFormatter()
+        let date = Date(timeIntervalSince1970: date / 1000)
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
     }
 }
