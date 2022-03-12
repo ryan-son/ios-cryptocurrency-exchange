@@ -11,6 +11,10 @@
 		2134363127D8D20B006F273B /* OrderBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134363027D8D20B006F273B /* OrderBookListView.swift */; };
 		2134363327D8D355006F273B /* OrderBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134363227D8D355006F273B /* OrderBookView.swift */; };
 		21434BBA27CA66A6001EFE9A /* BithumbRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21434BB927CA66A6001EFE9A /* BithumbRepository.swift */; };
+		21616AB727DC56C400949873 /* OrderBookListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21616AB627DC56C400949873 /* OrderBookListState.swift */; };
+		21616AB927DC56CD00949873 /* OrderBookListAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21616AB827DC56CD00949873 /* OrderBookListAction.swift */; };
+		21616ABB27DC56D900949873 /* OrderBookListEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21616ABA27DC56D900949873 /* OrderBookListEnvironment.swift */; };
+		21616ABD27DC56E800949873 /* OrderBookListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21616ABC27DC56E800949873 /* OrderBookListReducer.swift */; };
 		216C6AF027D8F2A9003EA3B5 /* OrderBookListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216C6AEF27D8F2A9003EA3B5 /* OrderBookListUseCase.swift */; };
 		21BECEAD27D332DD0018F7CA /* Publisher+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAC27D332DD0018F7CA /* Publisher+Decode.swift */; };
 		21BECEAF27D3426A0018F7CA /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BECEAE27D3426A0018F7CA /* Log.swift */; };
@@ -103,6 +107,10 @@
 		2134363027D8D20B006F273B /* OrderBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListView.swift; sourceTree = "<group>"; };
 		2134363227D8D355006F273B /* OrderBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookView.swift; sourceTree = "<group>"; };
 		21434BB927CA66A6001EFE9A /* BithumbRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbRepository.swift; sourceTree = "<group>"; };
+		21616AB627DC56C400949873 /* OrderBookListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListState.swift; sourceTree = "<group>"; };
+		21616AB827DC56CD00949873 /* OrderBookListAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListAction.swift; sourceTree = "<group>"; };
+		21616ABA27DC56D900949873 /* OrderBookListEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListEnvironment.swift; sourceTree = "<group>"; };
+		21616ABC27DC56E800949873 /* OrderBookListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListReducer.swift; sourceTree = "<group>"; };
 		216C6AEF27D8F2A9003EA3B5 /* OrderBookListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListUseCase.swift; sourceTree = "<group>"; };
 		21BECEAC27D332DD0018F7CA /* Publisher+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Decode.swift"; sourceTree = "<group>"; };
 		21BECEAE27D3426A0018F7CA /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -205,8 +213,8 @@
 		2134362F27D8D128006F273B /* OrderBook */ = {
 			isa = PBXGroup;
 			children = (
-				2134363027D8D20B006F273B /* OrderBookListView.swift */,
-				2134363227D8D355006F273B /* OrderBookView.swift */,
+				21616ABE27DC5FFF00949873 /* OrderBookItem */,
+				21616AB527DC56B400949873 /* OrderBookList */,
 			);
 			path = OrderBook;
 			sourceTree = "<group>";
@@ -228,6 +236,26 @@
 				21E4382227D64BC700002099 /* BithumbResultSocketResponseDTO.swift */,
 			);
 			path = ResponseDTO;
+			sourceTree = "<group>";
+		};
+		21616AB527DC56B400949873 /* OrderBookList */ = {
+			isa = PBXGroup;
+			children = (
+				21616AB627DC56C400949873 /* OrderBookListState.swift */,
+				21616AB827DC56CD00949873 /* OrderBookListAction.swift */,
+				21616ABA27DC56D900949873 /* OrderBookListEnvironment.swift */,
+				21616ABC27DC56E800949873 /* OrderBookListReducer.swift */,
+				2134363027D8D20B006F273B /* OrderBookListView.swift */,
+			);
+			path = OrderBookList;
+			sourceTree = "<group>";
+		};
+		21616ABE27DC5FFF00949873 /* OrderBookItem */ = {
+			isa = PBXGroup;
+			children = (
+				2134363227D8D355006F273B /* OrderBookView.swift */,
+			);
+			path = OrderBookItem;
 			sourceTree = "<group>";
 		};
 		21C2EA3327CDF2AE004E1379 /* Modifier */ = {
@@ -793,6 +821,7 @@
 				AA8669A227CA00B3007DFBE6 /* URL+Extensions.swift in Sources */,
 				7321A1F927CA428D00686DB5 /* AnyPublisher+Validate.swift in Sources */,
 				730F321527DA3EF1002AB57B /* BithumbTransactionType.swift in Sources */,
+				21616ABD27DC56E800949873 /* OrderBookListReducer.swift in Sources */,
 				7315F72B27D8D0FD00276943 /* TransactionListView.swift in Sources */,
 				730F320C27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift in Sources */,
 				7315F73527D8D46700276943 /* TransactionItemEnviroment.swift in Sources */,
@@ -804,7 +833,9 @@
 				AA4B6D7927D8DFB3002A7398 /* CoinCandleStickChartView.swift in Sources */,
 				216C6AF027D8F2A9003EA3B5 /* OrderBookListUseCase.swift in Sources */,
 				AABBA44D27D866480092D1D2 /* ToastView.swift in Sources */,
+				21616AB927DC56CD00949873 /* OrderBookListAction.swift in Sources */,
 				7315F72F27D8D15F00276943 /* TransactionItemView.swift in Sources */,
+				21616ABB27DC56D900949873 /* OrderBookListEnvironment.swift in Sources */,
 				AA406E4F27CD32AB00013BF2 /* CoinItemAction.swift in Sources */,
 				7386F07127DBAA570079E2EE /* CoinListReducer.swift in Sources */,
 				7386F06B27DBAA450079E2EE /* CoinListError.swift in Sources */,
@@ -824,6 +855,7 @@
 				7321A1E327CA1E6900686DB5 /* API+BithumbWebSocket.swift in Sources */,
 				AA8669AD27CA030F007DFBE6 /* BithumbSocketType.swift in Sources */,
 				AA406E4D27CD329D00013BF2 /* CoinItemState.swift in Sources */,
+				21616AB727DC56C400949873 /* OrderBookListState.swift in Sources */,
 				7315F73327D8D44A00276943 /* TransactionItemAction.swift in Sources */,
 				730F321927DA4C4A002AB57B /* TransactionListAction.swift in Sources */,
 				AA4B6D7E27DA3ADC002A7398 /* CoinCandleChartUseCase.swift in Sources */,

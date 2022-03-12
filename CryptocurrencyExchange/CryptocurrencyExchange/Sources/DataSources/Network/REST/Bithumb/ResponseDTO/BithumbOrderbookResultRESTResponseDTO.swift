@@ -14,7 +14,7 @@ struct BithumbOrderbookResultRESTResponseDTO: Codable {
 }
 
 struct BithumbOrderbookRESTResponseDTO: Codable {
-    let timestamp: Int
+    let timestamp: String
     let orderCurrency, paymentCurrency: String
     let bids, asks: [Orderbook]
 
@@ -26,13 +26,26 @@ struct BithumbOrderbookRESTResponseDTO: Codable {
     }
 }
 
-struct Orderbook: Codable {
+struct Orderbook: Codable, Equatable {
     let quantity, price: String
 }
 
 extension BithumbOrderbookResultRESTResponseDTO {
     func toDomain() -> BithumbOrderbookSingle {
-        return BithumbOrderbookSingle()
+        return BithumbOrderbookSingle(
+            buy: data?.bids.map {
+                BithumbOrderbookSingle.OrderbookRow(
+                    quantity: Double($0.quantity) ?? 0,
+                    price: Double($0.price) ?? 0
+                )
+            } ?? [],
+            sell: data?.asks.map {
+                BithumbOrderbookSingle.OrderbookRow(
+                    quantity: Double($0.quantity) ?? 0,
+                    price: Double($0.price) ?? 0
+                )
+            } ?? []
+        )
     }
 }
 

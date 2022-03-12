@@ -12,6 +12,14 @@ protocol OrderBookListUseCaseProtocol {
     func getLatelyTransactionSinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbTransactionHistroySingle?, Error>
+    
+    func getOrderbookSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbOrderbookSingle, Error>
+    
+    func getOrderBookDepthStreamPublisher(
+        symbols: [String]
+    ) -> AnyPublisher<[BithumbOrderBookDepthStream], Error>
 }
 
 struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
@@ -29,6 +37,31 @@ struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
         return repository
             .getTransactionHistorySinglePublisher(symbol: symbol)
             .map { $0.toDomain(symbol: symbol).first }
+            .eraseToAnyPublisher()
+    }
+    
+    func getOrderbookSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbOrderbookSingle, Error> {
+        return repository
+            .getOrderbookSinglePublisher(
+                symbol: symbol
+            )
+            .map { $0.toDomain() }
+            .eraseToAnyPublisher()
+    }
+    
+    func getOrderBookDepthStreamPublisher(
+        symbols: [String]
+    ) -> AnyPublisher<[BithumbOrderBookDepthStream], Error> {
+        let filter = BithumbWebSocketFilter(
+            type: .orderBookDepth,
+            symbols: symbols,
+            tickTypes: nil
+        )
+        return repository
+            .getOrderBookDepthStreamPublisher(with: filter)
+            .map { $0.toDomain() }
             .eraseToAnyPublisher()
     }
 }
