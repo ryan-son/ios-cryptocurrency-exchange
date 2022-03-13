@@ -9,11 +9,6 @@ import Foundation
 import Combine
 import CoreData
 
-enum CoreDataStorageError: Error {
-    case loadFailed(Error)
-    case saveFailed(Error)
-}
-
 protocol CoinIsLikeCoreDataStorageProtocol {
     func fetchCoinIsLike(for coinName: String) -> Bool
     func saveCoinIsLikeState(
@@ -25,20 +20,21 @@ protocol CoinIsLikeCoreDataStorageProtocol {
 final class CoinIsLikeCoreDataStorage: CoinIsLikeCoreDataStorageProtocol {
     typealias CoinName = String
 
+    static let shared = CoinIsLikeCoreDataStorage()
     private let storage: CoreDataStorageProtocol
-    private static var cache: [CoinName: Bool] = [:]
+    private var cache: [CoinName: Bool] = [:]
     
-    init(storage: CoreDataStorageProtocol = CoreDataStorage.shared) {
+    private init(storage: CoreDataStorageProtocol = CoreDataStorage.shared) {
         self.storage = storage
         loadEntities()
     }
-
+    
     private func loadEntities() {
         do {
             let request = CoinIsLikeStateEntity.fetchRequest()
             let result = try storage.viewContext.fetch(request).map { $0.toDomain() }
             for item in result {
-                CoinIsLikeCoreDataStorage.cache[item.name] = item.isLike
+                cache[item.name] = item.isLike
             }
         } catch {
             Log.error(error)
@@ -48,7 +44,7 @@ final class CoinIsLikeCoreDataStorage: CoinIsLikeCoreDataStorageProtocol {
     func fetchCoinIsLike(
         for coinName: String
     ) -> Bool {
-        return CoinIsLikeCoreDataStorage.cache[coinName] ?? false
+        return cache[coinName] ?? false
     }
     
     @discardableResult
@@ -57,14 +53,14 @@ final class CoinIsLikeCoreDataStorage: CoinIsLikeCoreDataStorageProtocol {
     ) -> Future<CoinIsLikeStateEntity, Error> {
         return Future { promise in
             do {
-                CoinIsLikeCoreDataStorage.cache[coinIsLikeState.name] = coinIsLikeState.isLike
+                self.cache[coinIsLikeState.name] = coinIsLikeState.isLike
                 try self.removeDuplicates(for: coinIsLikeState.name, in: self.storage.viewContext)
                 
                 let entity = CoinIsLikeStateEntity(
                     coinIsLikeState: coinIsLikeState,
                     insertInto: self.storage.viewContext
                 )
-                try self.storage.viewContext.save()
+                self.storage.saveContext()
                 promise(.success(entity))
             } catch {
                 Log.error(error)

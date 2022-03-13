@@ -45,13 +45,12 @@ struct BithumbRepository: BithumbRepositoryProtocol {
     init(
         restService: BithumbRESTService = BithumbRESTService(),
         socketService: BithumbSocketService = BithumbSocketService(),
-        coinIsLikeStorage: CoinIsLikeCoreDataStorageProtocol = CoinIsLikeCoreDataStorage()
+        coinIsLikeStorage: CoinIsLikeCoreDataStorageProtocol = CoinIsLikeCoreDataStorage.shared
     ) {
         self.restService = restService
         self.socketService = socketService
         self.coinIsLikeStorage = coinIsLikeStorage
     }
-    
     
     // MARK: - REST
     
