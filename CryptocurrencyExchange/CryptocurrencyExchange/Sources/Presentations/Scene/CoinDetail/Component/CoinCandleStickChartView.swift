@@ -27,7 +27,10 @@ struct CoinCandleChartView: View {
                     CoinCandleChartRepresentable(viewStore: ViewStore(store))
                         .padding()
                 },
-                else: ProgressView.init
+                else: {
+                    ProgressView()
+                        .frame(maxHeight: .infinity)
+                }
             )
         }
     }

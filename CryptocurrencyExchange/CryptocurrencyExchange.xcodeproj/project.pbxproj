@@ -11,6 +11,10 @@
 		212EF0C727DCC8A6008DF99C /* CoinPriceAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF0C627DCC8A6008DF99C /* CoinPriceAction.swift */; };
 		212EF0C927DCC8B7008DF99C /* CoinPriceEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF0C827DCC8B7008DF99C /* CoinPriceEnvironment.swift */; };
 		212EF0CB27DCC8C8008DF99C /* CoinPriceReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF0CA27DCC8C8008DF99C /* CoinPriceReducer.swift */; };
+		212EF0CF27DCD87C008DF99C /* OrderLayoutState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF0CE27DCD87C008DF99C /* OrderLayoutState.swift */; };
+		212EF0D127DCD886008DF99C /* OrderLayoutAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF0D027DCD886008DF99C /* OrderLayoutAction.swift */; };
+		212EF0D327DCD88D008DF99C /* OrderLayoutEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF0D227DCD88D008DF99C /* OrderLayoutEnvironment.swift */; };
+		212EF0D527DCD896008DF99C /* OrderLayoutReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF0D427DCD896008DF99C /* OrderLayoutReducer.swift */; };
 		2133D9FC27D11039003682C0 /* AnyCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 2133D9FB27D11039003682C0 /* AnyCodable */; };
 		2134363127D8D20B006F273B /* OrderBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134363027D8D20B006F273B /* OrderBookListView.swift */; };
 		2134363327D8D355006F273B /* OrderBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134363227D8D355006F273B /* OrderBookView.swift */; };
@@ -124,6 +128,10 @@
 		212EF0C627DCC8A6008DF99C /* CoinPriceAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceAction.swift; sourceTree = "<group>"; };
 		212EF0C827DCC8B7008DF99C /* CoinPriceEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceEnvironment.swift; sourceTree = "<group>"; };
 		212EF0CA27DCC8C8008DF99C /* CoinPriceReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceReducer.swift; sourceTree = "<group>"; };
+		212EF0CE27DCD87C008DF99C /* OrderLayoutState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderLayoutState.swift; sourceTree = "<group>"; };
+		212EF0D027DCD886008DF99C /* OrderLayoutAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderLayoutAction.swift; sourceTree = "<group>"; };
+		212EF0D227DCD88D008DF99C /* OrderLayoutEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderLayoutEnvironment.swift; sourceTree = "<group>"; };
+		212EF0D427DCD896008DF99C /* OrderLayoutReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderLayoutReducer.swift; sourceTree = "<group>"; };
 		2134363027D8D20B006F273B /* OrderBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListView.swift; sourceTree = "<group>"; };
 		2134363227D8D355006F273B /* OrderBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookView.swift; sourceTree = "<group>"; };
 		21434BB927CA66A6001EFE9A /* BithumbRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbRepository.swift; sourceTree = "<group>"; };
@@ -305,6 +313,10 @@
 		21616AC827DCBA7700949873 /* OrderLayout */ = {
 			isa = PBXGroup;
 			children = (
+				212EF0CE27DCD87C008DF99C /* OrderLayoutState.swift */,
+				212EF0D027DCD886008DF99C /* OrderLayoutAction.swift */,
+				212EF0D227DCD88D008DF99C /* OrderLayoutEnvironment.swift */,
+				212EF0D427DCD896008DF99C /* OrderLayoutReducer.swift */,
 				21616AC927DCBAB000949873 /* OrderLayoutView.swift */,
 			);
 			path = OrderLayout;
@@ -880,6 +892,7 @@
 				21E4382527D64EF800002099 /* Publisher+FilterSocketTopicType.swift in Sources */,
 				7321A22027CD122A00686DB5 /* BithumbTransactionStream.swift in Sources */,
 				2134363327D8D355006F273B /* OrderBookView.swift in Sources */,
+				212EF0CF27DCD87C008DF99C /* OrderLayoutState.swift in Sources */,
 				2134363127D8D20B006F273B /* OrderBookListView.swift in Sources */,
 				AA8669BC27CD1CDF007DFBE6 /* CoinListView.swift in Sources */,
 				AA8669A227CA00B3007DFBE6 /* URL+Extensions.swift in Sources */,
@@ -893,6 +906,8 @@
 				730F321B27DA4C50002AB57B /* TransactionListEnviroment.swift in Sources */,
 				AA4B6D9827DC7AC9002A7398 /* CoinDetailReducer.swift in Sources */,
 				AA4B6D8A27DC6DF5002A7398 /* CoinCandleChartEnvironment.swift in Sources */,
+				212EF0D527DCD896008DF99C /* OrderLayoutReducer.swift in Sources */,
+				212EF0D327DCD88D008DF99C /* OrderLayoutEnvironment.swift in Sources */,
 				21616ACA27DCBAB000949873 /* OrderLayoutView.swift in Sources */,
 				7321A22227CD17E300686DB5 /* BithumbOrderBookDepthStream.swift in Sources */,
 				730F321D27DA4C56002AB57B /* TransactionListReducer.swift in Sources */,
@@ -948,6 +963,7 @@
 				21C2EA3527CDF2D7004E1379 /* HiddenIf.swift in Sources */,
 				21BECEAF27D3426A0018F7CA /* Log.swift in Sources */,
 				AA4B6D8F27DC6F87002A7398 /* CoinDetailView.swift in Sources */,
+				212EF0D127DCD886008DF99C /* OrderLayoutAction.swift in Sources */,
 				AA406E5327CD341100013BF2 /* CoinItemReducer.swift in Sources */,
 				7386F07327DBAA8B0079E2EE /* CoinListAction.swift in Sources */,
 				AA406E5127CD33E900013BF2 /* CoinItemEnvironment.swift in Sources */,
