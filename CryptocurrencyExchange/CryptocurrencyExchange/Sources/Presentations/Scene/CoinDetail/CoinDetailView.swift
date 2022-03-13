@@ -10,7 +10,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct CoinDetailView: View {
-    let store: Store<CoinDetailState, CoinDetailAction>
+    let symbol: String
 
     var body: some View {
         VStack {
@@ -23,54 +23,38 @@ struct CoinDetailView: View {
 
 extension CoinDetailView {
     func priceAndNavigationView() -> some View {
-        WithViewStore(
-            self.store.scope(state: \.symbol)
-        ) { viewItemStore in
-            CoinCurrentTickerView(
-                store: Store(
-                    initialState: CoinCurrentTickerState(
-                        symbol: viewItemStore.state
-                    ),
-                    reducer: CoinCurrentTickerReducer,
-                    environment: CoinCurrentTickerEnvironment(
-                        useCase: TransactionUseCase()
-                    )
+        CoinCurrentTickerView(
+            store: Store(
+                initialState: CoinCurrentTickerState(
+                    symbol: symbol
+                ),
+                reducer: CoinCurrentTickerReducer,
+                environment: CoinCurrentTickerEnvironment(
+                    useCase: { TickerUseCase() }
                 )
             )
-        }
+        )
     }
     
     func graphView() -> some View {
-        WithViewStore(
-            self.store.scope(state: \.symbol)
-        ) { viewItemStore in
-            CoinCandleChartView(
-                store: Store(
-                    initialState: CoinCandleChartState(
-                        symbol: viewItemStore.state
-                    ),
-                    reducer: coinCandleChartReducer,
-                    environment: CoinCandleChartEnvironment(
-                        candleChartUseCase: CoinCandleChartUseCase(),
-                        tickerUseCase: { TickerUseCase() },
-                        toastClient: .live
-                    )
+        CoinCandleChartView(
+            store: Store(
+                initialState: CoinCandleChartState(
+                    symbol: symbol
+                ),
+                reducer: coinCandleChartReducer,
+                environment: CoinCandleChartEnvironment(
+                    candleChartUseCase: CoinCandleChartUseCase(),
+                    tickerUseCase: { TickerUseCase() },
+                    toastClient: .live
                 )
             )
-        }
+        )
     }
 }
 
 struct CoinDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CoinDetailView(
-            store: Store(
-                initialState: CoinDetailState(
-                    symbol: "BTC_KRW"
-                ),
-                reducer: coinDetailReducer,
-                environment: CoinDetailEnvironment()
-            )
-        )
+        CoinDetailView(symbol: "BTC_KRW")
     }
 }

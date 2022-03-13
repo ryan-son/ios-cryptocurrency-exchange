@@ -65,7 +65,6 @@ struct TransactionUseCase: TransactionUseCaseProtocol {
                 symbol: symbol
             )
             .map { $0.toDomain() }
-            .print()
             .eraseToAnyPublisher()
     }
     
@@ -110,7 +109,6 @@ struct TransactionUseCase: TransactionUseCaseProtocol {
         return repository
             .getTransactionStreamPublisher(with: filter)
             .map{ $0.toDomain() }
-            .print()
             .eraseToAnyPublisher()
     }
     
