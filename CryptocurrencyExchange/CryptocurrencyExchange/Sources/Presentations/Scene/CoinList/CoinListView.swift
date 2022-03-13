@@ -25,13 +25,7 @@ struct CoinListView: View {
                     content: { itemStore in
                         NavigationLink(destination: {
                             WithViewStore(itemStore.scope(state: \.symbol)) { viewItemStore in
-                                CoinDetailView(
-                                    store: Store(
-                                        initialState: CoinDetailState(symbol: viewItemStore.state),
-                                        reducer: coinDetailReducer,
-                                        environment: CoinDetailEnvironment()
-                                    )
-                                )
+                                CoinDetailView(symbol: viewItemStore.state)
                             }
                         }) {
                             CoinItemView(store: itemStore)

@@ -12,12 +12,6 @@ import ComposableArchitecture
 struct CoinCurrentTickerView: View {
     let store: Store<CoinCurrentTickerState, CoinCurrentTickerAction>
     
-    init(store: Store<CoinCurrentTickerState, CoinCurrentTickerAction>) {
-        self.store = store
-        let viewStore = ViewStore(store)
-        viewStore.send(.onAppear)
-    }
-    
     var body: some View {
         WithViewStore(self.store) { viewStore in
             let viewState = viewStore.state.toViewState()
@@ -43,9 +37,9 @@ struct CoinCurrentTickerView: View {
             }
             .padding()
         }
-//        .onAppear {
-//            ViewStore(store).send(.onAppear)
-//        }
+        .onAppear {
+            ViewStore(store).send(.onAppear)
+        }
         .onDisappear {
             ViewStore(store).send(.onDisappear)
         }
@@ -118,7 +112,7 @@ struct CoinCurrentTickerView_Previews: PreviewProvider {
                 initialState: CoinCurrentTickerState(symbol: "BTC_KRW"),
                 reducer: CoinCurrentTickerReducer,
                 environment: CoinCurrentTickerEnvironment(
-                    useCase: TransactionUseCase()
+                    useCase: { TickerUseCase() }
                 )
             )
         )
