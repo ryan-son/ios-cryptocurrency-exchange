@@ -19,7 +19,7 @@ struct CoinListView: View {
             List {
                 ForEachStore(
                     self.store.scope(
-                        state: \.items,
+                        state: \.refinedItems,
                         action: CoinListAction.coinItem(id:action:)
                     ),
                     content: { itemStore in
@@ -49,11 +49,35 @@ struct CoinListView: View {
                 }
             }
         }
+        .add(
+            SearchBar(
+                text: ViewStore(store).binding(
+                    get: { $0.searchedQuery },
+                    send: CoinListAction.search(query:)
+                )
+            )
+        )
+        .navigationBarItems(
+            trailing: WithViewStore(
+                store.scope(state: \.sortType)
+            ) { viewStore in
+                let cases = CoinListSortType.allCases
+                Menu(viewStore.state.displayValue) {
+                    ForEach(cases, id: \.self) { it in
+                        Button(it.displayValue) {
+                            ViewStore(store).send(
+                                CoinListAction.updateSortType(it)
+                            )
+                        }
+                    }
+                }
+            }
+        )
         .navigationTitle("목록")
     }
 }
 
-extension IdentifiedArray where ID == CoinItemState.ID, Element == CoinItemState {
+extension Array where Element == CoinItemState {
     static let mock: Self = [
         CoinItemState(
             rank: nil,
