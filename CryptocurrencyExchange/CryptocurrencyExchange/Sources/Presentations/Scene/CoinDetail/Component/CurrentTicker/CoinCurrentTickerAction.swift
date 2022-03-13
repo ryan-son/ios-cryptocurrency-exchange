@@ -1,13 +1,13 @@
 //
-//  CoinPriceAction.swift
+//  CoinCurrentTickerAction.swift
 //  CryptocurrencyExchange
 //
-//  Created by 이경준 on 2022/03/12.
+//  Created by 김정상 on 2022/03/13.
 //
 
 import Foundation
 
-enum CoinPriceAction: Equatable {
+enum CoinCurrentTickerAction: Equatable {
     case onAppear
     case onDisappear
     case responseTickerSingle(Result<BithumbTickerSingle, OrderBookListError>)

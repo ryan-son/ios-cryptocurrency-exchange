@@ -23,29 +23,20 @@ struct CoinDetailView: View {
 
 extension CoinDetailView {
     func priceAndNavigationView() -> some View {
-        WithViewStore(self.store) { viewStore in
-            let viewState = viewStore.state.toViewState()
-            VStack(alignment: .leading, spacing: 0) {
-                Text("KRW")
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                    .padding(.bottom)
-                HStack(spacing: 8) {
-                    Text(viewState.name)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                    Spacer()
-                    navigationButton(navigationButtonType: .transaction)
-                    navigationButton(navigationButtonType: .orderbook)
-                }
-                Text("₩1,239,100")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                Text("+₩1,450 (+3.0%)")
-                    .font(.body)
-                    .foregroundColor(.red)
-            }
-            .padding()
+        WithViewStore(
+            self.store.scope(state: \.symbol)
+        ) { viewItemStore in
+            CoinCurrentTickerView(
+                store: Store(
+                    initialState: CoinCurrentTickerState(
+                        symbol: viewItemStore.state
+                    ),
+                    reducer: CoinCurrentTickerReducer,
+                    environment: CoinCurrentTickerEnvironment(
+                        useCase: TransactionListUseCase()
+                    )
+                )
+            )
         }
     }
     
@@ -65,65 +56,6 @@ extension CoinDetailView {
                     )
                 )
             )
-        }
-    }
-}
-
-extension CoinDetailView {
-    func navigationButton(
-        navigationButtonType: NavigationButtonType
-    ) -> some View {
-        NavigationLink(
-            destination: {
-                WithViewStore(
-                    self.store.scope(state: \.symbol)
-                ) { viewItemStore in
-                    OrderLayoutView(
-                        store: Store(
-                            initialState: OrderLayoutState(
-                                symbol: viewItemStore.state,
-                                selection: navigationButtonType.getTapBarItem()
-                            ),
-                            reducer: orderLayoutReducer,
-                            environment: OrderLayoutEnvironment()
-                        )
-                    )
-                }
-            },
-            label: {
-                Text(navigationButtonType.label)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.gray)
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                    .background(Color(UIColor.systemGray6))
-                    .cornerRadius(8)
-            }
-        )
-    }
-}
-
-extension CoinDetailView {
-    enum NavigationButtonType {
-        case transaction
-        case orderbook
-        
-        var label: String {
-            switch self {
-            case .transaction:
-                return "체결"
-            case .orderbook:
-                return "호가"
-            }
-        }
-        
-        func getTapBarItem() -> OrderLayoutView.TapBarList {
-            switch self {
-            case .transaction:
-                return .transaction
-            case .orderbook:
-                return .orderbook
-            }
         }
     }
 }

@@ -10,7 +10,10 @@ import Combine
 import Foundation
 
 protocol BithumbRepositoryProtocol {
-    func getTickerSinglePublisher() -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error>
+    func getTickerAllSinglePublisher() -> AnyPublisher<BithumbTickerAllResultRESTResponseDTO, Error>
+    func getTickerSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error>
     func getOrderbookSinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbOrderbookResultRESTResponseDTO, Error>
@@ -54,9 +57,17 @@ struct BithumbRepository: BithumbRepositoryProtocol {
     
     // MARK: - REST
     
-    func getTickerSinglePublisher() -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error> {
+    func getTickerAllSinglePublisher() -> AnyPublisher<BithumbTickerAllResultRESTResponseDTO, Error> {
         return restService
             .getTickers()
+            .eraseToAnyPublisher()
+    }
+    
+    func getTickerSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error> {
+        return restService
+            .getTicker(symbol: symbol)
             .eraseToAnyPublisher()
     }
     

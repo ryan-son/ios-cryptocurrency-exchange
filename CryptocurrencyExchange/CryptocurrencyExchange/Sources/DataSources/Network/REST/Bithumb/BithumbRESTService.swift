@@ -14,8 +14,18 @@ import Moya
 struct BithumbRESTService {
     private let service = MoyaProvider<API.BithumbREST>.makeService()
         
-    func getTickers() -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error> {
-        return service.requestPublisher(.ticker)
+    func getTickers() -> AnyPublisher<BithumbTickerAllResultRESTResponseDTO, Error> {
+        return service.requestPublisher(.tickerAll)
+            .validate()
+            .map(\.data)
+            .decode(type: BithumbTickerAllResultRESTResponseDTO.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    func getTicker(
+        symbol: String
+    ) -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error> {
+        return service.requestPublisher(.ticker(symbol: symbol))
             .validate()
             .map(\.data)
             .decode(type: BithumbTickerResultRESTResponseDTO.self, decoder: JSONDecoder())

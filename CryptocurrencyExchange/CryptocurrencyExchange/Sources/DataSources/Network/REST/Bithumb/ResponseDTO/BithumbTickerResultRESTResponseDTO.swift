@@ -2,7 +2,7 @@
 //  BithumbTickerResultRESTResponseDTO.swift
 //  CryptocurrencyExchange
 //
-//  Created by 김정상 on 2022/02/26.
+//  Created by 김정상 on 2022/03/13.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import AnyCodable
 struct BithumbTickerResultRESTResponseDTO: BithumbDataResponse {
     let status: String
     let resmsg: String?
-    let data: [String: AnyCodable]?
+    let data: BithumbTickerRESTResponseDTO?
 }
 
 struct BithumbTickerRESTResponseDTO: Decodable {
@@ -35,20 +35,15 @@ struct BithumbTickerRESTResponseDTO: Decodable {
 }
 
 extension BithumbTickerResultRESTResponseDTO {
-    func toDomain() -> [BithumbTickerSingle] {
-        let filteredKeys = data?.keys
-            .filter { $0 != "date" } ?? []
-        let responses = filteredKeys
-            .compactMap { data?[$0] }
-            .compactMap { try? JSONEncoder().encode($0) }
-            .compactMap { try? JSONDecoder().decode(BithumbTickerRESTResponseDTO.self, from: $0) }
-        return zip(filteredKeys, responses)
-            .map { key, response in
-                BithumbTickerSingle(
-                    name: key,
-                    closingPrice: Double(response.closingPrice) ?? 0,
-                    changeRate: Double(response.fluctateRate24H) ?? 0
-                )
-            }
+    func toDomain(
+        symbol: String
+    ) -> BithumbTickerSingle {
+        return BithumbTickerSingle(
+            name: symbol.replacingOccurrences(of: "_KRW", with: ""),
+            closingPrice: Double(data?.closingPrice ?? "") ?? 0,
+            changeRate: Double(data?.fluctateRate24H ?? "") ?? 0,
+            changeAmount: Double(data?.fluctate24H ?? "") ?? 0
+        )
     }
 }
+

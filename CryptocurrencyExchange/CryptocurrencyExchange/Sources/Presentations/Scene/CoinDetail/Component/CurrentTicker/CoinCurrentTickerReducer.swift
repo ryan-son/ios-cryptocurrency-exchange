@@ -1,19 +1,19 @@
 //
-//  CoinPriceReducer.swift
+//  CoinCurrentTickerReducer.swift
 //  CryptocurrencyExchange
 //
-//  Created by 이경준 on 2022/03/12.
+//  Created by 김정상 on 2022/03/13.
 //
 
 import Foundation
 
 import ComposableArchitecture
 
-let coinPriceReducer = Reducer<
-    CoinPriceState, CoinPriceAction, CoinPriceEnvironment
+let CoinCurrentTickerReducer = Reducer<
+    CoinCurrentTickerState, CoinCurrentTickerAction, CoinCurrentTickerEnvironment
 > { state, action, environment in
     
-    struct CoinPriceCancelId: Hashable {}
+    struct CoinCurrentTickerCancelId: Hashable {}
     
     switch action {
     case .onAppear:
@@ -22,7 +22,7 @@ let coinPriceReducer = Reducer<
                 .getTickerSinglePublisher(symbol: state.symbol)
                 .receive(on: DispatchQueue.main)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
-                .catchToEffect(CoinPriceAction.responseTickerSingle)
+                .catchToEffect(CoinCurrentTickerAction.responseTickerSingle)
             ,
             environment.useCase
                 .getTickerStreamPublisher(
@@ -31,15 +31,17 @@ let coinPriceReducer = Reducer<
                 )
                 .receive(on: DispatchQueue.main)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
-                .catchToEffect(CoinPriceAction.responseTickerStream)
-                .cancellable(id: CoinPriceCancelId())
+                .catchToEffect(CoinCurrentTickerAction.responseTickerStream)
+                .cancellable(id: CoinCurrentTickerCancelId())
         )
         
     case .onDisappear:
-        return .cancel(id: CoinPriceCancelId())
+        return .cancel(id: CoinCurrentTickerCancelId())
         
     case let .responseTickerSingle(.success(ticker)):
         state.nowPrice = ticker.closingPrice
+        state.changeRate = ticker.changeRate
+        state.changeAmount = ticker.changeAmount
         return .none
         
     case let .responseTickerSingle(.failure(error)):
@@ -48,6 +50,8 @@ let coinPriceReducer = Reducer<
         
     case let .responseTickerStream(.success(ticker)):
         state.nowPrice = ticker.closePrice
+        state.changeRate = ticker.changeRate
+        state.changeAmount = ticker.changeAmount
         return .none
         
     case let .responseTickerStream(.failure(error)):

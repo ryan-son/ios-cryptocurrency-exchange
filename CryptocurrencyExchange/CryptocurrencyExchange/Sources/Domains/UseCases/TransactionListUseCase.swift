@@ -9,7 +9,10 @@ import Combine
 import Foundation
 
 protocol TransactionListUseCaseProtocol {
-    func getTickerSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error>
+    func getTickerAllSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error>
+    func getTickerSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbTickerSingle, Error>
     func getOrderbookSinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbOrderbookSingle, Error>
@@ -37,9 +40,20 @@ struct TransactionListUseCase: TransactionListUseCaseProtocol {
         self.repository = repository
     }
 
-    func getTickerSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error> {
-        return repository.getTickerSinglePublisher()
+    func getTickerAllSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error> {
+        return repository.getTickerAllSinglePublisher()
             .map { $0.toDomain() }
+            .eraseToAnyPublisher()
+    }
+    
+    func getTickerSinglePublisher(
+        symbol: String
+    ) -> AnyPublisher<BithumbTickerSingle, Error> {
+        return repository
+            .getTickerSinglePublisher(
+                symbol: symbol
+            )
+            .map { $0.toDomain(symbol: symbol) }
             .eraseToAnyPublisher()
     }
     
