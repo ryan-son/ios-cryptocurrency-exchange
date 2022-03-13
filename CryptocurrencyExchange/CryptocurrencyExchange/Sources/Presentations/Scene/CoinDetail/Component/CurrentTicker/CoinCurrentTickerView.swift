@@ -32,7 +32,7 @@ struct CoinCurrentTickerView: View {
                         .fontWeight(.bold)
                     Spacer()
                     navigationButton(navigationButtonType: .transaction)
-                    navigationButton(navigationButtonType: .orderbook)
+                    navigationButton(navigationButtonType: .orderBook)
                 }
                 Text(viewState.nowPrice)
                     .font(.largeTitle)
@@ -89,13 +89,13 @@ extension CoinCurrentTickerView {
 extension CoinCurrentTickerView {
     enum NavigationButtonType {
         case transaction
-        case orderbook
+        case orderBook
         
         var label: String {
             switch self {
             case .transaction:
                 return "체결"
-            case .orderbook:
+            case .orderBook:
                 return "호가"
             }
         }
@@ -104,8 +104,8 @@ extension CoinCurrentTickerView {
             switch self {
             case .transaction:
                 return .transaction
-            case .orderbook:
-                return .orderbook
+            case .orderBook:
+                return .orderBook
             }
         }
     }

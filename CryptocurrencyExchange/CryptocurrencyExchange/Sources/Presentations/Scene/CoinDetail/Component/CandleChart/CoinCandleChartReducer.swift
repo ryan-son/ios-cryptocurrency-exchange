@@ -17,7 +17,10 @@ let coinCandleChartReducer = Reducer<
     case .onAppear:
         return fetchCandleItems(
             symbol: state.symbol,
-            coinListEnviroment: CoinListEnvironment(coinListUseCase: { CoinListUseCase() }, toastClient: ToastClient.live),
+            coinListEnvironment: CoinListEnvironment( // TODO: UseCase 정리하면서 이 부분 정리
+                coinListUseCase: { CoinListUseCase() },
+                toastClient: ToastClient.live
+            ),
             coinCandleChartEnvironment: environment,
             cancelId: CancelId()
         )
@@ -43,13 +46,13 @@ let coinCandleChartReducer = Reducer<
 
 fileprivate func fetchCandleItems(
     symbol: String,
-    coinListEnviroment: CoinListEnvironment,
+    coinListEnvironment: CoinListEnvironment,
     coinCandleChartEnvironment: CoinCandleChartEnvironment,
     cancelId: AnyHashable
 ) -> Effect<CoinCandleChartAction, Never> {
     var coinCandleChartItemStates = OrderedDictionary<String, CoinCandleChartItemState>()
     
-    let coinListUseCase = coinListEnviroment.coinListUseCase()
+    let coinListUseCase = coinListEnvironment.coinListUseCase()
     let coinCandleChartUseCase = coinCandleChartEnvironment.useCase
     
     return coinCandleChartUseCase.getCandleStickSinglePublisher(symbol: symbol)
@@ -72,7 +75,6 @@ fileprivate func fetchCandleItems(
                     symbols: [symbol],
                     tickTypes: [.day]
                 )
-                // TODO: 첫 Stream이 늦게 도착하는 경우 차트가 늦게 그려지기 때문에 임시 처리.
                 .map { [$0] }
                 .merge(
                     with: Just([]).setFailureType(to: Error.self)
@@ -92,8 +94,7 @@ fileprivate func fetchCandleItems(
         .eraseToAnyPublisher()
         .mapError { error in
             Log.error("Error: \(error)")
-            // TODO: 오류 났을 때 처리 필요.
-            return CoinListError.description("다시 연결 중...")
+            return CoinCandleChartError.description("다시 연결 중...")
         }
         .receive(on: DispatchQueue.main)
         .eraseToEffect()

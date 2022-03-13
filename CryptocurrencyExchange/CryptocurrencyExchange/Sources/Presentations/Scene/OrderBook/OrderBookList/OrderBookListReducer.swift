@@ -21,7 +21,7 @@ let orderBookListReducer = Reducer<
     case .onAppear:
         return .merge(
             environment.useCase
-                .getOrderbookSinglePublisher(symbol: state.symbol)
+                .getOrderBookSinglePublisher(symbol: state.symbol)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
                 .catchToEffect(OrderBookListAction.responseOrderBookSingle),
             environment.useCase
@@ -124,7 +124,7 @@ let orderBookListReducer = Reducer<
         if state.orderBooks.filter({ $0.orderType == .sell}).count != itemCount ||
             state.orderBooks.filter({ $0.orderType == .buy}).count != itemCount {
             return environment.useCase
-                .getOrderbookSinglePublisher(symbol: state.symbol)
+                .getOrderBookSinglePublisher(symbol: state.symbol)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
                 .catchToEffect(OrderBookListAction.responseOrderBookSingle)
         }

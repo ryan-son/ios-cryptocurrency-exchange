@@ -9,9 +9,9 @@ import Combine
 import Foundation
 
 protocol OrderBookListUseCaseProtocol {    
-    func getOrderbookSinglePublisher(
+    func getOrderBookSinglePublisher(
         symbol: String
-    ) -> AnyPublisher<BithumbOrderbookSingle, Error>
+    ) -> AnyPublisher<BithumbOrderBookSingle, Error>
     
     func getOrderBookDepthStreamPublisher(
         symbols: [String]
@@ -33,11 +33,11 @@ struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
     }
     
     
-    func getOrderbookSinglePublisher(
+    func getOrderBookSinglePublisher(
         symbol: String
-    ) -> AnyPublisher<BithumbOrderbookSingle, Error> {
+    ) -> AnyPublisher<BithumbOrderBookSingle, Error> {
         return repository
-            .getOrderbookSinglePublisher(
+            .getOrderBookSinglePublisher(
                 symbol: symbol
             )
             .map { $0.toDomain() }

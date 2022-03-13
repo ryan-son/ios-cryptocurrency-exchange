@@ -13,9 +13,9 @@ protocol TransactionListUseCaseProtocol {
     func getTickerSinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbTickerSingle, Error>
-    func getOrderbookSinglePublisher(
+    func getOrderBookSinglePublisher(
         symbol: String
-    ) -> AnyPublisher<BithumbOrderbookSingle, Error>
+    ) -> AnyPublisher<BithumbOrderBookSingle, Error>
     func getTransactionHistorySinglePublisher(
         symbol: String
     ) -> AnyPublisher<[BithumbTransactionHistroySingle], Error>
@@ -57,11 +57,11 @@ struct TransactionListUseCase: TransactionListUseCaseProtocol {
             .eraseToAnyPublisher()
     }
     
-    func getOrderbookSinglePublisher(
+    func getOrderBookSinglePublisher(
         symbol: String
-    ) -> AnyPublisher<BithumbOrderbookSingle, Error> {
+    ) -> AnyPublisher<BithumbOrderBookSingle, Error> {
         return repository
-            .getOrderbookSinglePublisher(
+            .getOrderBookSinglePublisher(
                 symbol: symbol
             )
             .map { $0.toDomain() }

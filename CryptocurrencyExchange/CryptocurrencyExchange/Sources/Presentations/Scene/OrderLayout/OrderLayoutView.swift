@@ -94,7 +94,7 @@ extension OrderLayoutView {
                 )
             }
             
-        case .orderbook:
+        case .orderBook:
             WithViewStore(
                 store.scope(state: \.symbol)
             ) { symbol in
@@ -117,13 +117,13 @@ extension OrderLayoutView {
 extension OrderLayoutView {
     enum TapBarList: Equatable, CaseIterable {
         case transaction
-        case orderbook
+        case orderBook
         
         var label: String {
             switch self {
             case .transaction:
                 return "체결내역"
-            case .orderbook:
+            case .orderBook:
                 return "호가"
             }
         }

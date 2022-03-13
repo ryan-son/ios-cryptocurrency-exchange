@@ -14,9 +14,9 @@ protocol BithumbRepositoryProtocol {
     func getTickerSinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbTickerResultRESTResponseDTO, Error>
-    func getOrderbookSinglePublisher(
+    func getOrderBookSinglePublisher(
         symbol: String
-    ) -> AnyPublisher<BithumbOrderbookResultRESTResponseDTO, Error>
+    ) -> AnyPublisher<BithumbOrderBookResultRESTResponseDTO, Error>
     func getTransactionHistorySinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbTransactionHistoryResultRESTResponseDTO, Error>
@@ -71,11 +71,11 @@ struct BithumbRepository: BithumbRepositoryProtocol {
             .eraseToAnyPublisher()
     }
     
-    func getOrderbookSinglePublisher(
+    func getOrderBookSinglePublisher(
         symbol: String
-    ) -> AnyPublisher<BithumbOrderbookResultRESTResponseDTO, Error> {
+    ) -> AnyPublisher<BithumbOrderBookResultRESTResponseDTO, Error> {
         return restService
-            .getOrderbook(symbol: symbol)
+            .getOrderBook(symbol: symbol)
             .eraseToAnyPublisher()
     }
     
