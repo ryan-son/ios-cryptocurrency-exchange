@@ -10,12 +10,6 @@ import SwiftUI
 import ComposableArchitecture
 import Kingfisher
 
-
-
-
-
-
-
 struct CoinPriceView: View {
     let store: Store<CoinPriceState, CoinPriceAction>
     

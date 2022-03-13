@@ -35,6 +35,11 @@
 		21E32C9327CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E32C9227CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift */; };
 		21E4382327D64BC700002099 /* BithumbResultSocketResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E4382227D64BC700002099 /* BithumbResultSocketResponseDTO.swift */; };
 		21E4382527D64EF800002099 /* Publisher+FilterSocketTopicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E4382427D64EF800002099 /* Publisher+FilterSocketTopicType.swift */; };
+		73056ECD27DD8CEA0023092C /* CoinCurrentTickerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056EC827DD8CEA0023092C /* CoinCurrentTickerReducer.swift */; };
+		73056ECE27DD8CEA0023092C /* CoinCurrentTickerEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056EC927DD8CEA0023092C /* CoinCurrentTickerEnvironment.swift */; };
+		73056ECF27DD8CEA0023092C /* CoinCurrentTickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056ECA27DD8CEA0023092C /* CoinCurrentTickerView.swift */; };
+		73056ED027DD8CEA0023092C /* CoinCurrentTickerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056ECB27DD8CEA0023092C /* CoinCurrentTickerAction.swift */; };
+		73056ED127DD8CEA0023092C /* CoinCurrentTickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056ECC27DD8CEA0023092C /* CoinCurrentTickerState.swift */; };
 		730F320C27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F320B27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift */; };
 		730F320E27D8EE27002AB57B /* BithumbOrderbookSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F320D27D8EE27002AB57B /* BithumbOrderbookSingle.swift */; };
 		730F321327D8F4A2002AB57B /* Date+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F321227D8F4A2002AB57B /* Date+Format.swift */; };
@@ -158,6 +163,11 @@
 		21E32C9227CB390300949D97 /* BithumbTransactionSocketResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTransactionSocketResponseDTO.swift; sourceTree = "<group>"; };
 		21E4382227D64BC700002099 /* BithumbResultSocketResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbResultSocketResponseDTO.swift; sourceTree = "<group>"; };
 		21E4382427D64EF800002099 /* Publisher+FilterSocketTopicType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+FilterSocketTopicType.swift"; sourceTree = "<group>"; };
+		73056EC827DD8CEA0023092C /* CoinCurrentTickerReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinCurrentTickerReducer.swift; sourceTree = "<group>"; };
+		73056EC927DD8CEA0023092C /* CoinCurrentTickerEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinCurrentTickerEnvironment.swift; sourceTree = "<group>"; };
+		73056ECA27DD8CEA0023092C /* CoinCurrentTickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinCurrentTickerView.swift; sourceTree = "<group>"; };
+		73056ECB27DD8CEA0023092C /* CoinCurrentTickerAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinCurrentTickerAction.swift; sourceTree = "<group>"; };
+		73056ECC27DD8CEA0023092C /* CoinCurrentTickerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinCurrentTickerState.swift; sourceTree = "<group>"; };
 		730F320B27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbOrderbookResultRESTResponseDTO.swift; sourceTree = "<group>"; };
 		730F320D27D8EE27002AB57B /* BithumbOrderbookSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbOrderbookSingle.swift; sourceTree = "<group>"; };
 		730F321227D8F4A2002AB57B /* Date+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Format.swift"; sourceTree = "<group>"; };
@@ -346,6 +356,31 @@
 			path = Modifier;
 			sourceTree = "<group>";
 		};
+		73056EC527DD8C030023092C /* CandleChart */ = {
+			isa = PBXGroup;
+			children = (
+				AA4B6D8527DC6DCE002A7398 /* CoinCandleChartState.swift */,
+				AA4B6D8727DC6DE2002A7398 /* CoinCandleChartAction.swift */,
+				AA4B6D8927DC6DF5002A7398 /* CoinCandleChartEnvironment.swift */,
+				AA4B6D8B27DC6E1C002A7398 /* CoinCandleChartReducer.swift */,
+				AA4B6D8327DC6D90002A7398 /* CoinCandleChartRepresentable.swift */,
+				AA4B6D7827D8DFB3002A7398 /* CoinCandleStickChartView.swift */,
+			);
+			path = CandleChart;
+			sourceTree = "<group>";
+		};
+		73056EC727DD8CAA0023092C /* CurrentTicker */ = {
+			isa = PBXGroup;
+			children = (
+				73056ECC27DD8CEA0023092C /* CoinCurrentTickerState.swift */,
+				73056ECB27DD8CEA0023092C /* CoinCurrentTickerAction.swift */,
+				73056EC927DD8CEA0023092C /* CoinCurrentTickerEnvironment.swift */,
+				73056EC827DD8CEA0023092C /* CoinCurrentTickerReducer.swift */,
+				73056ECA27DD8CEA0023092C /* CoinCurrentTickerView.swift */,
+			);
+			path = CurrentTicker;
+			sourceTree = "<group>";
+		};
 		7315F72127D896C600276943 /* Bithumb */ = {
 			isa = PBXGroup;
 			children = (
@@ -510,12 +545,8 @@
 		AA4B6D8D27DC6F0D002A7398 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				AA4B6D8527DC6DCE002A7398 /* CoinCandleChartState.swift */,
-				AA4B6D8727DC6DE2002A7398 /* CoinCandleChartAction.swift */,
-				AA4B6D8927DC6DF5002A7398 /* CoinCandleChartEnvironment.swift */,
-				AA4B6D8B27DC6E1C002A7398 /* CoinCandleChartReducer.swift */,
-				AA4B6D8327DC6D90002A7398 /* CoinCandleChartRepresentable.swift */,
-				AA4B6D7827D8DFB3002A7398 /* CoinCandleStickChartView.swift */,
+				73056EC727DD8CAA0023092C /* CurrentTicker */,
+				73056EC527DD8C030023092C /* CandleChart */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -938,6 +969,7 @@
 				AA8669A227CA00B3007DFBE6 /* URL+Extensions.swift in Sources */,
 				7321A1F927CA428D00686DB5 /* AnyPublisher+Validate.swift in Sources */,
 				730F321527DA3EF1002AB57B /* BithumbTransactionType.swift in Sources */,
+				73056ED127DD8CEA0023092C /* CoinCurrentTickerState.swift in Sources */,
 				AA4B6DC227DCBBB4002A7398 /* CoreDataStorage.swift in Sources */,
 				21616ABD27DC56E800949873 /* OrderBookListReducer.swift in Sources */,
 				7315F72B27D8D0FD00276943 /* TransactionListView.swift in Sources */,
@@ -961,6 +993,7 @@
 				AABBA44D27D866480092D1D2 /* ToastView.swift in Sources */,
 				AA4B6DED27DCC7BC002A7398 /* CoinIsLikeState.swift in Sources */,
 				21616AB927DC56CD00949873 /* OrderBookListAction.swift in Sources */,
+				73056ED027DD8CEA0023092C /* CoinCurrentTickerAction.swift in Sources */,
 				7315F72F27D8D15F00276943 /* TransactionItemView.swift in Sources */,
 				21616ABB27DC56D900949873 /* OrderBookListEnvironment.swift in Sources */,
 				AA406E4F27CD32AB00013BF2 /* CoinItemAction.swift in Sources */,
@@ -1017,7 +1050,9 @@
 				7321A1EB27CA243500686DB5 /* API+BithumbREST.swift in Sources */,
 				21434BBA27CA66A6001EFE9A /* BithumbRepository.swift in Sources */,
 				AA8669A427CA00BC007DFBE6 /* URLRequest+Extensions.swift in Sources */,
+				73056ECD27DD8CEA0023092C /* CoinCurrentTickerReducer.swift in Sources */,
 				AA406E5727D389A200013BF2 /* BithumbTickerSingle.swift in Sources */,
+				73056ECE27DD8CEA0023092C /* CoinCurrentTickerEnvironment.swift in Sources */,
 				AA4B6DEF27DCD63D002A7398 /* CoinItemUseCase.swift in Sources */,
 				AA4B6D8627DC6DCE002A7398 /* CoinCandleChartState.swift in Sources */,
 				AA86699827C9E17D007DFBE6 /* API.swift in Sources */,
@@ -1031,6 +1066,7 @@
 				AA4B6DF127DD85A5002A7398 /* CoreDataStorageError.swift in Sources */,
 				AA4B6DE827DCBDD0002A7398 /* CoinIsLikeStateEntity+CoreDataClass.swift in Sources */,
 				7386F06F27DBAA520079E2EE /* CoinListEnviroment.swift in Sources */,
+				73056ECF27DD8CEA0023092C /* CoinCurrentTickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
