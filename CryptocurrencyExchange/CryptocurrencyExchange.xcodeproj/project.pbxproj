@@ -106,6 +106,9 @@
 		AA4B6DFA27DDB2AE002A7398 /* TickerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6DF927DDB2AE002A7398 /* TickerUseCase.swift */; };
 		AA4B6DFC27DDB2B6002A7398 /* OrderBookUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6DFB27DDB2B6002A7398 /* OrderBookUseCase.swift */; };
 		AA4B6DFE27DDB5C6002A7398 /* CoinCandleChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6DFD27DDB5C6002A7398 /* CoinCandleChartUseCase.swift */; };
+		AA4B6E0027DDBAFC002A7398 /* CoinCurrentTickerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6DFF27DDBAFC002A7398 /* CoinCurrentTickerError.swift */; };
+		AA4B6E0227DDBB32002A7398 /* OrderBookListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6E0127DDBB32002A7398 /* OrderBookListError.swift */; };
+		AA4B6E0427DDBB7E002A7398 /* String+SymbolToName.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B6E0327DDBB7E002A7398 /* String+SymbolToName.swift */; };
 		AA86695527C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86695427C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift */; };
 		AA86695727C9C484007DFBE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86695627C9C484007DFBE6 /* ContentView.swift */; };
 		AA86695927C9C487007DFBE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA86695827C9C487007DFBE6 /* Assets.xcassets */; };
@@ -235,6 +238,9 @@
 		AA4B6DF927DDB2AE002A7398 /* TickerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerUseCase.swift; sourceTree = "<group>"; };
 		AA4B6DFB27DDB2B6002A7398 /* OrderBookUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookUseCase.swift; sourceTree = "<group>"; };
 		AA4B6DFD27DDB5C6002A7398 /* CoinCandleChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCandleChartUseCase.swift; sourceTree = "<group>"; };
+		AA4B6DFF27DDBAFC002A7398 /* CoinCurrentTickerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCurrentTickerError.swift; sourceTree = "<group>"; };
+		AA4B6E0127DDBB32002A7398 /* OrderBookListError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookListError.swift; sourceTree = "<group>"; };
+		AA4B6E0327DDBB7E002A7398 /* String+SymbolToName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+SymbolToName.swift"; sourceTree = "<group>"; };
 		AA86695127C9C484007DFBE6 /* CryptocurrencyExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptocurrencyExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA86695427C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocurrencyExchangeApp.swift; sourceTree = "<group>"; };
 		AA86695627C9C484007DFBE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -311,6 +317,7 @@
 		21616AB527DC56B400949873 /* OrderBookList */ = {
 			isa = PBXGroup;
 			children = (
+				AA4B6E0127DDBB32002A7398 /* OrderBookListError.swift */,
 				21616AB627DC56C400949873 /* OrderBookListState.swift */,
 				21616AB827DC56CD00949873 /* OrderBookListAction.swift */,
 				21616ABA27DC56D900949873 /* OrderBookListEnvironment.swift */,
@@ -377,6 +384,7 @@
 		73056EC727DD8CAA0023092C /* CurrentTicker */ = {
 			isa = PBXGroup;
 			children = (
+				AA4B6DFF27DDBAFC002A7398 /* CoinCurrentTickerError.swift */,
 				73056ECC27DD8CEA0023092C /* CoinCurrentTickerState.swift */,
 				73056ECB27DD8CEA0023092C /* CoinCurrentTickerAction.swift */,
 				73056EC927DD8CEA0023092C /* CoinCurrentTickerEnvironment.swift */,
@@ -590,6 +598,23 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		AA4B6E0527DDBBCA002A7398 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AA4B6E0627DDBBCF002A7398 /* Extensions */,
+				21BECEAE27D3426A0018F7CA /* Log.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		AA4B6E0627DDBBCF002A7398 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AA4B6E0327DDBB7E002A7398 /* String+SymbolToName.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AA86694827C9C484007DFBE6 = {
 			isa = PBXGroup;
 			children = (
@@ -636,6 +661,7 @@
 		AA86698727C9C8A5007DFBE6 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				AA4B6E0527DDBBCA002A7398 /* Utilities */,
 				AA86695427C9C484007DFBE6 /* CryptocurrencyExchangeApp.swift */,
 			);
 			path = Application;
@@ -755,7 +781,6 @@
 			isa = PBXGroup;
 			children = (
 				AA8669A627CA0172007DFBE6 /* Extensions */,
-				21BECEAE27D3426A0018F7CA /* Log.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -990,6 +1015,7 @@
 				212EF0D327DCD88D008DF99C /* OrderLayoutEnvironment.swift in Sources */,
 				21616ACA27DCBAB000949873 /* OrderLayoutView.swift in Sources */,
 				7321A22227CD17E300686DB5 /* BithumbOrderBookDepthStream.swift in Sources */,
+				AA4B6E0027DDBAFC002A7398 /* CoinCurrentTickerError.swift in Sources */,
 				730F321D27DA4C56002AB57B /* TransactionListReducer.swift in Sources */,
 				AA4B6D9427DC7AB0002A7398 /* CoinDetailAction.swift in Sources */,
 				AA4B6D8227DA3DAF002A7398 /* BithumbCandleStickSingle.swift in Sources */,
@@ -1012,12 +1038,14 @@
 				7321A1F127CA31D300686DB5 /* BithumbTickerAllResultRESTResponseDTO.swift in Sources */,
 				AA4B6DF527DDADB9002A7398 /* CoinCandleChartError.swift in Sources */,
 				212EF0C527DCC892008DF99C /* CoinPriceState.swift in Sources */,
+				AA4B6E0227DDBB32002A7398 /* OrderBookListError.swift in Sources */,
 				7315F73D27D8DA9B00276943 /* BithumbTransactionHistroySingle.swift in Sources */,
 				AA86699B27C9FFDA007DFBE6 /* BithumbSocketService.swift in Sources */,
 				AA4B6D8427DC6D90002A7398 /* CoinCandleChartRepresentable.swift in Sources */,
 				AA4B6DE927DCBDD0002A7398 /* CoinIsLikeStateEntity+CoreDataProperties.swift in Sources */,
 				21E32C8F27CB38E000949D97 /* BithumbTickerSocketResponseDTO.swift in Sources */,
 				AA4B6D8027DA3C36002A7398 /* BithumbCandleStickResultResponseDTO.swift in Sources */,
+				AA4B6E0427DDBB7E002A7398 /* String+SymbolToName.swift in Sources */,
 				730F320E27D8EE27002AB57B /* BithumbOrderBookSingle.swift in Sources */,
 				AA86695727C9C484007DFBE6 /* ContentView.swift in Sources */,
 				AA8669A927CA024C007DFBE6 /* SocketTargetType.swift in Sources */,

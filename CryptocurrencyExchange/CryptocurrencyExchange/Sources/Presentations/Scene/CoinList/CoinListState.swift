@@ -11,7 +11,5 @@ import ComposableArchitecture
 
 struct CoinListState: Equatable {
     var items: IdentifiedArrayOf<CoinItemState>
-    var selectedItem: Identified<CoinItemState.ID, CoinItemState>?
-    var alert: AlertState<CoinListAction>?
     var toastMessage: String?
 }

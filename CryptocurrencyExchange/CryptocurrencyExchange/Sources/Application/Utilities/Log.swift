@@ -8,7 +8,12 @@
 import Foundation
 
 class Log {
-    static func debug(_ msg: Any, file: String = #file, function: String = #function, line: Int = #line){
+    static func debug(
+        _ msg: Any,
+        file: String = #file,
+        function: String = #function,
+        line: Int = #line
+    ) {
         #if DEBUG
         let fileName = file.split(separator: "/").last ?? ""
         let funcName = function.split(separator: "(").first ?? ""
@@ -16,7 +21,12 @@ class Log {
         #endif
     }
     
-    static func info(_ msg: Any, file: String = #file, function: String = #function, line: Int = #line){
+    static func info(
+        _ msg: Any,
+        file: String = #file,
+        function: String = #function,
+        line: Int = #line
+    ){
         #if DEBUG
         let fileName = file.split(separator: "/").last ?? ""
         let funcName = function.split(separator: "(").first ?? ""
@@ -24,7 +34,12 @@ class Log {
         #endif
     }
     
-    static func error(_ msg: Any, file: String = #file, function: String = #function, line: Int = #line){
+    static func error(
+        _ msg: Any,
+        file: String = #file,
+        function: String = #function,
+        line: Int = #line
+    ){
         let fileName = file.split(separator: "/").last ?? ""
         let funcName = function.split(separator: "(").first ?? ""
         print("⚬ 🔴 [\(Date())] [\(fileName)] \(funcName)(\(line)) : \(msg)")
