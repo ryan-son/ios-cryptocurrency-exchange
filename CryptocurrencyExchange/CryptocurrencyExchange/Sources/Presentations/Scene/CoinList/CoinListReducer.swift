@@ -116,11 +116,6 @@ fileprivate func fetchTickers(
                 return state
             }
         }
-        .map {
-            $0.sorted(by: {
-                $0.price > $1.price
-            })
-        }
         .eraseToAnyPublisher()
         .mapError { error in
             Log.error("Error: \(error)")
