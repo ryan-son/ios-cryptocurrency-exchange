@@ -16,7 +16,7 @@ enum Currency: String {
 extension Double {
     func format(to currency: Currency) -> String {
         let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
+        formatter.numberStyle = .currencyAccounting
 
         switch currency {
         case .krw:

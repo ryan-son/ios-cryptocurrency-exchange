@@ -9,7 +9,7 @@ import Foundation
 
 import ComposableArchitecture
 
-let coinCurrentTickerReducer = Reducer<
+let CoinCurrentTickerReducer = Reducer<
     CoinCurrentTickerState, CoinCurrentTickerAction, CoinCurrentTickerEnvironment
 > { state, action, environment in
     

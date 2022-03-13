@@ -15,11 +15,11 @@ struct TransactionListView: View {
     let store: Store<TransactionListState, TransactionListAction>
     
     // TODO: Coin List Scoping 정리 되면 삭제 할 것.
-//    init(store: Store<TransactionListState, TransactionListAction>) {
-//        self.store = store
-//        let viewStore = ViewStore(store)
-//        viewStore.send(.onAppear)
-//    }
+    init(store: Store<TransactionListState, TransactionListAction>) {
+        self.store = store
+        let viewStore = ViewStore(store)
+        viewStore.send(.onAppear)
+    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -53,9 +53,9 @@ struct TransactionListView: View {
                 .buttonStyle(.plain)
             }
             // TODO: Coin List Scoping 정리 되면 되돌릴 것.
-            .onAppear {
-                ViewStore(store).send(.onAppear)
-            }
+            //                .onAppear {
+            //                    viewStore.send(.onAppear)
+            //                }
             .onDisappear {
                 ViewStore(store).send(.onDisappear)
             }

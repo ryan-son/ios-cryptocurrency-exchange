@@ -10,13 +10,6 @@ import ComposableArchitecture
 let coinListReducer = Reducer<
     CoinListState, CoinListAction, CoinListEnvironment
 >.combine(
-    coinDetailReducer
-        .optional(breakpointOnNil: false)
-        .pullback(
-            state: \.coinDetail,
-            action: /CoinListAction.coinDetail,
-            environment: { _ in CoinDetailEnvironment() }
-        ),
     coinItemReducer.forEach(
         state: \.items,
         action: /CoinListAction.coinItem(id:action:),
@@ -51,18 +44,6 @@ let coinListReducer = Reducer<
             let model = ToastModel(duration: 3, message: message)
             return environment.toastClient.show(model)
                 .fireAndForget()
-        case .coinDetail:
-            return .none
-        case let .setCoinDetailViewSelection(symbol):
-            guard let filtered = state.items.first(where: { $0.symbol == symbol }) else {
-                state.selectedItem = nil
-                state.coinDetail = nil
-                return .none
-            }
-            let coinDetail = CoinDetailState(symbol: filtered.symbol)
-            state.selectedItem = .init(coinDetail, id: filtered.symbol)
-            state.coinDetail = coinDetail
-            return .none
         }
     }
 )

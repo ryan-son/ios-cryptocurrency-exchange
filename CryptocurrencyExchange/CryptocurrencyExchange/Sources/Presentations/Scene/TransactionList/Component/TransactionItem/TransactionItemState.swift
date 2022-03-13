@@ -22,10 +22,10 @@ extension TransactionItemState {
         let typeColor: Color
         switch self.type {
         case .sell:
-            type = "매도"
+            type = "ASK"
             typeColor = .blue
         case .buy:
-            type = "매수"
+            type = "BID"
             typeColor = .red
         case .none:
             type = "None"
