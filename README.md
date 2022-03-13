@@ -86,6 +86,7 @@
 - 현재는 뷰 생성시 단순히 `Store`를 생성하여 뷰를 만들고 있지만, `pullback`을 사용하여 화면을 구조화하는 개선이 필요합니다.
 
 ## 코인 목록 화면
+<img src="https://i.imgur.com/BvCHuvT.png" alt="chart" width="375"/>
 
 ### 기능
 - 코인별로 실시간 현재가, 변동률 정보를 표시합니다.
@@ -99,6 +100,7 @@
 - `TickerUseCase`는 내부적으로 `BithumbRepository`를 통해 `CoreDataStorage` 영역인 `CoinIsLikeStorage`에 해당 코인이 관심 코인으로 등록되어 있는지를 확인하거나 관심 코인에 등록합니다.
 
 ## 현재가 및 차트 화면
+<img src="https://i.imgur.com/H9MO86a.png" alt="chart" width="375"/>
 
 ### 기능
 - 실시간 현재가, 변동률, 변동금액을 표시합니다.
@@ -115,6 +117,7 @@
 - 현재는 각각의 컴포넌트 화면을 사용하고 있지만, `pullback`을 사용하여 데이터를 한 곳에서 처리하는 개선이 필요합니다.
 
 ## 체결 정보 화면
+<img src="https://i.imgur.com/iVMAG1C.png" alt="chart" width="375"/>
 
 ### 기능
 - 해당 코인의 실시간 체결 현황을 목록 형식으로 표시합니다.
@@ -123,6 +126,7 @@
 - 현재가 및 차트 화면에서 받은 `symbol`을 기반으로 `UseCase`로 부터 받은 `Single(REST)` `Transcation History` 데이터에 `Stream(WebSocket)` `Transaction` 데이터를 조합하여 화면에 표시합니다.
 
 ## 호가 정보 화면
+<img src="https://i.imgur.com/DY8NZA7.png" alt="chart" width="375"/>
 
 ### 기능
 - 해당 코인의 실시간 호가 현황을 목록 형식으로 표시합니다.
