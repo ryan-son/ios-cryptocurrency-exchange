@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 @main
 struct CryptocurrencyExchangeApp: App {
