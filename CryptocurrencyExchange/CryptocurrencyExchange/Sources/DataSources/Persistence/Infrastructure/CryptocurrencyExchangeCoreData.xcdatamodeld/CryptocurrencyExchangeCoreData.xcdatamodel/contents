@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20G314" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CoinIsLikeStateEntity" representedClassName="CoinIsLikeStateEntity" syncable="YES">
+        <attribute name="isLike" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="CoinIsLikeStateEntity" positionX="-63" positionY="-18" width="128" height="59"/>
+    </elements>
+</model>

@@ -12,7 +12,9 @@ let coinItemReducer = Reducer<
 > { state, action, environment in
     switch action {
     case .likeButtonTapped:
+        let useCase = environment.useCase()
         state.isLiked.toggle()
+        useCase.saveCoinIsLikeState(for: state.name, isLike: state.isLiked)
         return .none
     }
 }

@@ -40,6 +40,7 @@ struct CoinItemView: View {
                     .font(.body)
                 }
                 Spacer()
+                
                 Button(action: { viewStore.send(.likeButtonTapped) }) {
                     Image(systemName: "heart.fill")
                         .resizable()
@@ -66,7 +67,9 @@ struct CoinItemView_Previews: PreviewProvider {
                         symbol: "BTC_KRW"
                     ),
                     reducer: coinItemReducer,
-                    environment: CoinItemEnvironment()
+                    environment: CoinItemEnvironment(
+                        useCase: { CoinItemUseCase() }
+                    )
                 )
             )
             CoinItemView(
@@ -80,7 +83,9 @@ struct CoinItemView_Previews: PreviewProvider {
                         symbol: "BTC_USD"
                     ),
                     reducer: coinItemReducer,
-                    environment: CoinItemEnvironment()
+                    environment: CoinItemEnvironment(
+                        useCase: { CoinItemUseCase() }
+                    )
                 )
             )
                 .preferredColorScheme(.dark)

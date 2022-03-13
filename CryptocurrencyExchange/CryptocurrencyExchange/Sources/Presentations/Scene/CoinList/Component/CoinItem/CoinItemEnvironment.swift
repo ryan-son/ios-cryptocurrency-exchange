@@ -6,5 +6,5 @@
 //
 
 struct CoinItemEnvironment {
-    // 로컬 DB
+    let useCase: () -> CoinItemUseCaseProtocol
 }
