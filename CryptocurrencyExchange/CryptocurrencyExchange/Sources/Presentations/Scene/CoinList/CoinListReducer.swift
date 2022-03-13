@@ -11,7 +11,7 @@ let coinListReducer = Reducer<
     CoinListState, CoinListAction, CoinListEnvironment
 >.combine(
     coinItemReducer.forEach(
-        state: \.items,
+        state: \.refinedItems,
         action: /CoinListAction.coinItem(id:action:),
         environment: { _ in
             CoinItemEnvironment(
@@ -23,21 +23,38 @@ let coinListReducer = Reducer<
         struct CancelId: Hashable {}
         let cancelId = CancelId()
         switch action {
+        case let .search(query):
+            state.searchedQuery = query
+            return Effect(value: .refinedCoinItems(state.items))
+        case let .updateSortType(sortType):
+            state.sortType = sortType
+            return Effect(value: .refinedCoinItems(state.items))
         case let .updateCoinItems(result):
             switch result {
             case let .success(items):
-                state.items = IdentifiedArray(uniqueElements: items)
-                return .none
+                return Effect(value: .refinedCoinItems(items))
             case let .failure(error):
                 return Effect.merge(
                     Effect(value: .onAppear),
                     Effect(value: .showToast(message: "\(error.localizedDescription)"))
                 )
             }
+        case let .refinedCoinItems(items):
+            refineItems(
+                stateRefinedItems: &state.refinedItems,
+                items: items,
+                searchQuery: state.searchedQuery,
+                sortType: state.sortType
+            )
+            return .none
         case .coinItem:
             return .none
         case .onAppear:
-            return fetchTickers(environment: environment, cancelId: cancelId)
+            return fetchTickers(
+                searchAction: action,
+                environment: environment,
+                cancelId: cancelId
+            )
         case .onDisappear:
             return .cancel(id: cancelId)
         case let .showToast(message):
@@ -49,6 +66,7 @@ let coinListReducer = Reducer<
 )
 
 fileprivate func fetchTickers(
+    searchAction: CoinListAction,
     environment: CoinListEnvironment,
     cancelId: AnyHashable
 ) -> Effect<CoinListAction, Never> {
@@ -113,4 +131,38 @@ fileprivate func fetchTickers(
         .catchToEffect()
         .map(CoinListAction.updateCoinItems(result:))
         .cancellable(id: cancelId, cancelInFlight: true)
+}
+
+fileprivate func refineItems(
+    stateRefinedItems: inout IdentifiedArray<CoinItemState.ID, CoinItemState>,
+    items: [CoinItemState],
+    searchQuery: String,
+    sortType: CoinListSortType
+) {
+    let refinedItems = items
+        .filter { item in
+            if searchQuery.isEmpty {
+                return true
+            }
+            return item.name.lowercased()
+                .contains(searchQuery.lowercased())
+        }
+        .sorted(by: {
+            switch sortType {
+            case .priceASC:
+                return $0.price < $1.price
+            case .priceDESC:
+                return $0.price > $1.price
+            case .changeRateASC:
+                return $0.changeRate < $1.changeRate
+            case .changeRateDESC:
+                return $0.changeRate > $1.changeRate
+            case .like:
+                if $0.isLiked {
+                    return true
+                }
+                return $0.price > $1.price
+            }
+        })
+    stateRefinedItems = IdentifiedArray(uniqueElements: refinedItems)
 }
