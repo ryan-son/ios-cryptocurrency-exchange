@@ -14,50 +14,35 @@ struct CoinDetailView: View {
 
     var body: some View {
         VStack {
-            priceAndNavigationView()
-            graphView()
+            WithViewStore(
+                self.store.scope(state: \.symbol)
+            ) { symbolViewStore in
+                CoinCurrentTickerView(
+                    store: Store(
+                        initialState: CoinCurrentTickerState(
+                            symbol: symbolViewStore.state
+                        ),
+                        reducer: coinCurrentTickerReducer,
+                        environment: CoinCurrentTickerEnvironment(
+                            useCase: TransactionUseCase()
+                        )
+                    )
+                )
+                CoinCandleChartView(
+                    store: Store(
+                        initialState: CoinCandleChartState(
+                            symbol: symbolViewStore.state
+                        ),
+                        reducer: coinCandleChartReducer,
+                        environment: CoinCandleChartEnvironment(
+                            candleChartUseCase: CoinCandleChartUseCase(),
+                            tickerUseCase: { TickerUseCase() },
+                            toastClient: .live)
+                    )
+                )
+            }
         }
         .navigationTitle("상세")
-    }
-}
-
-extension CoinDetailView {
-    func priceAndNavigationView() -> some View {
-        WithViewStore(
-            self.store.scope(state: \.symbol)
-        ) { viewItemStore in
-            CoinCurrentTickerView(
-                store: Store(
-                    initialState: CoinCurrentTickerState(
-                        symbol: viewItemStore.state
-                    ),
-                    reducer: CoinCurrentTickerReducer,
-                    environment: CoinCurrentTickerEnvironment(
-                        useCase: TransactionUseCase()
-                    )
-                )
-            )
-        }
-    }
-    
-    func graphView() -> some View {
-        WithViewStore(
-            self.store.scope(state: \.symbol)
-        ) { viewItemStore in
-            CoinCandleChartView(
-                store: Store(
-                    initialState: CoinCandleChartState(
-                        symbol: viewItemStore.state
-                    ),
-                    reducer: coinCandleChartReducer,
-                    environment: CoinCandleChartEnvironment(
-                        candleChartUseCase: CoinCandleChartUseCase(),
-                        tickerUseCase: { TickerUseCase() },
-                        toastClient: .live
-                    )
-                )
-            )
-        }
     }
 }
 
@@ -67,6 +52,8 @@ struct CoinDetailView_Previews: PreviewProvider {
             store: Store(
                 initialState: CoinDetailState(
                     symbol: "BTC_KRW"
+//                    coinCurrentTicker: CoinCurrentTickerState(symbol: "BTC_KRW"),
+//                    coinCandleChart: CoinCandleChartState(symbol: "BTC_KRW")
                 ),
                 reducer: coinDetailReducer,
                 environment: CoinDetailEnvironment()

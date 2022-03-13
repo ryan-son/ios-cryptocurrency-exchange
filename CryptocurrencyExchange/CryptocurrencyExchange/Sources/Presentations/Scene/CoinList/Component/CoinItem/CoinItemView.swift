@@ -94,3 +94,4 @@ struct CoinItemView_Previews: PreviewProvider {
         
     }
 }
+

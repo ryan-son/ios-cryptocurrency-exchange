@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CoinCandleChartAction {
+enum CoinCandleChartAction: Equatable {
     case onAppear
     case onDisappear
     case updateCoinCandleChartItemStates(result: Result<[CoinCandleChartItemState], CoinCandleChartError>)
