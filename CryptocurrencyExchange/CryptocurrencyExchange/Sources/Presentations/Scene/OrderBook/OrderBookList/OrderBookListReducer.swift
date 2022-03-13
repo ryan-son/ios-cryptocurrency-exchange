@@ -139,8 +139,15 @@ let orderBookListReducer = Reducer<
         return .none
         
     case .sortOrderBooks:
-        state.orderBooks.sort(by: >)
         state.maxQuantity = state.orderBooks.map(\.quantity).max() ?? state.maxQuantity
+        state.orderBooks = state.orderBooks
+            .map { orderBook -> OrderBookListState.OrderBookItem in
+                var orderBook = orderBook
+                orderBook.ratio = state.getRatio(quantity: orderBook.quantity)
+                return orderBook
+            }
+            .sorted(by: >)
+        
         return .none
         
     case let .responseTicker(.success(ticker)):
