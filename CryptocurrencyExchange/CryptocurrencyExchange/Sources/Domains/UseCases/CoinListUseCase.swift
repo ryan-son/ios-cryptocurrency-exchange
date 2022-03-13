@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 protocol CoinListUseCaseProtocol {
-    func getTickerSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error>
+    func getTickerAllSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error>
     func getTickerStreamPublisher(
         symbols: [String],
         tickTypes: [TickType]
@@ -33,8 +33,8 @@ struct CoinListUseCase: CoinListUseCaseProtocol {
         self.repository = repository
     }
 
-    func getTickerSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error> {
-        return repository.getTickerSinglePublisher()
+    func getTickerAllSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error> {
+        return repository.getTickerAllSinglePublisher()
             .map { $0.toDomain() }
             .eraseToAnyPublisher()
     }

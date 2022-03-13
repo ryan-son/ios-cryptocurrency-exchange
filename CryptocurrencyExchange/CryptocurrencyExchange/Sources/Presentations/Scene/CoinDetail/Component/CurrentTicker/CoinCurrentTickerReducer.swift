@@ -19,10 +19,10 @@ let CoinCurrentTickerReducer = Reducer<
     case .onAppear:
         return .merge(
             environment.useCase
-                .getTransactionHistorySinglePublisher(symbol: state.symbol)
+                .getTickerSinglePublisher(symbol: state.symbol)
                 .receive(on: DispatchQueue.main)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
-                .catchToEffect(CoinCurrentTickerAction.responseTransactionSingle)
+                .catchToEffect(CoinCurrentTickerAction.responseTickerSingle)
             ,
             environment.useCase
                 .getTickerStreamPublisher(
@@ -38,16 +38,13 @@ let CoinCurrentTickerReducer = Reducer<
     case .onDisappear:
         return .cancel(id: CoinCurrentTickerCancelId())
         
-    case let .responseTransactionSingle(.success(transactions)):
-        if let lastTransaction = transactions.first {
-            state.nowPrice = lastTransaction.contPrice
-            // TODO: 표시 위해서는 API 변경 필요.
-//            state.changeRate =
-//            state.changeAmount =
-        }
+    case let .responseTickerSingle(.success(ticker)):
+        state.nowPrice = ticker.closingPrice
+        state.changeRate = ticker.changeRate
+        state.changeAmount = ticker.changeAmount
         return .none
         
-    case let .responseTransactionSingle(.failure(error)):
+    case let .responseTickerSingle(.failure(error)):
         Log.error(error)
         return .none
         

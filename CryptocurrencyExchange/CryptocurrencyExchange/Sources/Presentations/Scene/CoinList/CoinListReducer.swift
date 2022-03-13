@@ -58,7 +58,7 @@ fileprivate func fetchTickers(
 ) -> Effect<CoinListAction, Never> {
     var coinItemStates = [CoinItemState]()
     let useCase = environment.coinListUseCase()
-    return useCase.getTickerSinglePublisher()
+    return useCase.getTickerAllSinglePublisher()
         .map { tickers in
             tickers.map { ticker in
                 let isLiked = useCase.getCoinIsLikeState(for: ticker.name)

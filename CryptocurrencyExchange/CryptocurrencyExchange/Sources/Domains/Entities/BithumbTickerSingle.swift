@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct BithumbTickerSingle {
+struct BithumbTickerSingle: Equatable {
     let name: String
     let closingPrice: Double
     let changeRate: Double
+    let changeAmount: Double
 }
 
 extension BithumbTickerSingle {

@@ -19,39 +19,38 @@ let coinPriceReducer = Reducer<
     case .onAppear:
         return .merge(
             environment.useCase
-                .getTransactionHistorySinglePublisher(symbol: state.symbol)
+                .getTickerSinglePublisher(symbol: state.symbol)
                 .receive(on: DispatchQueue.main)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
-                .catchToEffect(CoinPriceAction.responseTransactionSingle)
+                .catchToEffect(CoinPriceAction.responseTickerSingle)
             ,
-            environment.useCase.getTickerStreamPublisher(
-                symbols: [state.symbol],
-                tickTypes: [.day]
-            )
+            environment.useCase
+                .getTickerStreamPublisher(
+                    symbols: [state.symbol],
+                    tickTypes: [.day]
+                )
                 .receive(on: DispatchQueue.main)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
-                .catchToEffect(CoinPriceAction.responseTransactionStream)
+                .catchToEffect(CoinPriceAction.responseTickerStream)
                 .cancellable(id: CoinPriceCancelId())
         )
         
     case .onDisappear:
         return .cancel(id: CoinPriceCancelId())
         
-    case let .responseTransactionSingle(.success(transactions)):
-        if let nowPrice = transactions.first?.contPrice {
-            state.nowPrice = nowPrice
-        }
+    case let .responseTickerSingle(.success(ticker)):
+        state.nowPrice = ticker.closingPrice
         return .none
         
-    case let .responseTransactionSingle(.failure(error)):
+    case let .responseTickerSingle(.failure(error)):
         Log.error(error)
         return .none
         
-    case let .responseTransactionStream(.success(ticker)):
+    case let .responseTickerStream(.success(ticker)):
         state.nowPrice = ticker.closePrice
         return .none
         
-    case let .responseTransactionStream(.failure(error)):
+    case let .responseTickerStream(.failure(error)):
         Log.error(error)
         return .none
         

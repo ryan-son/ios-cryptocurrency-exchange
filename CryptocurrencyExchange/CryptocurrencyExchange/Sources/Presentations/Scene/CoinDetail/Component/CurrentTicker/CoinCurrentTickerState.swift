@@ -9,9 +9,9 @@ import Foundation
 
 struct CoinCurrentTickerState: Equatable {
     let symbol: String
-    var nowPrice: Double = 0
-    var changeRate: Double = 0
-    var changeAmount: Double = 0
+    var nowPrice: Double?
+    var changeRate: Double?
+    var changeAmount: Double?
 }
 
 struct CoinCurrentTickerViewState: Equatable {
@@ -28,17 +28,29 @@ extension CoinCurrentTickerState {
         let coinSymbol = symbols.first ?? ""
         let currencySymbol = symbols.last ?? ""
         let currency = Currency(rawValue: currencySymbol.lowercased()) ?? .none
-        let nowPrice = nowPrice.format(to: currency)
-        let changeAmount = changeAmount.format(to: currency)
+        guard let nowPrice = nowPrice,
+              let changeAmount = changeAmount,
+              let changeRate = changeRate
+        else {
+            return CoinCurrentTickerViewState(
+                currency: currencySymbol,
+                name: coinSymbol,
+                nowPrice: "",
+                isPlus: false,
+                changeAmountRate: ""
+            )
+        }
+        let nowPriceFormatted = nowPrice.format(to: currency)
+        let changeAmountFormatted = changeAmount.format(to: currency)
         let isPlus = changeRate >= 0
-        let changeRate = isPlus ? "+\(changeRate)%" : "\(changeRate)%"
-        let changeAmountRate = "\(changeAmount) (\(changeRate))"
+        let changeRateFormatted = isPlus ? "+\(changeRate)%" : "\(changeRate)%"
+        let changeAmountRateFormatted = "\(changeAmountFormatted) (\(changeRateFormatted))"
         return CoinCurrentTickerViewState(
          currency: currencySymbol,
          name: coinSymbol,
-         nowPrice: nowPrice,
+         nowPrice: nowPriceFormatted,
          isPlus: isPlus,
-         changeAmountRate: changeAmountRate
+         changeAmountRate: changeAmountRateFormatted
         )
     }
 }

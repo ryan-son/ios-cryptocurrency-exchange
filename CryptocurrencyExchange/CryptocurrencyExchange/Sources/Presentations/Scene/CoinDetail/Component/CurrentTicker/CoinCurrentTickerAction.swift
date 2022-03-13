@@ -10,6 +10,6 @@ import Foundation
 enum CoinCurrentTickerAction: Equatable {
     case onAppear
     case onDisappear
-    case responseTransactionSingle(Result<[BithumbTransactionHistroySingle], OrderBookListError>)
+    case responseTickerSingle(Result<BithumbTickerSingle, OrderBookListError>)
     case responseTickerStream(Result<BithumbTickerStream, OrderBookListError>)
 }

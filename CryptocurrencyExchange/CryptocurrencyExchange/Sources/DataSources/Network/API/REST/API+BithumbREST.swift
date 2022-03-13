@@ -15,8 +15,10 @@ extension API.BithumbREST: TargetType {
     
     var path: String {
         switch self {
-        case .ticker:
+        case .tickerAll:
             return "/public/ticker/ALL_KRW"
+        case let .ticker(symbol):
+            return "/public/ticker/\(symbol)"
         case let .orderbook(symbol):
             return "/public/orderbook/\(symbol)"
         case let .transactionHistory(symbol):
@@ -28,6 +30,8 @@ extension API.BithumbREST: TargetType {
     
     var method: Moya.Method {
         switch self {
+        case .tickerAll:
+            return .get
         case .ticker:
             return .get
         case .orderbook:
@@ -41,6 +45,8 @@ extension API.BithumbREST: TargetType {
     
     var task: Task {
         switch self {
+        case .tickerAll:
+            return .requestPlain
         case .ticker:
             return .requestPlain
         case .orderbook:
@@ -54,6 +60,8 @@ extension API.BithumbREST: TargetType {
     
     var headers: [String : String]? {
         switch self {
+        case .tickerAll:
+            return nil
         case .ticker:
             return nil
         case .orderbook:

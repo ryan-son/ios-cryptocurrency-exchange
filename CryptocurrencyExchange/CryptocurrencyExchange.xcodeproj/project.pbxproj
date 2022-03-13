@@ -40,6 +40,7 @@
 		73056ECF27DD8CEA0023092C /* CoinCurrentTickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056ECA27DD8CEA0023092C /* CoinCurrentTickerView.swift */; };
 		73056ED027DD8CEA0023092C /* CoinCurrentTickerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056ECB27DD8CEA0023092C /* CoinCurrentTickerAction.swift */; };
 		73056ED127DD8CEA0023092C /* CoinCurrentTickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056ECC27DD8CEA0023092C /* CoinCurrentTickerState.swift */; };
+		73056ED327DD9BB00023092C /* BithumbTickerResultRESTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73056ED227DD9BB00023092C /* BithumbTickerResultRESTResponseDTO.swift */; };
 		730F320C27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F320B27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift */; };
 		730F320E27D8EE27002AB57B /* BithumbOrderbookSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F320D27D8EE27002AB57B /* BithumbOrderbookSingle.swift */; };
 		730F321327D8F4A2002AB57B /* Date+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F321227D8F4A2002AB57B /* Date+Format.swift */; };
@@ -61,7 +62,7 @@
 		7321A1E327CA1E6900686DB5 /* API+BithumbWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1E227CA1E6900686DB5 /* API+BithumbWebSocket.swift */; };
 		7321A1EB27CA243500686DB5 /* API+BithumbREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1EA27CA243500686DB5 /* API+BithumbREST.swift */; };
 		7321A1ED27CA249E00686DB5 /* BithumbRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1EC27CA249E00686DB5 /* BithumbRESTService.swift */; };
-		7321A1F127CA31D300686DB5 /* BithumbTickerResultRESTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1F027CA31D300686DB5 /* BithumbTickerResultRESTResponseDTO.swift */; };
+		7321A1F127CA31D300686DB5 /* BithumbTickerAllResultRESTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1F027CA31D300686DB5 /* BithumbTickerAllResultRESTResponseDTO.swift */; };
 		7321A1F427CA386800686DB5 /* BithumbDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1F327CA386800686DB5 /* BithumbDataResponse.swift */; };
 		7321A1F627CA397300686DB5 /* MoyaProvider+MakeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1F527CA397300686DB5 /* MoyaProvider+MakeProvider.swift */; };
 		7321A1F927CA428D00686DB5 /* AnyPublisher+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321A1F827CA428D00686DB5 /* AnyPublisher+Validate.swift */; };
@@ -168,6 +169,7 @@
 		73056ECA27DD8CEA0023092C /* CoinCurrentTickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinCurrentTickerView.swift; sourceTree = "<group>"; };
 		73056ECB27DD8CEA0023092C /* CoinCurrentTickerAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinCurrentTickerAction.swift; sourceTree = "<group>"; };
 		73056ECC27DD8CEA0023092C /* CoinCurrentTickerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinCurrentTickerState.swift; sourceTree = "<group>"; };
+		73056ED227DD9BB00023092C /* BithumbTickerResultRESTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTickerResultRESTResponseDTO.swift; sourceTree = "<group>"; };
 		730F320B27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbOrderbookResultRESTResponseDTO.swift; sourceTree = "<group>"; };
 		730F320D27D8EE27002AB57B /* BithumbOrderbookSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbOrderbookSingle.swift; sourceTree = "<group>"; };
 		730F321227D8F4A2002AB57B /* Date+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Format.swift"; sourceTree = "<group>"; };
@@ -189,7 +191,7 @@
 		7321A1E227CA1E6900686DB5 /* API+BithumbWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+BithumbWebSocket.swift"; sourceTree = "<group>"; };
 		7321A1EA27CA243500686DB5 /* API+BithumbREST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+BithumbREST.swift"; sourceTree = "<group>"; };
 		7321A1EC27CA249E00686DB5 /* BithumbRESTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbRESTService.swift; sourceTree = "<group>"; };
-		7321A1F027CA31D300686DB5 /* BithumbTickerResultRESTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTickerResultRESTResponseDTO.swift; sourceTree = "<group>"; };
+		7321A1F027CA31D300686DB5 /* BithumbTickerAllResultRESTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbTickerAllResultRESTResponseDTO.swift; sourceTree = "<group>"; };
 		7321A1F327CA386800686DB5 /* BithumbDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BithumbDataResponse.swift; sourceTree = "<group>"; };
 		7321A1F527CA397300686DB5 /* MoyaProvider+MakeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+MakeProvider.swift"; sourceTree = "<group>"; };
 		7321A1F827CA428D00686DB5 /* AnyPublisher+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyPublisher+Validate.swift"; sourceTree = "<group>"; };
@@ -465,7 +467,8 @@
 		7321A1EF27CA2F7E00686DB5 /* ResponseDTO */ = {
 			isa = PBXGroup;
 			children = (
-				7321A1F027CA31D300686DB5 /* BithumbTickerResultRESTResponseDTO.swift */,
+				7321A1F027CA31D300686DB5 /* BithumbTickerAllResultRESTResponseDTO.swift */,
+				73056ED227DD9BB00023092C /* BithumbTickerResultRESTResponseDTO.swift */,
 				730F320B27D8ECE5002AB57B /* BithumbOrderbookResultRESTResponseDTO.swift */,
 				7315F73A27D8D94A00276943 /* BithumbTransactionHistoryResultRESTResponseDTO.swift */,
 				AA4B6D7F27DA3C36002A7398 /* BithumbCandleStickResultResponseDTO.swift */,
@@ -998,11 +1001,12 @@
 				21616ABB27DC56D900949873 /* OrderBookListEnvironment.swift in Sources */,
 				AA406E4F27CD32AB00013BF2 /* CoinItemAction.swift in Sources */,
 				AA4B6D9227DC7AA6002A7398 /* CoinDetailState.swift in Sources */,
+				73056ED327DD9BB00023092C /* BithumbTickerResultRESTResponseDTO.swift in Sources */,
 				7386F07127DBAA570079E2EE /* CoinListReducer.swift in Sources */,
 				7386F06B27DBAA450079E2EE /* CoinListError.swift in Sources */,
 				730F321F27DA4C90002AB57B /* TransactionListError.swift in Sources */,
 				7315F73727D8D47600276943 /* TransactionReducer.swift in Sources */,
-				7321A1F127CA31D300686DB5 /* BithumbTickerResultRESTResponseDTO.swift in Sources */,
+				7321A1F127CA31D300686DB5 /* BithumbTickerAllResultRESTResponseDTO.swift in Sources */,
 				212EF0C527DCC892008DF99C /* CoinPriceState.swift in Sources */,
 				7315F73D27D8DA9B00276943 /* BithumbTransactionHistroySingle.swift in Sources */,
 				AA86699B27C9FFDA007DFBE6 /* BithumbSocketService.swift in Sources */,
@@ -1213,7 +1217,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = TCV7B8P2RX;
+				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1226,7 +1230,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12123123;
+				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12345;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1242,7 +1246,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CryptocurrencyExchange/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = TCV7B8P2RX;
+				DEVELOPMENT_TEAM = QQF2SQ9MZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1255,7 +1259,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12123123;
+				PRODUCT_BUNDLE_IDENTIFIER = net.topSkyRyan.CryptocurrencyExchange12345;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
