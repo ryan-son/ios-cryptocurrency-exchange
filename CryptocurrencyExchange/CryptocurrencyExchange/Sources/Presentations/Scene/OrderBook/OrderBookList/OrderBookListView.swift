@@ -40,22 +40,31 @@ struct OrderBookListView: View {
                 Text("구매 잔여 수량")
             }
             .padding(.horizontal, 20)
-            ScrollView {
-                WithViewStore(
-                    store.scope(state: \.orderBooks)
-                ) { orderBooksViewStore in
-                    ForEach(orderBooksViewStore.state, id: \.self) { orderBookState in
-                        OrderBookView(
-                            orderBookItem: orderBookState.toViewItem()
-                        )
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack {
+                        WithViewStore(
+                            store.scope(state: \.orderBooks)
+                        ) { orderBooksViewStore in
+                            ForEach(orderBooksViewStore.state, id: \.self) { orderBookState in
+                                OrderBookView(
+                                    orderBookItem: orderBookState.toViewItem()
+                                )
+                            }
+                        }
+                    }
+                    .frame(minHeight: 1100)
+                    .id(1)
+                    .onAppear {
+                        proxy.scrollTo(1, anchor: .center)
                     }
                 }
             }
         }
         .padding(.horizontal)
-//        .onAppear {
-//            ViewStore(store).send(.onAppear)
-//        }
+        //        .onAppear {
+        //            ViewStore(store).send(.onAppear)
+        //        }
         .onDisappear {
             ViewStore(store).send(.onDisappear)
         }
