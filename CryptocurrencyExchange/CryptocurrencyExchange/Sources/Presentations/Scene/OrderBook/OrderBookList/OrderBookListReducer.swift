@@ -15,9 +15,15 @@ let orderBookListReducer = Reducer<
     
     struct OrderBookCancelId: Hashable {}
     
+    let itemCount = 10
+    
     switch action {
     case .onAppear:
         return .merge(
+            environment.useCase
+                .getOrderbookSinglePublisher(symbol: state.symbol)
+                .mapError { OrderBookListError.description($0.localizedDescription) }
+                .catchToEffect(OrderBookListAction.responseOrderBookSingle),
             environment.useCase
                 .getOrderBookDepthStreamPublisher(symbols: [state.symbol])
                 .receive(on: RunLoop.main)
@@ -38,8 +44,8 @@ let orderBookListReducer = Reducer<
         
     case let .responseOrderBookSingle(.success(orderBooks)):
         
-        let sellOrderBooks = orderBooks.sell.prefix(10).reversed()
-        let buyOrderBooks = orderBooks.buy.prefix(10)
+        let sellOrderBooks = orderBooks.sell.prefix(itemCount).reversed()
+        let buyOrderBooks = orderBooks.buy.prefix(itemCount)
         
         state.maxQuantity = [
             sellOrderBooks.map(\.quantity).max() ?? 0,
@@ -96,14 +102,9 @@ let orderBookListReducer = Reducer<
                             ratio: state.getRatio(quantity: orderBook.quantity)
                         )
                     )
-                    if state.orderBooks.count > 20 {
+                    if state.orderBooks.filter({ $0.orderType == .sell }).count > itemCount {
                         state.orderBooks.removeFirst()
                     }
-                    //                    if let indexForRemove = state.orderBooks.firstIndex(where: {
-                    //                        $0.orderType == .buy && $0.price > orderBook.price
-                    //                    }) {
-                    //                        state.orderBooks.remove(at: indexForRemove)
-                    //                    }
                 }
             case .buy:
                 if orderBook.price > state.orderBooks.map({ $0.price }).min() ?? 0 {
@@ -112,20 +113,16 @@ let orderBookListReducer = Reducer<
                             ratio: state.getRatio(quantity: orderBook.quantity)
                         )
                     )
-                    if state.orderBooks.count > 20 {
+                    if state.orderBooks.filter({ $0.orderType == .buy }).count > itemCount {
                         state.orderBooks.removeLast()
                     }
-                    //                    if let indexForRemove = state.orderBooks.firstIndex(where: {
-                    //                        $0.orderType == .sell && $0.price < orderBook.price
-                    //                    }) {
-                    //                        state.orderBooks.remove(at: indexForRemove)
-                    //                    }
                 }
             case .none:
                 break
             }
         }
-        if state.orderBooks.count != 20 {
+        if state.orderBooks.filter({ $0.orderType == .sell}).count != itemCount ||
+            state.orderBooks.filter({ $0.orderType == .buy}).count != itemCount {
             return environment.useCase
                 .getOrderbookSinglePublisher(symbol: state.symbol)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
@@ -139,8 +136,15 @@ let orderBookListReducer = Reducer<
         return .none
         
     case .sortOrderBooks:
-        state.orderBooks.sort(by: >)
         state.maxQuantity = state.orderBooks.map(\.quantity).max() ?? state.maxQuantity
+        state.orderBooks = state.orderBooks
+            .map { orderBook -> OrderBookListState.OrderBookItem in
+                var orderBook = orderBook
+                orderBook.ratio = state.getRatio(quantity: orderBook.quantity)
+                return orderBook
+            }
+            .sorted(by: >)
+        
         return .none
         
     case let .responseTicker(.success(ticker)):
