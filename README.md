@@ -19,7 +19,7 @@
 - Xcode 13.2.1
 - iOS 14.0
 
-iOS 사용자의 98%가 iOS 14.0 이상 버전을 사용하고 있으므로 타겟 버전을 iOS 14.0으로 설정하였습니다.
+지난 4년 동안 도입된 기기의 98%가 iOS 14.0 이상 버전을 사용하고 있으므로 타겟 버전을 iOS 14.0으로 설정하였습니다.
 
 [![](https://i.imgur.com/LV199wv.png)](https://developer.apple.com/kr/support/app-store/)
 
@@ -48,7 +48,7 @@ iOS 사용자의 98%가 iOS 14.0 이상 버전을 사용하고 있으므로 타�
 
 | 코인 목록 | 현재가 및 차트 |
 | - | - |
-| <img src="https://i.imgur.com/YQgoGyG.gif" alt="coin-list" width="375"/> | <img src="https://i.imgur.com/5Ocd4gL.gif" alt="chart" width="375"/> |
+| <img src="https://i.imgur.com/fBaon3N.gif" alt="coin-list" width="375"/> | <img src="https://i.imgur.com/5Ocd4gL.gif" alt="chart" width="375"/> |
 
 | 체결정보 | 호가정보 |
 | - | - |
