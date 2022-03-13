@@ -21,23 +21,33 @@ struct CoinListView: View {
                     self.store.scope(
                         state: \.items,
                         action: CoinListAction.coinItem(id:action:)
-                    ),
-                    content: { itemStore in
-                        NavigationLink(destination: {
-                            WithViewStore(itemStore.scope(state: \.symbol)) { viewItemStore in
-                                CoinDetailView(
-                                    store: Store(
-                                        initialState: CoinDetailState(symbol: viewItemStore.state),
-                                        reducer: coinDetailReducer,
-                                        environment: CoinDetailEnvironment()
+                    )
+                ) { itemStore in
+                    WithViewStore(
+                        self.store.scope(state: \.selectedItem)
+                    ) { selectedItemViewStore in
+                        WithViewStore(itemStore) { itemViewStore in
+                            NavigationLink(
+                                tag: itemViewStore.symbol,
+                                selection: selectedItemViewStore.binding(
+                                    get: { $0?.id },
+                                    send: { CoinListAction.setCoinDetailViewSelection(symbol: $0) }
+                                ),
+                                destination: {
+                                    IfLetStore(
+                                        self.store.scope(
+                                            state: \.selectedItem?.value,
+                                            action: CoinListAction.coinDetail
+                                        ),
+                                        then: CoinDetailView.init,
+                                        else: ProgressView.init
                                     )
-                                )
-                            }
-                        }) {
-                            CoinItemView(store: itemStore)
+                                },
+                                label: { CoinItemView(store: itemStore) }
+                            )
                         }
                     }
-                )
+                }
             }
             .listStyle(.plain)
             .buttonStyle(.plain)

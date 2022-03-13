@@ -39,13 +39,10 @@ struct CoinCurrentTickerView: View {
                     .fontWeight(.bold)
                 Text(viewState.changeAmountRate)
                     .font(.body)
-                    .foregroundColor(.red)
+                    .foregroundColor(viewState.isPlus ? .red : .blue)
             }
             .padding()
         }
-//        .onAppear {
-//            ViewStore(store).send(.onAppear)
-//        }
         .onDisappear {
             ViewStore(store).send(.onDisappear)
         }
@@ -116,7 +113,7 @@ struct CoinCurrentTickerView_Previews: PreviewProvider {
         CoinCurrentTickerView(
             store: Store(
                 initialState: CoinCurrentTickerState(symbol: "BTC_KRW"),
-                reducer: CoinCurrentTickerReducer,
+                reducer: coinCurrentTickerReducer,
                 environment: CoinCurrentTickerEnvironment(
                     useCase: TransactionUseCase()
                 )

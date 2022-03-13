@@ -32,6 +32,9 @@ struct CoinCandleChartView: View {
                         .frame(maxHeight: .infinity)
                 }
             )
+                .onDisappear {
+                    viewStore.send(.onDisappear)
+                }
         }
     }
 }

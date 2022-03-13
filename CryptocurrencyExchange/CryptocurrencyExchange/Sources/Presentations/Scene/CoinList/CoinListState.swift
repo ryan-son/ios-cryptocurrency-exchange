@@ -11,5 +11,7 @@ import ComposableArchitecture
 
 struct CoinListState: Equatable {
     var items: IdentifiedArrayOf<CoinItemState>
+    var selectedItem: Identified<String, CoinDetailState?>?
+    var coinDetail: CoinDetailState?
     var toastMessage: String?
 }
