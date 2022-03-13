@@ -34,7 +34,6 @@ struct OrderBookUseCase: OrderBookUseCaseProtocol {
                 symbol: symbol
             )
             .map { $0.toDomain() }
-            .print()
             .eraseToAnyPublisher()
     }
     
