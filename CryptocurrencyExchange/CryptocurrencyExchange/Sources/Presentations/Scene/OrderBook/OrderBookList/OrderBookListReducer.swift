@@ -15,6 +15,8 @@ let orderBookListReducer = Reducer<
     
     struct OrderBookCancelId: Hashable {}
     
+    let itemCount = 10
+    
     switch action {
     case .onAppear:
         return .merge(
@@ -42,8 +44,8 @@ let orderBookListReducer = Reducer<
         
     case let .responseOrderBookSingle(.success(orderBooks)):
         
-        let sellOrderBooks = orderBooks.sell.prefix(10).reversed()
-        let buyOrderBooks = orderBooks.buy.prefix(10)
+        let sellOrderBooks = orderBooks.sell.prefix(itemCount).reversed()
+        let buyOrderBooks = orderBooks.buy.prefix(itemCount)
         
         state.maxQuantity = [
             sellOrderBooks.map(\.quantity).max() ?? 0,
@@ -100,7 +102,7 @@ let orderBookListReducer = Reducer<
                             ratio: state.getRatio(quantity: orderBook.quantity)
                         )
                     )
-                    if state.orderBooks.count > 20 {
+                    if state.orderBooks.filter({ $0.orderType == .sell }).count > itemCount {
                         state.orderBooks.removeFirst()
                     }
                 }
@@ -111,7 +113,7 @@ let orderBookListReducer = Reducer<
                             ratio: state.getRatio(quantity: orderBook.quantity)
                         )
                     )
-                    if state.orderBooks.count > 20 {
+                    if state.orderBooks.filter({ $0.orderType == .buy }).count > itemCount {
                         state.orderBooks.removeLast()
                     }
                 }
@@ -119,7 +121,8 @@ let orderBookListReducer = Reducer<
                 break
             }
         }
-        if state.orderBooks.count != 20 {
+        if state.orderBooks.filter({ $0.orderType == .sell}).count != itemCount ||
+            state.orderBooks.filter({ $0.orderType == .buy}).count != itemCount {
             return environment.useCase
                 .getOrderbookSinglePublisher(symbol: state.symbol)
                 .mapError { OrderBookListError.description($0.localizedDescription) }

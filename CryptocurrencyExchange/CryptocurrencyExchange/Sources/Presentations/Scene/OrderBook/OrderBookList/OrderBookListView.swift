@@ -53,7 +53,7 @@ struct OrderBookListView: View {
                             }
                         }
                     }
-                    .frame(minHeight: 1100)
+                    .frame(minHeight: 1200)
                     .id(1)
                     .onAppear {
                         proxy.scrollTo(1, anchor: .center)
