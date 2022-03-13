@@ -1,5 +1,5 @@
 //
-//  TransactionListUseCase.swift
+//  TransactionUseCase.swift
 //  CryptocurrencyExchange
 //
 //  Created by Ryan-Son on 2022/02/27.
@@ -8,14 +8,14 @@
 import Combine
 import Foundation
 
-protocol TransactionListUseCaseProtocol {
+protocol TransactionUseCaseProtocol {
     func getTickerAllSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error>
     func getTickerSinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbTickerSingle, Error>
-    func getOrderbookSinglePublisher(
+    func getOrderBookSinglePublisher(
         symbol: String
-    ) -> AnyPublisher<BithumbOrderbookSingle, Error>
+    ) -> AnyPublisher<BithumbOrderBookSingle, Error>
     func getTransactionHistorySinglePublisher(
         symbol: String
     ) -> AnyPublisher<[BithumbTransactionHistroySingle], Error>
@@ -31,7 +31,7 @@ protocol TransactionListUseCaseProtocol {
     ) -> AnyPublisher<[BithumbOrderBookDepthStream], Error>
 }
 
-struct TransactionListUseCase: TransactionListUseCaseProtocol {
+struct TransactionUseCase: TransactionUseCaseProtocol {
     private let repository: BithumbRepositoryProtocol
 
     init(
@@ -57,11 +57,11 @@ struct TransactionListUseCase: TransactionListUseCaseProtocol {
             .eraseToAnyPublisher()
     }
     
-    func getOrderbookSinglePublisher(
+    func getOrderBookSinglePublisher(
         symbol: String
-    ) -> AnyPublisher<BithumbOrderbookSingle, Error> {
+    ) -> AnyPublisher<BithumbOrderBookSingle, Error> {
         return repository
-            .getOrderbookSinglePublisher(
+            .getOrderBookSinglePublisher(
                 symbol: symbol
             )
             .map { $0.toDomain() }

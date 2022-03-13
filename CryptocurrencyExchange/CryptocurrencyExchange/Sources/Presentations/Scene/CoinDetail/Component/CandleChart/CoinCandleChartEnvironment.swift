@@ -6,6 +6,7 @@
 //
 
 struct CoinCandleChartEnvironment {
-    var useCase: CoinCandleChartUseCaseProtocol
+    var candleChartUseCase: CoinCandleChartUseCaseProtocol
+    var tickerUseCase: () -> TickerUseCaseProtocol
     var toastClient: ToastClient
 }

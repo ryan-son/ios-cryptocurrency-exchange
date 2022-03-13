@@ -7,8 +7,6 @@
 
 import ComposableArchitecture
 
-//var isLikedCache: [String: Bool] = [:]
-
 let coinListReducer = Reducer<
     CoinListState, CoinListAction, CoinListEnvironment
 >.combine(
@@ -17,7 +15,7 @@ let coinListReducer = Reducer<
         action: /CoinListAction.coinItem(id:action:),
         environment: { _ in
             CoinItemEnvironment(
-                useCase: { CoinItemUseCase() }
+                tickerUseCase: { TickerUseCase() }
             )
         }
     ),
@@ -38,8 +36,6 @@ let coinListReducer = Reducer<
             }
         case .coinItem:
             return .none
-        case .coinItemTapped:
-            return .none
         case .onAppear:
             return fetchTickers(environment: environment, cancelId: cancelId)
         case .onDisappear:
@@ -57,7 +53,7 @@ fileprivate func fetchTickers(
     cancelId: AnyHashable
 ) -> Effect<CoinListAction, Never> {
     var coinItemStates = [CoinItemState]()
-    let useCase = environment.coinListUseCase()
+    let useCase = environment.tickerUseCase()
     return useCase.getTickerAllSinglePublisher()
         .map { tickers in
             tickers.map { ticker in
@@ -110,7 +106,6 @@ fileprivate func fetchTickers(
         .eraseToAnyPublisher()
         .mapError { error in
             Log.error("Error: \(error)")
-            // TODO: 오류 났을 때 처리 필요.
             return CoinListError.description("다시 연결 중...")
         }
         .receive(on: DispatchQueue.main)

@@ -44,7 +44,7 @@ fileprivate func fetchTransaction(
     cancelId: AnyHashable
 ) -> Effect<TransactionListAction, Never> {
     var transactionItemStates = [TransactionItemState]()
-    let useCase = environment.transactionListUseCase()
+    let useCase = environment.transactionUseCase()
     
     return useCase
         .getTransactionHistorySinglePublisher(

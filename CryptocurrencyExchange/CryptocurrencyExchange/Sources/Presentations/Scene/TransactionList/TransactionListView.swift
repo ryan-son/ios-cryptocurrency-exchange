@@ -32,7 +32,7 @@ struct TransactionListView: View {
                             initialState: CoinPriceState(symbol: symbolViewStore.state),
                             reducer: coinPriceReducer,
                             environment: CoinPriceEnvironment(
-                                useCase: TransactionListUseCase()
+                                tickerUseCase: { TickerUseCase() }
                             )
                         )
                     )
@@ -99,8 +99,8 @@ struct TransactionListView_Previews: PreviewProvider {
                 initialState: TransactionListState(symbol: "BTC_KRW", items: .mock),
                 reducer: transcationListReducer,
                 environment: TransactionListEnvironment(
-                    transactionListUseCase: {
-                        TransactionListUseCase()
+                    transactionUseCase: {
+                        TransactionUseCase()
                     },
                     toastClient: .live
                 )

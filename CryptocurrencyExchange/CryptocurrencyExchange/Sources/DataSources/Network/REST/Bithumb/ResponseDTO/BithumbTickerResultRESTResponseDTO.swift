@@ -39,7 +39,7 @@ extension BithumbTickerResultRESTResponseDTO {
         symbol: String
     ) -> BithumbTickerSingle {
         return BithumbTickerSingle(
-            name: symbol.replacingOccurrences(of: "_KRW", with: ""),
+            name: symbol.symbolToName(),
             closingPrice: Double(data?.closingPrice ?? "") ?? 0,
             changeRate: Double(data?.fluctateRate24H ?? "") ?? 0,
             changeAmount: Double(data?.fluctate24H ?? "") ?? 0

@@ -19,7 +19,7 @@ extension API.BithumbREST: TargetType {
             return "/public/ticker/ALL_KRW"
         case let .ticker(symbol):
             return "/public/ticker/\(symbol)"
-        case let .orderbook(symbol):
+        case let .orderBook(symbol):
             return "/public/orderbook/\(symbol)"
         case let .transactionHistory(symbol):
             return "/public/transaction_history/\(symbol)"
@@ -34,7 +34,7 @@ extension API.BithumbREST: TargetType {
             return .get
         case .ticker:
             return .get
-        case .orderbook:
+        case .orderBook:
             return .get
         case .transactionHistory:
             return .get
@@ -49,7 +49,7 @@ extension API.BithumbREST: TargetType {
             return .requestPlain
         case .ticker:
             return .requestPlain
-        case .orderbook:
+        case .orderBook:
             return .requestPlain
         case .transactionHistory:
             return .requestPlain
@@ -64,7 +64,7 @@ extension API.BithumbREST: TargetType {
             return nil
         case .ticker:
             return nil
-        case .orderbook:
+        case .orderBook:
             return nil
         case .transactionHistory:
             return nil

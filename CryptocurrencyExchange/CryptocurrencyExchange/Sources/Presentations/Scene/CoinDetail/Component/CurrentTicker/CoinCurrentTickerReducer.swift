@@ -21,7 +21,7 @@ let CoinCurrentTickerReducer = Reducer<
             environment.useCase
                 .getTickerSinglePublisher(symbol: state.symbol)
                 .receive(on: DispatchQueue.main)
-                .mapError { OrderBookListError.description($0.localizedDescription) }
+                .mapError { CoinCurrentTickerError.description($0.localizedDescription) }
                 .catchToEffect(CoinCurrentTickerAction.responseTickerSingle)
             ,
             environment.useCase
@@ -30,7 +30,7 @@ let CoinCurrentTickerReducer = Reducer<
                     tickTypes: [.day]
                 )
                 .receive(on: DispatchQueue.main)
-                .mapError { OrderBookListError.description($0.localizedDescription) }
+                .mapError { CoinCurrentTickerError.description($0.localizedDescription) }
                 .catchToEffect(CoinCurrentTickerAction.responseTickerStream)
                 .cancellable(id: CoinCurrentTickerCancelId())
         )

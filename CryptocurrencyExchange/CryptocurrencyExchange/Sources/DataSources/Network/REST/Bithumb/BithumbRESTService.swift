@@ -32,13 +32,13 @@ struct BithumbRESTService {
             .eraseToAnyPublisher()
     }
     
-    func getOrderbook(
+    func getOrderBook(
         symbol: String
-    ) -> AnyPublisher<BithumbOrderbookResultRESTResponseDTO, Error> {
-        return service.requestPublisher(.orderbook(symbol: symbol))
+    ) -> AnyPublisher<BithumbOrderBookResultRESTResponseDTO, Error> {
+        return service.requestPublisher(.orderBook(symbol: symbol))
             .validate()
             .map(\.data)
-            .decode(type: BithumbOrderbookResultRESTResponseDTO.self, decoder: JSONDecoder())
+            .decode(type: BithumbOrderBookResultRESTResponseDTO.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     

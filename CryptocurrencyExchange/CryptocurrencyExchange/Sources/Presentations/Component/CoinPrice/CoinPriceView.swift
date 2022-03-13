@@ -47,7 +47,7 @@ struct CoinPriceView_Previews: PreviewProvider {
                 initialState: CoinPriceState(symbol: "BTC_KRW"),
                 reducer: coinPriceReducer,
                 environment: CoinPriceEnvironment(
-                    useCase: TransactionListUseCase()
+                    tickerUseCase: { TickerUseCase() }
                 )
             )
         )

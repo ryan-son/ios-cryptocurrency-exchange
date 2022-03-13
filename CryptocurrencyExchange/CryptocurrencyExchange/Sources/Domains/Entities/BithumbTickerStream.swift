@@ -45,7 +45,7 @@ struct BithumbTickerStream: Equatable {
 extension BithumbTickerStream {
     func toCoinItemState(isLiked: Bool) -> CoinItemState {
         return CoinItemState(
-            name: symbol.replacingOccurrences(of: "_KRW", with: ""),
+            name: symbol.symbolToName(),
             price: closePrice,
             changeRate: changeRate,
             isLiked: isLiked,

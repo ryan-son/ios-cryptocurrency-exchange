@@ -8,19 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum OrderBookListError: Error, Equatable {
-    case description(String)
-}
-
-extension OrderBookListError: LocalizedError {
-    var localizedDescription: String {
-        switch self {
-        case let .description(message):
-            return message
-        }
-    }
-}
-
 struct OrderBookListState: Equatable {
     let symbol: String
     var coinPriceState: CoinPriceState

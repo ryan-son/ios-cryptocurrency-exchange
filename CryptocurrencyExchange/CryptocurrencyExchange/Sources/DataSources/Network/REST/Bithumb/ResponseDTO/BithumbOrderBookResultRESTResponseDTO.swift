@@ -1,5 +1,5 @@
 //
-//  BithumbOrderbookResultRESTResponseDTO.swift
+//  BithumbOrderBookResultRESTResponseDTO.swift
 //  CryptocurrencyExchange
 //
 //  Created by 김정상 on 2022/03/09.
@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct BithumbOrderbookResultRESTResponseDTO: Codable {
+struct BithumbOrderBookResultRESTResponseDTO: Codable {
     let status: String
     let resmsg: String?
-    let data: BithumbOrderbookRESTResponseDTO?
+    let data: BithumbOrderBookRESTResponseDTO?
 }
 
-struct BithumbOrderbookRESTResponseDTO: Codable {
+struct BithumbOrderBookRESTResponseDTO: Codable {
     let timestamp: String
     let orderCurrency, paymentCurrency: String
-    let bids, asks: [Orderbook]
+    let bids, asks: [OrderBook]
 
     enum CodingKeys: String, CodingKey {
         case timestamp
@@ -26,21 +26,21 @@ struct BithumbOrderbookRESTResponseDTO: Codable {
     }
 }
 
-struct Orderbook: Codable, Equatable {
+struct OrderBook: Codable, Equatable {
     let quantity, price: String
 }
 
-extension BithumbOrderbookResultRESTResponseDTO {
-    func toDomain() -> BithumbOrderbookSingle {
-        return BithumbOrderbookSingle(
+extension BithumbOrderBookResultRESTResponseDTO {
+    func toDomain() -> BithumbOrderBookSingle {
+        return BithumbOrderBookSingle(
             buy: data?.bids.map {
-                BithumbOrderbookSingle.OrderbookRow(
+                BithumbOrderBookSingle.OrderBookRow(
                     quantity: Double($0.quantity) ?? 0,
                     price: Double($0.price) ?? 0
                 )
             } ?? [],
             sell: data?.asks.map {
-                BithumbOrderbookSingle.OrderbookRow(
+                BithumbOrderBookSingle.OrderBookRow(
                     quantity: Double($0.quantity) ?? 0,
                     price: Double($0.price) ?? 0
                 )

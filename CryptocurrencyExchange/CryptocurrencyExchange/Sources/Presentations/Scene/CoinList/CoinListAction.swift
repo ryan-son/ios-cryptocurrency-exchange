@@ -9,7 +9,6 @@ import Foundation
 
 enum CoinListAction: Equatable {
     case coinItem(id: CoinItemState.ID, action: CoinItemAction)
-    case coinItemTapped
     case onAppear
     case onDisappear
     case updateCoinItems(result: Result<[CoinItemState], CoinListError>)

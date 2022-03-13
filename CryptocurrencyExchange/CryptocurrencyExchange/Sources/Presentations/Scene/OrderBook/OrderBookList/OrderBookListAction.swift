@@ -10,7 +10,7 @@ import Foundation
 enum OrderBookListAction: Equatable {
     case onAppear
     case onDisappear
-    case responseOrderBookSingle(Result<BithumbOrderbookSingle, OrderBookListError>)
+    case responseOrderBookSingle(Result<BithumbOrderBookSingle, OrderBookListError>)
     case responseOrderBookStream(Result<[BithumbOrderBookDepthStream], OrderBookListError>)
     case responseTicker(Result<BithumbTickerStream, OrderBookListError>)
     case sortOrderBooks

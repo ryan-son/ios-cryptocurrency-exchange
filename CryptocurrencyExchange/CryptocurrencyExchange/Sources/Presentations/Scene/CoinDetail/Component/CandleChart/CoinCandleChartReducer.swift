@@ -17,8 +17,7 @@ let coinCandleChartReducer = Reducer<
     case .onAppear:
         return fetchCandleItems(
             symbol: state.symbol,
-            coinListEnviroment: CoinListEnvironment(coinListUseCase: { CoinListUseCase() }, toastClient: ToastClient.live),
-            coinCandleChartEnvironment: environment,
+            environment: environment,
             cancelId: CancelId()
         )
     case let .updateCoinCandleChartItemStates(result):
@@ -43,14 +42,13 @@ let coinCandleChartReducer = Reducer<
 
 fileprivate func fetchCandleItems(
     symbol: String,
-    coinListEnviroment: CoinListEnvironment,
-    coinCandleChartEnvironment: CoinCandleChartEnvironment,
+    environment: CoinCandleChartEnvironment,
     cancelId: AnyHashable
 ) -> Effect<CoinCandleChartAction, Never> {
     var coinCandleChartItemStates = OrderedDictionary<String, CoinCandleChartItemState>()
     
-    let coinListUseCase = coinListEnviroment.coinListUseCase()
-    let coinCandleChartUseCase = coinCandleChartEnvironment.useCase
+    let coinCandleChartUseCase = environment.candleChartUseCase
+    let tickerUseCase = environment.tickerUseCase()
     
     return coinCandleChartUseCase.getCandleStickSinglePublisher(symbol: symbol)
         .map { result in
@@ -67,12 +65,11 @@ fileprivate func fetchCandleItems(
             }
         )
         .flatMap { it in
-            coinListUseCase
+            tickerUseCase
                 .getTickerStreamPublisher(
                     symbols: [symbol],
                     tickTypes: [.day]
                 )
-                // TODO: 첫 Stream이 늦게 도착하는 경우 차트가 늦게 그려지기 때문에 임시 처리.
                 .map { [$0] }
                 .merge(
                     with: Just([]).setFailureType(to: Error.self)
@@ -92,8 +89,7 @@ fileprivate func fetchCandleItems(
         .eraseToAnyPublisher()
         .mapError { error in
             Log.error("Error: \(error)")
-            // TODO: 오류 났을 때 처리 필요.
-            return CoinListError.description("다시 연결 중...")
+            return CoinCandleChartError.description("다시 연결 중...")
         }
         .receive(on: DispatchQueue.main)
         .eraseToEffect()

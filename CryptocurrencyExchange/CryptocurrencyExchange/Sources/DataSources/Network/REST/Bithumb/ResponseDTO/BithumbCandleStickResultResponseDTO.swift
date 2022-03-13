@@ -11,7 +11,7 @@ import Foundation
 ///    "status": "0000",
 ///    "data" : {
 ///        [
-///            "1576823400000",  // 기준 시간
+///            1576823400000,  // 기준 시간
 ///            "8284000",        // 시가
 ///            "8286000",        // 종가
 ///            "8289000",        // 고가
@@ -19,7 +19,7 @@ import Foundation
 ///            "15.41503692"     // 거래량
 ///        ],
 ///        [
-///            "1576824000000",  // 기준 시간
+///            1576824000000,  // 기준 시간
 ///            "8284000",        // 시가
 ///            "8281000",        // 종가
 ///            "8289000",        // 고가
@@ -32,7 +32,6 @@ struct BithumbCandleStickResultResponseDTO: Decodable {
     let status: String
     let data: [[BithumbCandleStickResponseDTO]]
 }
-//BithumbCandleStickResponseDTO
 
 extension BithumbCandleStickResultResponseDTO {
     func toDomain() -> BithumbCandleStickSingle {
@@ -44,7 +43,6 @@ extension BithumbCandleStickResultResponseDTO {
 
 fileprivate extension Array where Element == BithumbCandleStickResponseDTO {
     func toBithumbCandleStickDataSingle() -> BithumbCandleStickDataSingle {
-        // TODO: Apply safe subscription
         let converted = self.map { item -> Double in
             switch item {
             case let .time(time):
@@ -54,12 +52,12 @@ fileprivate extension Array where Element == BithumbCandleStickResponseDTO {
             }
         }
         return BithumbCandleStickDataSingle(
-            date: converted[0],
-            openPrice: converted[1],
-            closePrice: converted[2],
-            lowPrice: converted[3],
-            highPrice: converted[4],
-            transactionVolume: converted[5]
+            date: converted[safe: 0] ?? 0,
+            openPrice: converted[safe: 1] ?? 0,
+            closePrice: converted[safe: 2] ?? 0,
+            lowPrice: converted[safe: 3] ?? 0,
+            highPrice: converted[safe: 4] ?? 0,
+            transactionVolume: converted[safe: 5] ?? 0
         )
     }
 }
