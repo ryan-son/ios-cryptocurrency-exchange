@@ -8,6 +8,6 @@
 import Foundation
 
 struct CoinListEnvironment {
-    let coinListUseCase: () -> CoinListUseCaseProtocol
+    let tickerUseCase: () -> TickerUseCaseProtocol
     let toastClient: ToastClient
 }

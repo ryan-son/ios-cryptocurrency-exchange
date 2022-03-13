@@ -15,23 +15,25 @@ let orderBookListReducer = Reducer<
     
     struct OrderBookCancelId: Hashable {}
     
+    let orderBookUseCase = environment.orderBookUseCase
+    let tickerUseCase = environment.tickerUseCase()
     let itemCount = 10
     
     switch action {
     case .onAppear:
         return .merge(
-            environment.useCase
+            orderBookUseCase
                 .getOrderBookSinglePublisher(symbol: state.symbol)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
                 .catchToEffect(OrderBookListAction.responseOrderBookSingle),
-            environment.useCase
+            orderBookUseCase
                 .getOrderBookDepthStreamPublisher(symbols: [state.symbol])
                 .receive(on: RunLoop.main)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
                 .map { $0.filter { $0.quantity > 0 } }
                 .catchToEffect(OrderBookListAction.responseOrderBookStream)
                 .cancellable(id: OrderBookCancelId()),
-            environment.useCase
+            tickerUseCase
                 .getTickerStreamPublisher(symbols: [state.symbol], tickTypes: [.day])
                 .receive(on: RunLoop.main)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
@@ -123,7 +125,7 @@ let orderBookListReducer = Reducer<
         }
         if state.orderBooks.filter({ $0.orderType == .sell}).count != itemCount ||
             state.orderBooks.filter({ $0.orderType == .buy}).count != itemCount {
-            return environment.useCase
+            return environment.orderBookUseCase
                 .getOrderBookSinglePublisher(symbol: state.symbol)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
                 .catchToEffect(OrderBookListAction.responseOrderBookSingle)

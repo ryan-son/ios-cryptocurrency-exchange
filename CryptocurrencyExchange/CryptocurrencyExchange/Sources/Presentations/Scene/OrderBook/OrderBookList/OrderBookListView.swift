@@ -29,7 +29,7 @@ struct OrderBookListView: View {
                         initialState: coinPriceStore.state,
                         reducer: coinPriceReducer,
                         environment: CoinPriceEnvironment(
-                            useCase: TransactionListUseCase()
+                            tickerUseCase: { TickerUseCase() }
                         )
                     )
                 )
@@ -81,7 +81,8 @@ struct OrderBookListView_Previews: PreviewProvider {
                 ),
                 reducer: orderBookListReducer,
                 environment: OrderBookListEnvironment(
-                    useCase: OrderBookListUseCase()
+                    orderBookUseCase: OrderBookUseCase(),
+                    tickerUseCase: { TickerUseCase() }
                 )
             )
         )

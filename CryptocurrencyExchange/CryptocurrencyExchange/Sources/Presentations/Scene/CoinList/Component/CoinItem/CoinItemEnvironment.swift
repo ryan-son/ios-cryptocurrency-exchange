@@ -6,5 +6,5 @@
 //
 
 struct CoinItemEnvironment {
-    let useCase: () -> CoinItemUseCaseProtocol
+    let tickerUseCase: () -> TickerUseCaseProtocol
 }

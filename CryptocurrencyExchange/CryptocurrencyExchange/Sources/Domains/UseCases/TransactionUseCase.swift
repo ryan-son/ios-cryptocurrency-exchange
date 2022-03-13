@@ -1,5 +1,5 @@
 //
-//  TransactionListUseCase.swift
+//  TransactionUseCase.swift
 //  CryptocurrencyExchange
 //
 //  Created by Ryan-Son on 2022/02/27.
@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol TransactionListUseCaseProtocol {
+protocol TransactionUseCaseProtocol {
     func getTickerAllSinglePublisher() -> AnyPublisher<[BithumbTickerSingle], Error>
     func getTickerSinglePublisher(
         symbol: String
@@ -31,7 +31,7 @@ protocol TransactionListUseCaseProtocol {
     ) -> AnyPublisher<[BithumbOrderBookDepthStream], Error>
 }
 
-struct TransactionListUseCase: TransactionListUseCaseProtocol {
+struct TransactionUseCase: TransactionUseCaseProtocol {
     private let repository: BithumbRepositoryProtocol
 
     init(

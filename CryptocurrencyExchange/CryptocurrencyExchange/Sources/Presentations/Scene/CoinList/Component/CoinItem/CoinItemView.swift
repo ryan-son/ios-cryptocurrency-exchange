@@ -68,7 +68,7 @@ struct CoinItemView_Previews: PreviewProvider {
                     ),
                     reducer: coinItemReducer,
                     environment: CoinItemEnvironment(
-                        useCase: { CoinItemUseCase() }
+                        tickerUseCase: { TickerUseCase() }
                     )
                 )
             )
@@ -84,7 +84,7 @@ struct CoinItemView_Previews: PreviewProvider {
                     ),
                     reducer: coinItemReducer,
                     environment: CoinItemEnvironment(
-                        useCase: { CoinItemUseCase() }
+                        tickerUseCase: { TickerUseCase() }
                     )
                 )
             )

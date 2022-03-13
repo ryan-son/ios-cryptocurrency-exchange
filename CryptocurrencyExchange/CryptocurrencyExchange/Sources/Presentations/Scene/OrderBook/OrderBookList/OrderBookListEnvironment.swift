@@ -8,5 +8,6 @@
 import Foundation
 
 struct OrderBookListEnvironment {
-    let useCase: OrderBookListUseCaseProtocol
+    let orderBookUseCase: OrderBookUseCaseProtocol
+    let tickerUseCase: () -> TickerUseCaseProtocol
 }

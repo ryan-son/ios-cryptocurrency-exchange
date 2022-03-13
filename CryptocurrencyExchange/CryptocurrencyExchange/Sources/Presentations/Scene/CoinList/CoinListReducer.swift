@@ -15,7 +15,7 @@ let coinListReducer = Reducer<
         action: /CoinListAction.coinItem(id:action:),
         environment: { _ in
             CoinItemEnvironment(
-                useCase: { CoinItemUseCase() }
+                tickerUseCase: { TickerUseCase() }
             )
         }
     ),
@@ -53,7 +53,7 @@ fileprivate func fetchTickers(
     cancelId: AnyHashable
 ) -> Effect<CoinListAction, Never> {
     var coinItemStates = [CoinItemState]()
-    let useCase = environment.coinListUseCase()
+    let useCase = environment.tickerUseCase()
     return useCase.getTickerAllSinglePublisher()
         .map { tickers in
             tickers.map { ticker in

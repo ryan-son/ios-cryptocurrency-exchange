@@ -85,8 +85,8 @@ extension OrderLayoutView {
                         ),
                         reducer: transcationListReducer,
                         environment: TransactionListEnvironment(
-                            transactionListUseCase: {
-                                TransactionListUseCase()
+                            transactionUseCase: {
+                                TransactionUseCase()
                             },
                             toastClient: .live
                         )
@@ -105,7 +105,8 @@ extension OrderLayoutView {
                         ),
                         reducer: orderBookListReducer,
                         environment: OrderBookListEnvironment(
-                            useCase: OrderBookListUseCase()
+                            orderBookUseCase: OrderBookUseCase(),
+                            tickerUseCase: { TickerUseCase() }
                         )
                     )
                 )

@@ -15,16 +15,18 @@ let coinPriceReducer = Reducer<
     
     struct CoinPriceCancelId: Hashable {}
     
+    let tickerUseCase = environment.tickerUseCase()
+    
     switch action {
     case .onAppear:
         return .merge(
-            environment.useCase
+            tickerUseCase
                 .getTickerSinglePublisher(symbol: state.symbol)
                 .receive(on: DispatchQueue.main)
                 .mapError { OrderBookListError.description($0.localizedDescription) }
                 .catchToEffect(CoinPriceAction.responseTickerSingle)
             ,
-            environment.useCase
+            tickerUseCase
                 .getTickerStreamPublisher(
                     symbols: [state.symbol],
                     tickTypes: [.day]

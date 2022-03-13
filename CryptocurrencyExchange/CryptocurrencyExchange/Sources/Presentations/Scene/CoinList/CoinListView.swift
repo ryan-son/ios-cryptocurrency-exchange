@@ -87,9 +87,7 @@ struct CoinListView_Previews: PreviewProvider {
                 initialState: CoinListState(items: .mock),
                 reducer: coinListReducer,
                 environment: CoinListEnvironment(
-                    coinListUseCase: {
-                        CoinListUseCase()
-                    },
+                    tickerUseCase: { TickerUseCase() },
                     toastClient: .live
                 )
             )

@@ -8,6 +8,6 @@
 import Foundation
 
 struct TransactionListEnvironment {
-    let transactionListUseCase: () -> TransactionListUseCaseProtocol
+    let transactionUseCase: () -> TransactionUseCaseProtocol
     let toastClient: ToastClient
 }

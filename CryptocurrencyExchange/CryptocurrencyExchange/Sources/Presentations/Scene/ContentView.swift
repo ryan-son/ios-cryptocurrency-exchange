@@ -17,9 +17,7 @@ struct ContentView: View {
                     initialState: CoinListState(items: []),
                     reducer: coinListReducer,
                     environment: CoinListEnvironment(
-                        coinListUseCase: {
-                            CoinListUseCase()
-                        },
+                        tickerUseCase: { TickerUseCase() },
                         toastClient: .live
                     )
                 )

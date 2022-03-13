@@ -33,7 +33,7 @@ extension CoinDetailView {
                     ),
                     reducer: CoinCurrentTickerReducer,
                     environment: CoinCurrentTickerEnvironment(
-                        useCase: TransactionListUseCase()
+                        useCase: TransactionUseCase()
                     )
                 )
             )
@@ -51,7 +51,8 @@ extension CoinDetailView {
                     ),
                     reducer: coinCandleChartReducer,
                     environment: CoinCandleChartEnvironment(
-                        useCase: CoinCandleChartUseCase(),
+                        candleChartUseCase: CoinCandleChartUseCase(),
+                        tickerUseCase: { TickerUseCase() },
                         toastClient: .live
                     )
                 )

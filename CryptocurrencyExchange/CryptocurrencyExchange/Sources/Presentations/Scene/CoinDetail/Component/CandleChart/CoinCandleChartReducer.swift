@@ -17,11 +17,7 @@ let coinCandleChartReducer = Reducer<
     case .onAppear:
         return fetchCandleItems(
             symbol: state.symbol,
-            coinListEnvironment: CoinListEnvironment( // TODO: UseCase 정리하면서 이 부분 정리
-                coinListUseCase: { CoinListUseCase() },
-                toastClient: ToastClient.live
-            ),
-            coinCandleChartEnvironment: environment,
+            environment: environment,
             cancelId: CancelId()
         )
     case let .updateCoinCandleChartItemStates(result):
@@ -46,14 +42,13 @@ let coinCandleChartReducer = Reducer<
 
 fileprivate func fetchCandleItems(
     symbol: String,
-    coinListEnvironment: CoinListEnvironment,
-    coinCandleChartEnvironment: CoinCandleChartEnvironment,
+    environment: CoinCandleChartEnvironment,
     cancelId: AnyHashable
 ) -> Effect<CoinCandleChartAction, Never> {
     var coinCandleChartItemStates = OrderedDictionary<String, CoinCandleChartItemState>()
     
-    let coinListUseCase = coinListEnvironment.coinListUseCase()
-    let coinCandleChartUseCase = coinCandleChartEnvironment.useCase
+    let coinCandleChartUseCase = environment.candleChartUseCase
+    let tickerUseCase = environment.tickerUseCase()
     
     return coinCandleChartUseCase.getCandleStickSinglePublisher(symbol: symbol)
         .map { result in
@@ -70,7 +65,7 @@ fileprivate func fetchCandleItems(
             }
         )
         .flatMap { it in
-            coinListUseCase
+            tickerUseCase
                 .getTickerStreamPublisher(
                     symbols: [symbol],
                     tickTypes: [.day]

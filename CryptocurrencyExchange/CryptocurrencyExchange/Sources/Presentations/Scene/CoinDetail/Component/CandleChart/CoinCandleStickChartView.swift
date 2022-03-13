@@ -45,7 +45,8 @@ struct CoinCandleStickChartView_Previews: PreviewProvider {
                 ),
                 reducer: coinCandleChartReducer,
                 environment: CoinCandleChartEnvironment(
-                    useCase: CoinCandleChartUseCase(),
+                    candleChartUseCase: CoinCandleChartUseCase(),
+                    tickerUseCase: { TickerUseCase() },
                     toastClient: .live
                 )
             )

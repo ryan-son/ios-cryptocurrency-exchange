@@ -118,7 +118,7 @@ struct CoinCurrentTickerView_Previews: PreviewProvider {
                 initialState: CoinCurrentTickerState(symbol: "BTC_KRW"),
                 reducer: CoinCurrentTickerReducer,
                 environment: CoinCurrentTickerEnvironment(
-                    useCase: TransactionListUseCase()
+                    useCase: TransactionUseCase()
                 )
             )
         )

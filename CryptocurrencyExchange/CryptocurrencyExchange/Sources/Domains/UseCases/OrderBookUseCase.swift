@@ -1,29 +1,23 @@
 //
-//  OrderBookListUseCase.swift
+//  OrderBookUseCase.swift
 //  CryptocurrencyExchange
 //
-//  Created by 이경준 on 2022/03/09.
+//  Created by Ryan-Son on 2022/03/13.
 //
 
 import Combine
 import Foundation
 
-protocol OrderBookListUseCaseProtocol {    
+protocol OrderBookUseCaseProtocol {
     func getOrderBookSinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbOrderBookSingle, Error>
-    
     func getOrderBookDepthStreamPublisher(
         symbols: [String]
     ) -> AnyPublisher<[BithumbOrderBookDepthStream], Error>
-    
-    func getTickerStreamPublisher(
-        symbols: [String],
-        tickTypes: [TickType]
-    ) -> AnyPublisher<BithumbTickerStream, Error>
 }
 
-struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
+struct OrderBookUseCase: OrderBookUseCaseProtocol {
     private let repository: BithumbRepositoryProtocol
 
     init(
@@ -31,8 +25,7 @@ struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
     ) {
         self.repository = repository
     }
-    
-    
+
     func getOrderBookSinglePublisher(
         symbol: String
     ) -> AnyPublisher<BithumbOrderBookSingle, Error> {
@@ -41,6 +34,7 @@ struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
                 symbol: symbol
             )
             .map { $0.toDomain() }
+            .print()
             .eraseToAnyPublisher()
     }
     
@@ -55,21 +49,6 @@ struct OrderBookListUseCase: OrderBookListUseCaseProtocol {
         return repository
             .getOrderBookDepthStreamPublisher(with: filter)
             .map { $0.toDomain() }
-            .eraseToAnyPublisher()
-    }
-    
-    func getTickerStreamPublisher(
-        symbols: [String],
-        tickTypes: [TickType]
-    ) -> AnyPublisher<BithumbTickerStream, Error> {
-        let filter = BithumbWebSocketFilter(
-            type: .ticker,
-            symbols: symbols,
-            tickTypes: tickTypes
-        )
-        return repository
-            .getTickerStreamPublisher(with: filter)
-            .map { $0.content.toDomain() }
             .eraseToAnyPublisher()
     }
 }
