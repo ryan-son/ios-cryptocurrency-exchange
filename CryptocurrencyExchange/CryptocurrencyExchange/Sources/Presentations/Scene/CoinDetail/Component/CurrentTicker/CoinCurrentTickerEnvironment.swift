@@ -8,5 +8,5 @@
 import Foundation
 
 struct CoinCurrentTickerEnvironment {
-    let useCase: TransactionUseCaseProtocol
+    let useCase: () -> TickerUseCaseProtocol
 }
