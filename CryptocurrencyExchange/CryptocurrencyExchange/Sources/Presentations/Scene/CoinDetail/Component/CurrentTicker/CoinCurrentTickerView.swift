@@ -39,7 +39,7 @@ struct CoinCurrentTickerView: View {
                     .fontWeight(.bold)
                 Text(viewState.changeAmountRate)
                     .font(.body)
-                    .foregroundColor(.red)
+                    .foregroundColor(viewState.isPlus ? .red : .blue)
             }
             .padding()
         }
